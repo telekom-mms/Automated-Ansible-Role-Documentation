@@ -3,8 +3,8 @@
 import textwrap
 import yaml
 import click
+import pathlib
 
-from pathlib import Path
 from jinja2 import Environment
 
 
@@ -17,7 +17,12 @@ def cli():
 @click.argument(
     "role",
     type=click.Path(
-        exists=True, file_okay=False, readable=True, writable=True, resolve_path=True
+        exists=True,
+        file_okay=False,
+        readable=True,
+        writable=True,
+        resolve_path=True,
+        path_type=pathlib.Path,
     ),
 )
 @click.option(
@@ -32,22 +37,27 @@ def cli():
     default="<!-- BEGIN_ANSIBLE_DOCS -->\n{{ content }}\n<!-- END_ANSIBLE_DOCS -->\n",
     type=click.STRING,
 )
-def markdown(role: str, output_file: click.File, output_template: str) -> None:
+def markdown(role: pathlib.Path, output_file: click.File, output_template: str) -> None:
     env = Environment()
     template = env.from_string(source=output_template.replace("\\n", "\n"))
 
-    metadata, argument_specs = parse_meta(role)
-    content = generate_content(role, metadata, argument_specs)
+    click.echo(role.stem)
+
+    metadata, argument_specs = parse_meta(role.stem)
+    content = generate_content(role.stem, metadata, argument_specs)
 
     output_file.write(
         template.render(
-            content=content, role=role, metadata=metadata, argument_specs=argument_specs
+            content=content,
+            role=role.stem,
+            metadata=metadata,
+            argument_specs=argument_specs,
         )
     )
 
 
 def parse_meta(role: str) -> tuple[dict, dict]:
-    meta = Path(f"{role}/meta")
+    meta = pathlib.Path(f"{role}/meta")
 
     argument_specs_yml = list(meta.glob("argument_specs.y*ml"))[0]
     main_yml = list(meta.glob("main.y*ml"))[0]
@@ -82,8 +92,7 @@ def generate_content(role: str, metadata: dict, argument_specs: dict) -> str:
 
     Role Variables
     --------------
-
-    {% for entrypoint, specs in argument_specs | items -%}
+    {% for entrypoint, specs in argument_specs | items %}
     ## {{ entrypoint }}
 
     {{ specs.short_description }}
@@ -97,19 +106,26 @@ def generate_content(role: str, metadata: dict, argument_specs: dict) -> str:
 
     Dependencies
     ------------
-
-    {% for dependency in metadata.dependencies -%}
+    {% for dependency in metadata.dependencies %}
     - {{ dependency }}
-    {% endfor %}
+    {%- endfor %}
 
     Example Playbook
     ----------------
 
-    Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-        - hosts: servers
-          roles:
-             - { role: username.rolename, x: 42 }
+    ```
+    - hosts: all
+      tasks:
+        - name: Importing role: {{ role }}
+          ansible.builtin.import_role:
+            name: {{ role }}
+          vars:
+            {% for name, variable in argument_specs.main.options | items -%}
+            {%- if variable.required -%}
+            {{ name }}:
+            {%- endif %}
+            {% endfor %}
+    ```
 
     License
     -------
@@ -122,13 +138,12 @@ def generate_content(role: str, metadata: dict, argument_specs: dict) -> str:
     {{ metadata.galaxy_info.author }} @ {{ metadata.galaxy_info.company }}
 
     Issues: {{ metadata.galaxy_info.issue_tracker_url }}
-
     """
 
     env = Environment()
     template = env.from_string(source=textwrap.dedent(content.lstrip("\n")))
 
-    return template.render(metadata=metadata, argument_specs=argument_specs)
+    return template.render(role=role, metadata=metadata, argument_specs=argument_specs)
 
 
 if __name__ == "__main__":
