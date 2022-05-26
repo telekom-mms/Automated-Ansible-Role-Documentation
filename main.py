@@ -19,6 +19,7 @@ def cli():
     type=click.Path(
         exists=True,
         file_okay=False,
+        dir_okay=True,
         readable=True,
         writable=True,
         resolve_path=True,
@@ -27,9 +28,14 @@ def cli():
 )
 @click.option(
     "--output-file",
-    help="The output file",
+    help="The output file, by default written into the role's directory",
     default="README.md",
-    type=click.File("a+", lazy=True),
+    type=click.Path(
+        file_okay=True,
+        dir_okay=False,
+        readable=True,
+        writable=True,
+    ),
 )
 @click.option(
     "--output-template",
@@ -45,7 +51,7 @@ def cli():
 )
 def markdown(
     role: pathlib.Path,
-    output_file: click.File,
+    output_file: str,
     output_template: str,
     output_mode: str,
 ) -> None:
@@ -63,20 +69,28 @@ def markdown(
         )
     ]
 
-    if output_mode == "inject":
-        output_file.seek(0)
-        lines = output_file.readlines()
+    output = pathlib.Path(output_file)
 
-        begin = lines.index("<!-- BEGIN_ANSIBLE_DOCS -->\n")
-        end = lines.index("<!-- END_ANSIBLE_DOCS -->\n")
+    if not "/" in output_file:
+        output = role.joinpath(output)
 
-        header = [*lines[:begin]]
-        footer = [*lines[1 + end :]]
+    output.resolve()
 
-        content = header + content + footer
+    with open(output, "a+") as f:
+        if output_mode == "inject":
+            f.seek(0)
+            lines = f.readlines()
 
-    output_file.truncate(0)
-    output_file.write("".join(content))
+            begin = lines.index("<!-- BEGIN_ANSIBLE_DOCS -->\n")
+            end = lines.index("<!-- END_ANSIBLE_DOCS -->\n")
+
+            header = [*lines[:begin]]
+            footer = [*lines[1 + end :]]
+
+            content = header + content + footer
+
+        f.truncate(0)
+        f.write("".join(content))
 
 
 def parse_meta(role: str) -> tuple[dict, dict]:
