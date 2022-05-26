@@ -29,31 +29,54 @@ def cli():
     "--output-file",
     help="The output file",
     default="README.md",
-    type=click.File("w+", lazy=True),
+    type=click.File("a+", lazy=True),
 )
 @click.option(
     "--output-template",
-    help="The output template string.",
-    default="<!-- BEGIN_ANSIBLE_DOCS -->\n{{ content }}\n<!-- END_ANSIBLE_DOCS -->\n",
+    help="The output template string",
+    default="<!-- BEGIN_ANSIBLE_DOCS -->\n{{ content }}\n<!-- END_ANSIBLE_DOCS -->\n\n",
     type=click.STRING,
 )
-def markdown(role: pathlib.Path, output_file: click.File, output_template: str) -> None:
+@click.option(
+    "--output-mode",
+    help="The output mode",
+    default="inject",
+    type=click.Choice(["inject", "replace"], case_sensitive=True),
+)
+def markdown(
+    role: pathlib.Path,
+    output_file: click.File,
+    output_template: str,
+    output_mode: str,
+) -> None:
     env = Environment()
     template = env.from_string(source=output_template.replace("\\n", "\n"))
 
-    click.echo(role.stem)
-
     metadata, argument_specs = parse_meta(role.stem)
-    content = generate_content(role.stem, metadata, argument_specs)
 
-    output_file.write(
+    content = [
         template.render(
-            content=content,
+            content=generate_content(role.stem, metadata, argument_specs),
             role=role.stem,
             metadata=metadata,
             argument_specs=argument_specs,
         )
-    )
+    ]
+
+    if output_mode == "inject":
+        output_file.seek(0)
+        lines = output_file.readlines()
+
+        begin = lines.index("<!-- BEGIN_ANSIBLE_DOCS -->\n")
+        end = lines.index("<!-- END_ANSIBLE_DOCS -->\n")
+
+        header = [*lines[:begin]]
+        footer = [*lines[1 + end :]]
+
+        content = header + content + footer
+
+    output_file.truncate(0)
+    output_file.write("".join(content))
 
 
 def parse_meta(role: str) -> tuple[dict, dict]:
