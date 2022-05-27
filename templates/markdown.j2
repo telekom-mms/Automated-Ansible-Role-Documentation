@@ -1,0 +1,64 @@
+Ansible Role: {{ role | capitalize }}
+=========
+
+{{ metadata.galaxy_info.description }}
+
+Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
+
+Requirements
+------------
+
+| Platform | Versions |
+| -------- | -------- |
+{%- for platform in metadata.galaxy_info.platforms %}
+| {{ platform.name }} | {{ platform.versions | join(', ') }} |
+{%- endfor %}
+
+Role Variables
+--------------
+{% for entrypoint, specs in argument_specs | items %}
+## {{ entrypoint }}
+
+{{ specs.short_description }}
+
+| Variable | Description | Type | Required | Default |
+| -------- | ----------- | ---- | -------- | ------- |
+{%- for name, variable in specs.options | items %}
+| {{ name }} | {{ variable.description }} | {{ variable.type }} | {{ 'yes' if variable.required else 'no' }} | {{ variable.default }} |
+{%- endfor %}
+{% endfor %}
+
+Dependencies
+------------
+{% for dependency in metadata.dependencies %}
+- {{ dependency }}
+{%- endfor %}
+
+Example Playbook
+----------------
+
+```
+- hosts: all
+  tasks:
+    - name: Importing role: {{ role }}
+      ansible.builtin.import_role:
+        name: {{ role }}
+      vars:
+        {% for name, variable in argument_specs.main.options | items -%}
+        {%- if variable.required -%}
+        {{ name }}:
+        {%- endif %}
+        {% endfor %}
+```
+
+License
+-------
+
+{{ metadata.galaxy_info.license }}
+
+Author Information
+------------------
+
+{{ metadata.galaxy_info.author }} @ {{ metadata.galaxy_info.company }}
+
+Issues: {{ metadata.galaxy_info.issue_tracker_url }}

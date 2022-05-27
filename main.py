@@ -1,21 +1,16 @@
 #!/usr/bin/env python3
 
-import textwrap
-import yaml
-import click
 import pathlib
 
-from jinja2 import Environment
+import yaml
+import click
+import jinja2
 
 
 @click.group()
-def cli():
-    pass
-
-
-@cli.command()
+@click.pass_context
 @click.argument(
-    "role",
+    "role_path",
     type=click.Path(
         exists=True,
         file_okay=False,
@@ -49,32 +44,54 @@ def cli():
     default="inject",
     type=click.Choice(["inject", "replace"], case_sensitive=True),
 )
-def markdown(
-    role: pathlib.Path,
+def cli(
+    ctx: click.Context,
+    role_path: pathlib.Path,
     output_file: str,
     output_template: str,
     output_mode: str,
+):
+    ctx.ensure_object(dict)
+
+    ctx.obj["role"] = role_path.stem
+    ctx.obj["role_path"] = role_path
+    ctx.obj["output_file"] = output_file
+    ctx.obj["output_template"] = output_template
+    ctx.obj["output_mode"] = output_mode
+
+    ctx.obj["metadata"], ctx.obj["argument_specs"] = parse_meta(role_path)
+
+
+@cli.command()
+@click.pass_context
+def markdown(ctx: click.Context) -> None:
+    role = ctx.obj["role"]
+    role_path = ctx.obj["role_path"]
+    output_file = ctx.obj["output_file"]
+    output_template = ctx.obj["output_template"]
+    output_mode = ctx.obj["output_mode"]
+    metadata = ctx.obj["metadata"]
+    argument_specs = ctx.obj["argument_specs"]
+
+    content = render_content(
+        "markdown.j2", output_template, role, metadata, argument_specs
+    )
+
+    write(role_path, output_file, output_mode, content)
+
+
+def write(
+    role_path: pathlib.Path, output_file: str, output_mode: str, content: str
 ) -> None:
-    env = Environment()
-    template = env.from_string(source=output_template.replace("\\n", "\n"))
-
-    metadata, argument_specs = parse_meta(role.stem)
-
-    content = [
-        template.render(
-            content=generate_content(role.stem, metadata, argument_specs),
-            role=role.stem,
-            metadata=metadata,
-            argument_specs=argument_specs,
-        )
-    ]
-
     output = pathlib.Path(output_file)
 
     if not "/" in output_file:
-        output = role.joinpath(output)
+        output = role_path / output
 
     output.resolve()
+
+    if not output.exists():
+        output_mode = "replace"
 
     with open(output, "a+") as f:
         if output_mode == "inject":
@@ -87,14 +104,14 @@ def markdown(
             header = [*lines[:begin]]
             footer = [*lines[1 + end :]]
 
-            content = header + content + footer
+            content = "".join(header + [content] + footer)
 
         f.truncate(0)
-        f.write("".join(content))
+        f.write(content)
 
 
-def parse_meta(role: str) -> tuple[dict, dict]:
-    meta = pathlib.Path(f"{role}/meta")
+def parse_meta(role_path: pathlib.Path) -> tuple[dict, dict]:
+    meta = role_path / "meta"
 
     argument_specs_yml = list(meta.glob("argument_specs.y*ml"))[0]
     main_yml = list(meta.glob("main.y*ml"))[0]
@@ -109,79 +126,35 @@ def parse_meta(role: str) -> tuple[dict, dict]:
     return main, argument_specs
 
 
-def generate_content(role: str, metadata: dict, argument_specs: dict) -> str:
-    content = """
-    Ansible Role: {{ role | capitalize }}
-    =========
+def render_content(
+    content_template: str,
+    output_template: str,
+    role: str,
+    metadata: dict,
+    argument_specs: dict,
+) -> str:
+    templates = pathlib.Path(__file__).parent / "templates"
+    loader = jinja2.FileSystemLoader(templates)
+    env = jinja2.Environment(loader=loader)
 
-    {{ metadata.galaxy_info.description }}
+    # First we render the template, with the parsed data to produce
+    # {{ content }} passed onto the output template
+    content = env.get_template(content_template).render(
+        role=role,
+        metadata=metadata,
+        argument_specs=argument_specs,
+    )
 
-    Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
+    env = jinja2.Environment()
 
-    Requirements
-    ------------
+    # Then, we render the user provided (or default) output template
+    # to produce the actual file content
+    template = env.from_string(source=output_template.replace("\\n", "\n"))
 
-    | Platform | Versions |
-    | -------- | -------- |
-    {%- for platform in metadata.galaxy_info.platforms %}
-    | {{ platform.name }} | {{ platform.versions | join(', ') }} |
-    {%- endfor %}
-
-    Role Variables
-    --------------
-    {% for entrypoint, specs in argument_specs | items %}
-    ## {{ entrypoint }}
-
-    {{ specs.short_description }}
-
-    | Variable | Description | Type | Required | Default |
-    | -------- | ----------- | ---- | -------- | ------- |
-    {%- for name, variable in specs.options | items %}
-    | {{ name }} | {{ variable.description }} | {{ variable.type }} | {{ 'yes' if variable.required else 'no' }} | {{ variable.default }} |
-    {%- endfor %}
-    {% endfor %}
-
-    Dependencies
-    ------------
-    {% for dependency in metadata.dependencies %}
-    - {{ dependency }}
-    {%- endfor %}
-
-    Example Playbook
-    ----------------
-
-    ```
-    - hosts: all
-      tasks:
-        - name: Importing role: {{ role }}
-          ansible.builtin.import_role:
-            name: {{ role }}
-          vars:
-            {% for name, variable in argument_specs.main.options | items -%}
-            {%- if variable.required -%}
-            {{ name }}:
-            {%- endif %}
-            {% endfor %}
-    ```
-
-    License
-    -------
-
-    {{ metadata.galaxy_info.license }}
-
-    Author Information
-    ------------------
-
-    {{ metadata.galaxy_info.author }} @ {{ metadata.galaxy_info.company }}
-
-    Issues: {{ metadata.galaxy_info.issue_tracker_url }}
-    """
-
-    env = Environment()
-    template = env.from_string(source=textwrap.dedent(content.lstrip("\n")))
-
-    return template.render(role=role, metadata=metadata, argument_specs=argument_specs)
+    return template.render(
+        content=content, role=role, metadata=metadata, argument_specs=argument_specs
+    )
 
 
 if __name__ == "__main__":
-    cli()
+    cli(obj={})
