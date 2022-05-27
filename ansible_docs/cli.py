@@ -2,9 +2,9 @@
 
 import pathlib
 
-import yaml
 import click
 import jinja2
+import yaml
 
 
 @click.group()
