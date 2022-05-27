@@ -51,6 +51,10 @@ def cli(
     output_template: str,
     output_mode: str,
 ):
+    """
+    Acts as the main entrypoint for all commands.
+    """
+
     ctx.ensure_object(dict)
 
     ctx.obj["role"] = role_path.stem
@@ -65,6 +69,10 @@ def cli(
 @cli.command()
 @click.pass_context
 def markdown(ctx: click.Context) -> None:
+    """
+    Command for generating role documentation in Markdown format.
+    """
+
     role = ctx.obj["role"]
     role_path = ctx.obj["role_path"]
     output_file = ctx.obj["output_file"]
@@ -83,6 +91,10 @@ def markdown(ctx: click.Context) -> None:
 def write(
     role_path: pathlib.Path, output_file: str, output_mode: str, content: str
 ) -> None:
+    """
+    Writes a content string to the given file.
+    """
+
     output = pathlib.Path(output_file)
 
     if not "/" in output_file:
@@ -111,6 +123,10 @@ def write(
 
 
 def parse_meta(role_path: pathlib.Path) -> tuple[dict, dict]:
+    """
+    Parses Ansible role metadata from YAML files in the meta/ directory.
+    """
+
     meta = role_path / "meta"
 
     argument_specs_yml = list(meta.glob("argument_specs.y*ml"))[0]
@@ -133,12 +149,16 @@ def render_content(
     metadata: dict,
     argument_specs: dict,
 ) -> str:
+    """
+    Renders Jinja2 templates twice, the first time to get the parsed
+    data into {{ content }} and finally to render the user provided
+    (or default) output template to be written to the file.
+    """
+
     templates = pathlib.Path(__file__).parent / "templates"
     loader = jinja2.FileSystemLoader(templates)
-    env = jinja2.Environment(loader=loader)
 
-    # First we render the template, with the parsed data to produce
-    # {{ content }} passed onto the output template
+    env = jinja2.Environment(loader=loader)
     content = env.get_template(content_template).render(
         role=role,
         metadata=metadata,
@@ -146,9 +166,6 @@ def render_content(
     )
 
     env = jinja2.Environment()
-
-    # Then, we render the user provided (or default) output template
-    # to produce the actual file content
     template = env.from_string(source=output_template.replace("\\n", "\n"))
 
     return template.render(
