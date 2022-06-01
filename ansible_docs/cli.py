@@ -52,7 +52,7 @@ def cli(
     output_mode: str,
 ):
     """
-    Acts as the main entrypoint for all commands.
+    A tool for generating docs for Ansible roles.
     """
 
     ctx.ensure_object(dict)
