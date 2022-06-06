@@ -155,7 +155,7 @@ def render_content(
     (or default) output template to be written to the file.
     """
 
-    templates = pathlib.Path(__file__).parent / "templates"
+    templates = pathlib.Path(__file__).parent.parent / "templates"
     loader = jinja2.FileSystemLoader(templates)
 
     env = jinja2.Environment(loader=loader)
