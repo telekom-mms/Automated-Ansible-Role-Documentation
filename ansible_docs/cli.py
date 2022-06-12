@@ -2,111 +2,83 @@
 
 import pathlib
 
-import click
+from enum import Enum
+
 import jinja2
+import typer
 import yaml
 
+app = typer.Typer()
+state = {}
 
-@click.group()
-@click.pass_context
-@click.argument(
-    "role_path",
-    type=click.Path(
+
+class OutputMode(str, Enum):
+    inject = "inject"
+    replace = "replace"
+
+
+@app.command()
+def markdown() -> None:
+    """
+    Command for generating role documentation in Markdown format.
+    """
+
+    content = render_content("markdown.j2")
+    write(content)
+
+
+@app.callback()
+def cli(
+    role_path: pathlib.Path = typer.Argument(
+        ...,
+        help="Path to an Ansible role",
         exists=True,
         file_okay=False,
         dir_okay=True,
         readable=True,
         writable=True,
         resolve_path=True,
-        path_type=pathlib.Path,
     ),
-)
-@click.option(
-    "--output-file",
-    help="The output file, by default written into the role's directory",
-    default="README.md",
-    type=click.Path(
+    output_file: str = typer.Option(
+        "README.md",
         file_okay=True,
         dir_okay=False,
         readable=True,
         writable=True,
     ),
-)
-@click.option(
-    "--output-template",
-    help="The output template string",
-    default="<!-- BEGIN_ANSIBLE_DOCS -->\n{{ content }}\n<!-- END_ANSIBLE_DOCS -->\n\n",
-    type=click.STRING,
-)
-@click.option(
-    "--output-mode",
-    help="The output mode",
-    default="inject",
-    type=click.Choice(["inject", "replace"], case_sensitive=True),
-)
-def cli(
-    ctx: click.Context,
-    role_path: pathlib.Path,
-    output_file: str,
-    output_template: str,
-    output_mode: str,
+    output_template: str = "<!-- BEGIN_ANSIBLE_DOCS -->\n{{ content }}\n<!-- END_ANSIBLE_DOCS -->\n\n",
+    output_mode: OutputMode = typer.Option(OutputMode.inject.name),
 ):
     """
     A tool for generating docs for Ansible roles.
     """
 
-    ctx.ensure_object(dict)
+    state["role"] = role_path.stem
+    state["role_path"] = role_path
+    state["output_file"] = output_file
+    state["output_template"] = output_template
+    state["output_mode"] = output_mode
 
-    ctx.obj["role"] = role_path.stem
-    ctx.obj["role_path"] = role_path
-    ctx.obj["output_file"] = output_file
-    ctx.obj["output_template"] = output_template
-    ctx.obj["output_mode"] = output_mode
-
-    ctx.obj["metadata"], ctx.obj["argument_specs"] = parse_meta(role_path)
+    state["metadata"], state["argument_specs"] = parse_meta()
 
 
-@cli.command()
-@click.pass_context
-def markdown(ctx: click.Context) -> None:
-    """
-    Command for generating role documentation in Markdown format.
-    """
-
-    role = ctx.obj["role"]
-    role_path = ctx.obj["role_path"]
-    output_file = ctx.obj["output_file"]
-    output_template = ctx.obj["output_template"]
-    output_mode = ctx.obj["output_mode"]
-    metadata = ctx.obj["metadata"]
-    argument_specs = ctx.obj["argument_specs"]
-
-    content = render_content(
-        "markdown.j2", output_template, role, metadata, argument_specs
-    )
-
-    write(role_path, output_file, output_mode, content)
-
-
-def write(
-    role_path: pathlib.Path, output_file: str, output_mode: str, content: str
-) -> None:
+def write(content: str) -> None:
     """
     Writes a content string to the given file.
     """
 
-    output = pathlib.Path(output_file)
+    output = pathlib.Path(state["output_file"])
 
-    if not "/" in output_file:
-        output = role_path / output
+    if not "/" in state["output_file"]:
+        output = state["role_path"] / output
 
     output.resolve()
 
     if not output.exists():
-        output_mode = "replace"
+        state["output_mode"] = OutputMode.replace
 
     with open(output, "a+") as f:
-        if output_mode == "inject":
+        if state["output_mode"] == OutputMode.inject:
             f.seek(0)
             lines = f.readlines()
 
@@ -122,12 +94,12 @@ def write(
         f.write(content)
 
 
-def parse_meta(role_path: pathlib.Path) -> tuple[dict, dict]:
+def parse_meta() -> tuple[dict, dict]:
     """
     Parses Ansible role metadata from YAML files in the meta/ directory.
     """
 
-    meta = role_path / "meta"
+    meta = state["role_path"] / "meta"
 
     argument_specs_yml = list(meta.glob("argument_specs.y*ml"))[0]
     main_yml = list(meta.glob("main.y*ml"))[0]
@@ -142,13 +114,7 @@ def parse_meta(role_path: pathlib.Path) -> tuple[dict, dict]:
     return main, argument_specs
 
 
-def render_content(
-    content_template: str,
-    output_template: str,
-    role: str,
-    metadata: dict,
-    argument_specs: dict,
-) -> str:
+def render_content(content_template: str) -> str:
     """
     Renders Jinja2 templates twice, the first time to get the parsed
     data into {{ content }} and finally to render the user provided
@@ -160,18 +126,21 @@ def render_content(
 
     env = jinja2.Environment(loader=loader)
     content = env.get_template(content_template).render(
-        role=role,
-        metadata=metadata,
-        argument_specs=argument_specs,
+        role=state["role"],
+        metadata=state["metadata"],
+        argument_specs=state["argument_specs"],
     )
 
     env = jinja2.Environment()
-    template = env.from_string(source=output_template.replace("\\n", "\n"))
+    template = env.from_string(source=state["output_template"].replace("\\n", "\n"))
 
     return template.render(
-        content=content, role=role, metadata=metadata, argument_specs=argument_specs
+        content=content,
+        role=state["role"],
+        metadata=state["metadata"],
+        argument_specs=state["argument_specs"],
     )
 
 
 if __name__ == "__main__":
-    cli(obj={})
+    app()
