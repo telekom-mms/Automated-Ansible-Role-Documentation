@@ -1,0 +1,7 @@
+---
+output_file: README.md
+output_template: |
+  <!-- BEGIN_ANSIBLE_DOCS -->
+  {{ content }}
+  <!-- END_ANSIBLE_DOCS -->
+output_mode: inject
