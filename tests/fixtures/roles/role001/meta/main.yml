@@ -1,0 +1,5 @@
+---
+galaxy_info:
+  role_name: role001
+  description: Tests basic rendering of documentation
+  company: ansible-docs

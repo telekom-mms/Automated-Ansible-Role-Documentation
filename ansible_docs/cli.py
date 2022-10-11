@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import pathlib
-
 from enum import Enum
 
 import jinja2
