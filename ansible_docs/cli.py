@@ -10,7 +10,7 @@ import yaml
 app = typer.Typer(no_args_is_help=True)
 
 
-class OutputMode(str, Enum):
+class OutputMode(Enum):
     inject = "inject"
     replace = "replace"
 
