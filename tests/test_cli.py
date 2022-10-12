@@ -55,8 +55,30 @@ def test_cli_config_file(tmp_path):
     )
     assert result.exit_code == 0
 
+    config = """
+    ---
+    foo: bar
+    baz: kaboom
+    """
+    config_file = output_dir / "config.yml"
+    config_file.write_text(config)
+    config_file = str(config_file)
 
-def test_output_mode(tmp_path):
+    result = runner.invoke(
+        app,
+        [
+            "--config-file",
+            config_file,
+            "--output-file",
+            output_file,
+            role_path,
+            "markdown",
+        ],
+    )
+    assert result.exit_code == 2
+
+
+def test_cli_output_mode(tmp_path):
     role_path = str(ROLES_DIR / "role001")
 
     output_dir = tmp_path
