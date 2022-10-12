@@ -123,7 +123,7 @@ def write(ctx: typer.Context, content: str) -> None:
             header = [*lines[:begin]]
             footer = [*lines[1 + end :]]
 
-            content = "".join(header + [content] + ["\n"] + footer)
+            content = "".join(header + [content] + footer)
 
         f.truncate(0)
         f.write(content)
