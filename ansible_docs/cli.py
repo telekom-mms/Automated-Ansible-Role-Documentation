@@ -126,7 +126,7 @@ def write(ctx: typer.Context, content: str) -> None:
             content = "".join(header + [content] + footer)
 
         f.truncate(0)
-        f.write(content)
+        print(content, file=f)
 
 
 def parse_meta(ctx: typer.Context) -> tuple[dict, dict]:
