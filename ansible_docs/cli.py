@@ -180,4 +180,4 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
 
 
 if __name__ == "__main__":
-    app()
+    app()  # pragma: no cover
