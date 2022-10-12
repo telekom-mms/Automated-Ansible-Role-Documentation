@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 
 import filecmp
+import os
+import shutil
 import pathlib
+from typing_extensions import assert_never
 
 from typer.testing import CliRunner
 
@@ -152,6 +155,31 @@ def test_cli_output_mode(tmp_path):
             "markdown",
         ],
     )
+    assert result.exit_code == 0
+
+
+def test_role_path(tmp_path):
+    current_dir = os.getcwd()
+
+    role = "role001"
+
+    output_dir = tmp_path
+    output_dir.mkdir(exist_ok=True)
+
+    output_file = output_dir / "README.md"
+
+    os.chdir(ROLES_DIR)
+    result = runner.invoke(app, ["--output-file", output_file, role, "markdown"])
+    os.chdir(current_dir)
+
+    assert result.exit_code == 0
+
+    shutil.copytree(ROLES_DIR / role, output_dir / role)
+
+    os.chdir(output_dir)
+    result = runner.invoke(app, [role, "markdown"])
+    os.chdir(current_dir)
+
     assert result.exit_code == 0
 
 
