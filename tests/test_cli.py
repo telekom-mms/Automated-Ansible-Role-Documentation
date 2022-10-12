@@ -2,11 +2,11 @@
 
 import filecmp
 import os
-import shutil
 import pathlib
-from typing_extensions import assert_never
+import shutil
 
 from typer.testing import CliRunner
+from typing_extensions import assert_never
 
 from ansible_docs.cli import app
 
