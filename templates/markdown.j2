@@ -3,7 +3,9 @@ Ansible Role: {{ role | capitalize }}
 
 {{ metadata.galaxy_info.description }}
 
+{%- if metadata.galaxy_info.galaxy_tags | length > 0 %}
 Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
+{%- endif %}
 
 Requirements
 ------------
@@ -30,9 +32,13 @@ Role Variables
 
 Dependencies
 ------------
+{% if metadata.dependencies | length > 0 -%}
 {% for dependency in metadata.dependencies %}
 - {{ dependency }}
 {%- endfor %}
+{%- else %}
+None.
+{%- endif %}
 
 Example Playbook
 ----------------

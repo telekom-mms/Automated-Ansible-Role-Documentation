@@ -2,9 +2,7 @@
 Ansible Role: Minimum
 =========
 
-Test role with a minimum mount of metadata
-
-Tags: 
+Test role with a minimum amount of metadata
 
 Requirements
 ------------
@@ -29,6 +27,7 @@ The main entry point for the minimum role.
 Dependencies
 ------------
 
+None.
 
 Example Playbook
 ----------------
