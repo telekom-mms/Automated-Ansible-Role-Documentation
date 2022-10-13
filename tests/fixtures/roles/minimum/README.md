@@ -1,8 +1,8 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
-Ansible Role: Role001
+Ansible Role: Minimum
 =========
 
-Tests basic rendering of documentation
+Test role with a minimum mount of metadata
 
 Tags: 
 
@@ -11,13 +11,14 @@ Requirements
 
 | Platform | Versions |
 | -------- | -------- |
+| Fedora | all |
 
 Role Variables
 --------------
 
 ## main
 
-The main entry point for the myapp role.
+The main entry point for the minimum role.
 
 | Variable | Description | Type | Required | Default |
 | -------- | ----------- | ---- | -------- | ------- |
@@ -35,9 +36,9 @@ Example Playbook
 ```
 - hosts: all
   tasks:
-    - name: Importing role: role001
+    - name: Importing role: minimum
       ansible.builtin.import_role:
-        name: role001
+        name: minimum
       vars:
         
         myapp_str:
@@ -47,12 +48,12 @@ Example Playbook
 License
 -------
 
-
+MIT
 
 Author Information
 ------------------
 
- @ ansible-docs
+your name @ ansible-docs
 
 Issues: 
 <!-- END_ANSIBLE_DOCS -->

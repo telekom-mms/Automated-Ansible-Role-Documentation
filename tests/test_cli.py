@@ -11,6 +11,7 @@ from typing_extensions import assert_never
 from ansible_docs.cli import app
 
 ROLES_DIR = pathlib.Path("./tests/fixtures/roles")
+DEFAULT_ROLE = "minimum"
 
 
 runner = CliRunner()
@@ -25,7 +26,7 @@ def test_cli_help():
 
 
 def test_cli_config_file(tmp_path):
-    role_path = str(ROLES_DIR / "role001")
+    role_path = str(ROLES_DIR / DEFAULT_ROLE)
 
     output_dir = tmp_path
     output_dir.mkdir(exist_ok=True)
@@ -82,7 +83,7 @@ def test_cli_config_file(tmp_path):
 
 
 def test_cli_output_mode(tmp_path):
-    role_path = str(ROLES_DIR / "role001")
+    role_path = str(ROLES_DIR / DEFAULT_ROLE)
 
     output_dir = tmp_path
     output_dir.mkdir(exist_ok=True)
@@ -161,7 +162,7 @@ def test_cli_output_mode(tmp_path):
 def test_role_path(tmp_path):
     current_dir = os.getcwd()
 
-    role = "role001"
+    role = DEFAULT_ROLE
 
     output_dir = tmp_path
     output_dir.mkdir(exist_ok=True)
