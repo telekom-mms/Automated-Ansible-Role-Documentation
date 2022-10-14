@@ -58,8 +58,6 @@ Author Information
 ------------------
 
 your name @ ansible-docs
-
-Issues: 
 <!-- END_ANSIBLE_DOCS -->
 
 This also stays as-is, as we `inject` only the parts between the markers!

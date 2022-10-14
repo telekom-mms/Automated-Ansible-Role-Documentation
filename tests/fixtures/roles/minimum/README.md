@@ -53,6 +53,4 @@ Author Information
 ------------------
 
 your name @ ansible-docs
-
-Issues: 
 <!-- END_ANSIBLE_DOCS -->

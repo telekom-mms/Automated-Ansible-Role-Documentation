@@ -72,4 +72,6 @@ Author Information
 
 {{ metadata.galaxy_info.author }} @ {{ metadata.galaxy_info.company }}
 
+{%- if metadata.galaxy_info.issue_tracker_url is defined and metadata.galaxy_info.issue_tracker_url | length > 0 %}
 Issues: {{ metadata.galaxy_info.issue_tracker_url }}
+{%- endif %}

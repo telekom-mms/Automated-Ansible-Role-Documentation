@@ -159,6 +159,5 @@ Author Information
 ------------------
 
 your name @ ansible-docs
-
 Issues: https://gitlab.com/kankare/ansible-docs/-/issues
 <!-- END_ANSIBLE_DOCS -->
