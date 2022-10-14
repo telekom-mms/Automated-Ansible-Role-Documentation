@@ -29,8 +29,9 @@ Arguments:
 Options:
   --config-file FILE              [default: .ansible-docs.yml]
   --output-file FILE              [default: README.md]
-  --output-template TEXT          [default: <!-- BEGIN_ANSIBLE_DOCS --> {{
-                                  content }} <!-- END_ANSIBLE_DOCS --> ]
+  --output-template TEXT          Output template as a string or a path to a
+                                  file.  [default: <!-- BEGIN_ANSIBLE_DOCS -->
+                                  {{ content }} <!-- END_ANSIBLE_DOCS --> ]
   --output-mode [inject|replace]  [default: inject]
   --install-completion [bash|zsh|fish|powershell|pwsh]
                                   Install completion for the specified shell.
@@ -47,9 +48,9 @@ Commands:
 
 The configuration options can be provided either via CLI arguments shown in `--help`, or a `--config-file` in YAML format.
 
-You can override the template used for rendering the document.
+You can override the `--output-template` used for rendering the document. This may be passed in a string containing Jinja2, or a path to a file.
 
-Example:
+Examples:
 
 ``` yaml
 ---
@@ -70,4 +71,8 @@ output_template: |
   
   Goodbye!
 output_mode: replace
+```
+
+``` sh
+ansible-docs --output-file ROLE.md --output-template ./path/to/template.j2 --output-mode replace ...
 ```

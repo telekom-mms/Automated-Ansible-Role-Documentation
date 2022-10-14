@@ -73,7 +73,10 @@ def cli(
         readable=True,
         writable=True,
     ),
-    output_template: str = "<!-- BEGIN_ANSIBLE_DOCS -->\n{{ content }}\n<!-- END_ANSIBLE_DOCS -->\n",
+    output_template: str = typer.Option(
+        "<!-- BEGIN_ANSIBLE_DOCS -->\n{{ content }}\n<!-- END_ANSIBLE_DOCS -->\n",
+        help="Output template as a string or a path to a file.",
+    ),
     output_mode: OutputMode = typer.Option(OutputMode.inject.name),
 ):
     """
@@ -166,10 +169,18 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
         argument_specs=ctx.obj["data"]["argument_specs"],
     )
 
-    env = jinja2.Environment()
-    template = env.from_string(
-        source=ctx.obj["config"]["output_template"].replace("\\n", "\n")
-    )
+    output_template = ctx.obj["config"]["output_template"].replace("\\n", "\n")
+
+    try:
+        output_template_file = pathlib.Path(output_template).resolve(strict=True)
+
+        env = jinja2.Environment(
+            loader=jinja2.FileSystemLoader(output_template_file.parent)
+        )
+        template = env.get_template(output_template_file.name)
+    except FileNotFoundError:
+        env = jinja2.Environment(loader=jinja2.BaseLoader())
+        template = env.from_string(source=output_template)
 
     return template.render(
         content=content,
