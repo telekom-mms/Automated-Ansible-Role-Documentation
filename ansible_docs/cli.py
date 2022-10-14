@@ -169,17 +169,18 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
         argument_specs=ctx.obj["data"]["argument_specs"],
     )
 
+    role_path = ctx.obj["config"]["role_path"]
     output_template = ctx.obj["config"]["output_template"].replace("\\n", "\n")
 
     try:
         output_template_file = pathlib.Path(output_template).resolve(strict=True)
 
         env = jinja2.Environment(
-            loader=jinja2.FileSystemLoader(output_template_file.parent)
+            loader=jinja2.FileSystemLoader([role_path, output_template_file.parent])
         )
         template = env.get_template(output_template_file.name)
     except FileNotFoundError:
-        env = jinja2.Environment(loader=jinja2.BaseLoader())
+        env = jinja2.Environment(loader=jinja2.FileSystemLoader(role_path))
         template = env.from_string(source=output_template)
 
     return template.render(
