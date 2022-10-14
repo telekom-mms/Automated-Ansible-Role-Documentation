@@ -158,6 +158,33 @@ def test_cli_output_mode(tmp_path):
     assert result.exit_code == 0
 
 
+def test_inject_content(tmp_path):
+    role_path = ROLES_DIR / "inject"
+
+    readme_md = str(role_path / "README.md")
+    role_path = str(role_path)
+
+    output_dir = tmp_path
+    output_dir.mkdir(exist_ok=True)
+
+    output_file = output_dir / "README.md"
+
+    shutil.copyfile(readme_md, output_file)
+
+    result = runner.invoke(
+        app,
+        [
+            "--output-file",
+            output_file,
+            role_path,
+            "markdown",
+        ],
+    )
+
+    assert result.exit_code == 0
+    assert filecmp.cmp(readme_md, output_file)
+
+
 def test_role_path(tmp_path):
     current_dir = os.getcwd()
 

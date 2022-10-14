@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  role_name: inject
+  author: your name
+  description: Test role with some header and footer text outside of the template
+  company: ansible-docs
+
+  license: MIT
+
+  min_ansible_version: "1.2"
+
+  platforms:
+    - name: Fedora
+      versions:
+        - all
