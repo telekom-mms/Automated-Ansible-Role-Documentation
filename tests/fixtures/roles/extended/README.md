@@ -36,9 +36,9 @@ The list entry point for the extended role.
 
 | Variable | Description | Type | Required | Default |
 | -------- | ----------- | ---- | -------- | ------- |
-| list_int | A list of ints | list | no | [1, 2, 3] |
-| list_str | A list of strings | list | no | ['foo', 'bar', 'baz'] |
-| list_dict | A list of dicts | list | no | [{'dict': {'foo': 'bar'}}, {'dict': {'one': 1, 'two': 2}}] |
+| list_int | A list of ints | list(int) | no | [1, 2, 3] |
+| list_str | A list of strings | list(str) | no | ['foo', 'bar', 'baz'] |
+| list_dict | A list of dicts | list(dict) | no | [{'dict': {'foo': 'bar'}}, {'dict': {'one': 1, 'two': 2}}] |
 
 ## dict
 

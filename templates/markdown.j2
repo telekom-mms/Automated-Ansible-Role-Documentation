@@ -26,7 +26,12 @@ Role Variables
 | Variable | Description | Type | Required | Default |
 | -------- | ----------- | ---- | -------- | ------- |
 {%- for name, variable in specs.options | items %}
-| {{ name }} | {{ variable.description }} | {{ variable.type }} | {{ 'yes' if variable.required else 'no' }} | {{ variable.default }} |
+{%- if variable.type == "list" -%}
+{%- set variable_type = "list({})".format(variable.elements) -%}
+{%- else -%}
+{%- set variable_type = variable.type -%}
+{%- endif %}
+| {{ name }} | {{ variable.short_description | default(variable.description) }} | {{ variable_type }} | {{ "yes" if variable.required else "no" }} | {{ variable.default }} |
 {%- endfor %}
 {% endfor %}
 
