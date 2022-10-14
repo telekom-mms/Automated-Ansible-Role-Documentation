@@ -210,28 +210,6 @@ def test_role_path(tmp_path):
     assert result.exit_code == 0
 
 
-def test_markdown(tmp_path):
-    roles = ["minimum", "extended"]
-
-    for role_path in [ROLES_DIR / x for x in roles]:
-        role = role_path.stem
-        readme_md = str(role_path / "README.md")
-        role_path = str(role_path)
-
-        output_dir = tmp_path / role
-        output_dir.mkdir(exist_ok=True)
-
-        output_file = output_dir / "README.md"
-
-        result = runner.invoke(
-            app, ["--output-file", output_file, role_path, "markdown"]
-        )
-
-        assert result.output == ""
-        assert result.exit_code == 0
-        assert filecmp.cmp(readme_md, output_file)
-
-
 def test_output_template(tmp_path):
     role_path = ROLES_DIR / "template"
 
@@ -281,3 +259,25 @@ def test_output_template(tmp_path):
 
     assert result.exit_code == 0
     assert filecmp.cmp(readme_md, output_file)
+
+
+def test_markdown(tmp_path):
+    roles = ["minimum", "extended"]
+
+    for role_path in [ROLES_DIR / x for x in roles]:
+        role = role_path.stem
+        readme_md = str(role_path / "README.md")
+        role_path = str(role_path)
+
+        output_dir = tmp_path / role
+        output_dir.mkdir(exist_ok=True)
+
+        output_file = output_dir / "README.md"
+
+        result = runner.invoke(
+            app, ["--output-file", output_file, role_path, "markdown"]
+        )
+
+        assert result.output == ""
+        assert result.exit_code == 0
+        assert filecmp.cmp(readme_md, output_file)
