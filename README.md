@@ -44,11 +44,17 @@ Commands:
   markdown  Command for generating role documentation in Markdown format.
 ```
 
+### Modes
+
+The `inject` mode will inject only the changed content in between the `BEGIN_ANSIBLE_DOCS` and `END_ANSIBLE_DOCS` markers. This makes it possible to have header and footer text in the file that is not touched. This is the default mode, and will revert to `replace` if the file does not exist to create it the first time.
+
+The `replace` mode will replace the whole file with the template. Usually, the `inject` mode should be fine for regular usage and changing the mode is not necessary unless you want to overwrite an existing file.
+
 ### Configuration
 
 The configuration options can be provided either via CLI arguments shown in `--help`, or a `--config-file` in YAML format.
 
-You can override the `--output-template` used for rendering the document. This may be passed in a string containing Jinja2, or a path to a file.
+You can override the `--output-template` used for rendering the document. This may be passed in as a string containing Jinja2, or a path to a file. The template must start and end with the markers as comments.
 
 Examples:
 
@@ -56,10 +62,6 @@ Examples:
 ---
 output_file: ROLE.md
 output_template: |
-  # Boilerplate
-  
-  Hello!
-
   <!-- BEGIN_ANSIBLE_DOCS -->
   {{ content }}
   
@@ -68,8 +70,6 @@ output_template: |
   
   There's {{ argument_specs.main.options | length }} input variables for main.yml.
   <!-- END_ANSIBLE_DOCS -->
-  
-  Goodbye!
 output_mode: replace
 ```
 
