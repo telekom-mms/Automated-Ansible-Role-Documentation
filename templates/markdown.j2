@@ -57,8 +57,8 @@ Example Playbook
       vars:
         {% for name, variable in argument_specs.main.options | items -%}
         {%- if variable.required -%}
-        {{ name }}:
-        {%- endif %}
+        {{ name }}: # required, type: {{ variable.type }}
+        {%- endif -%}
         {% endfor %}
 ```
 

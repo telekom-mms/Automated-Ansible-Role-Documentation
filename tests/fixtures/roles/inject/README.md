@@ -44,9 +44,7 @@ Example Playbook
       ansible.builtin.import_role:
         name: inject
       vars:
-        
-        myapp_str:
-        
+        myapp_str: # required, type: str
 ```
 
 License

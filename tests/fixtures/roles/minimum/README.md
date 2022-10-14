@@ -39,9 +39,7 @@ Example Playbook
       ansible.builtin.import_role:
         name: minimum
       vars:
-        
-        myapp_str:
-        
+        myapp_str: # required, type: str
 ```
 
 License

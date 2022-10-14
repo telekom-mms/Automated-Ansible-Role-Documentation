@@ -142,12 +142,7 @@ Example Playbook
       ansible.builtin.import_role:
         name: extended
       vars:
-        
-        
-        
-        required:
-        
-        
+        required: # required, type: str
 ```
 
 License
