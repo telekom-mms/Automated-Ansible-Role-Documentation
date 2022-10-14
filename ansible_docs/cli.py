@@ -129,7 +129,7 @@ def write(ctx: typer.Context, content: str) -> None:
             content = "".join(header + [content] + footer)
 
         f.truncate(0)
-        print(content, file=f)
+        f.write(content)
 
 
 def parse_meta(ctx: typer.Context) -> tuple[dict, dict]:
@@ -176,11 +176,14 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
         output_template_file = pathlib.Path(output_template).resolve(strict=True)
 
         env = jinja2.Environment(
-            loader=jinja2.FileSystemLoader([role_path, output_template_file.parent])
+            keep_trailing_newline=True,
+            loader=jinja2.FileSystemLoader([role_path, output_template_file.parent]),
         )
         template = env.get_template(output_template_file.name)
     except FileNotFoundError:
-        env = jinja2.Environment(loader=jinja2.FileSystemLoader(role_path))
+        env = jinja2.Environment(
+            keep_trailing_newline=True, loader=jinja2.FileSystemLoader(role_path)
+        )
         template = env.from_string(source=output_template)
 
     return template.render(
