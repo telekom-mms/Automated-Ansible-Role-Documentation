@@ -31,7 +31,7 @@ Role Variables
 {%- else -%}
 {%- set variable_type = variable.type -%}
 {%- endif %}
-| {{ name }} | {{ variable.short_description | default(variable.description) }} | {{ variable_type }} | {{ "yes" if variable.required else "no" }} | {{ variable.default }} |
+| {{ name }} | {{ variable.description }} | {{ variable_type }} | {{ "yes" if variable.required else "no" }} | {{ variable.default }} |
 {%- endfor %}
 {% endfor %}
 
