@@ -96,8 +96,7 @@ The jsonarg entry point for the extended role.
 
 | Variable | Description | Type | Required | Default |
 | -------- | ----------- | ---- | -------- | ------- |
-| jsonarg | A JSON value | jsonarg | no | {"foo": "bar"}
- |
+| jsonarg | A JSON value | jsonarg | no | {"foo": "bar"} |
 
 ## json
 
@@ -105,8 +104,7 @@ The json entry point for the extended role.
 
 | Variable | Description | Type | Required | Default |
 | -------- | ----------- | ---- | -------- | ------- |
-| json | A JSON value | json | no | {"foo": "bar"}
- |
+| json | A JSON value | json | no | {"foo": "bar"} |
 
 ## bytes
 

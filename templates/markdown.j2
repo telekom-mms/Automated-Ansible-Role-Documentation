@@ -35,8 +35,10 @@ Role Variables
 {%- set variable_description = " ".join(variable.description) | replace("\n", " ") | trim -%}
 {%- else -%}
 {%- set variable_description = variable.description | replace("\n", " ") | trim -%}
-{%- endif %}
-| {{ name }} | {{ variable_description }} | {{ variable_type }} | {{ "yes" if variable.required else "no" }} | {{ variable.default }} |
+{%- endif -%}
+{%- set variable_required = "yes" if variable.required else "no" -%}
+{%- set variable_default = variable.default | trim %}
+| {{ name }} | {{ variable_description }} | {{ variable_type }} | {{ variable_required }} | {{ variable_default }} |
 {%- endfor %}
 {% endfor %}
 
