@@ -86,11 +86,12 @@ As noted above, the template _must_ start and end with the markers as comments, 
 
 `{{ content }}` will contain the rendered builtin output specific template content. For Markdown, see [templates/markdown.j2](./templates/markdown.j2).
 
-You will most likely want to skip using it in your own template however, and use the provided variables containing the role metadata directly.
+You will most likely want to skip using it in your own template however, and use the provided variables containing the [role metadata](https://galaxy.ansible.com/docs/contributing/creating_role.html#role-metadata) and [argument specs](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#specification-format) directly. `ansible-docs` does not manipulate the values coming in from the YAML files in any way.
 
 Template variables:
 
 - `role`: The role name
+- `content`: Whole content as pre-rendered by the built in templates
 - `metadata`: Metadata read from `meta/main.yml`
 - `argument_specs`: Metadata read from `meta/argument_specs.yml`
 
