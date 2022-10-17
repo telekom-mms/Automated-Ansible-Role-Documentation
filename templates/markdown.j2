@@ -29,14 +29,14 @@ Role Variables
 {%- if variable.type == "list" -%}
 {%- set variable_type = "list({})".format(variable.elements) -%}
 {%- else -%}
-{%- set variable_type = variable.type -%}
+{%- set variable_type = variable.type | default("str") -%}
 {%- endif %}
 {%- if variable.description is not string -%}
-{%- set variable_description = " ".join(variable.description) -%}
+{%- set variable_description = " ".join(variable.description) | replace("\n", " ") | trim -%}
 {%- else -%}
-{%- set variable_description = variable.description -%}
+{%- set variable_description = variable.description | replace("\n", " ") | trim -%}
 {%- endif %}
-| {{ name }} | {{ variable_description | replace("\n", " ") | trim }} | {{ variable_type }} | {{ "yes" if variable.required else "no" }} | {{ variable.default }} |
+| {{ name }} | {{ variable_description }} | {{ variable_type }} | {{ "yes" if variable.required else "no" }} | {{ variable.default }} |
 {%- endfor %}
 {% endfor %}
 
