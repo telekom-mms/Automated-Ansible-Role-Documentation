@@ -97,7 +97,7 @@ Template variables:
 
 Example:
 
-``` python
+```
 <!-- BEGIN_ANSIBLE_DOCS -->
 
 This is my role: {{ role }}
