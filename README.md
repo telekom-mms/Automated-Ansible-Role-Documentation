@@ -52,27 +52,73 @@ The `replace` mode will replace the whole file with the template. Usually, the `
 
 ### Configuration
 
-The configuration options can be provided either via CLI arguments shown in `--help`, or a `--config-file` in YAML format.
-
-You can override the `--output-template` used for rendering the document. This may be passed in as a string containing Jinja2, or a path to a file. The template must start and end with the markers as comments.
+The configuration options can be provided either via CLI arguments shown in `--help`, or a `--config-file` in YAML format. Note that the options have underscores when provided via the configuration file.
 
 Examples:
+
+``` sh
+ansible-docs --output-file ROLE.md --output-mode replace ...
+```
 
 ``` yaml
 ---
 output_file: ROLE.md
-output_template: |
-  <!-- BEGIN_ANSIBLE_DOCS -->
-  {{ content }}
-  
-  <!-- Metadata is directly accessible as 'metadata' and 'argument_specs' -->
-  {{ metadata.galaxy_info.author }} wrote this Markdown!
-  
-  There's {{ argument_specs.main.options | length }} input variables for main.yml.
-  <!-- END_ANSIBLE_DOCS -->
 output_mode: replace
 ```
 
-``` sh
-ansible-docs --output-file ROLE.md --output-template ./path/to/template.j2 --output-mode replace ...
+### Templating
+
+You can override the `--output-template` used for rendering the document. This may be passed in as a string containing Jinja2, or a path to a file. As noted above, this option may be passed in via CLI or the configuration file.
+
+In the configuration file, easiest is to do a multiline string:
+
+``` yaml
+---
+output_template: |
+  <!-- BEGIN_ANSIBLE_DOCS -->
+  
+  This is my role: {{ role }}
+  
+  <!-- END_ANSIBLE_DOCS -->
 ```
+
+As noted above, the template _must_ start and end with the markers as comments, for the content injection to work.
+
+`{{ content }}` will contain the rendered builtin output specific template content. For Markdown, see [templates/markdown.j2](./templates/markdown.j2).
+
+You will most likely want to skip using it in your own template however, and use the provided variables containing the role metadata directly.
+
+Template variables:
+
+- `role`: The role name
+- `metadata`: Metadata read from `meta/main.yml`
+- `argument_specs`: Metadata read from `meta/argument_specs.yml`
+
+Example:
+
+``` python
+<!-- BEGIN_ANSIBLE_DOCS -->
+
+This is my role: {{ role }}
+
+<!-- 'metadata' contains all the things in meta/main.yml -->
+{{ metadata.galaxy_info.license }}
+
+<!-- All the usual Jinja2 filters are available -->
+{{ metadata.galaxy_info.galaxy_tags | sort }}
+
+<!-- Including files is also possible in relation to the role's directory with Jinja2's include directive -->
+{% include "defaults/main.yml" %}
+
+<!-- 'argument_specs' contains all the things in meta/argument_specs.yml -->
+{% for entrypoint, specs in argument_specs | items %}
+Task file name: {{ entrypoint }}.yml has {{ specs | length }} input variables!
+{% endfor %}
+<!-- END_ANSIBLE_DOCS -->
+```
+
+``` sh
+ansible-docs --output-template ./path/to/template.j2 ...
+```
+
+More examples can be found in the [tests](./tests/).
