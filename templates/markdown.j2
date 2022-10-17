@@ -2,11 +2,9 @@ Ansible Role: {{ role | capitalize }}
 =========
 
 {{ metadata.galaxy_info.description }}
-
-{%- if metadata.galaxy_info.galaxy_tags | length > 0 %}
+{% if metadata.galaxy_info.galaxy_tags | length > 0 %}
 Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
-{%- endif %}
-
+{% endif %}
 Requirements
 ------------
 

@@ -4,6 +4,8 @@ Ansible Role: Extended
 
 Test role with lots of metadata
 
+Tags: ansible, docs
+
 Requirements
 ------------
 

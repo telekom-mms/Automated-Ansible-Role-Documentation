@@ -5,6 +5,10 @@ galaxy_info:
   description: Test role with lots of metadata
   company: ansible-docs
 
+  galaxy_tags:
+    - ansible
+    - docs
+
   issue_tracker_url: https://gitlab.com/kankare/ansible-docs/-/issues
 
   license: MIT
