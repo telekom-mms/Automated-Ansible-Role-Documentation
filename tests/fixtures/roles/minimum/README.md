@@ -51,4 +51,5 @@ Author Information
 ------------------
 
 your name @ ansible-docs
+
 <!-- END_ANSIBLE_DOCS -->
