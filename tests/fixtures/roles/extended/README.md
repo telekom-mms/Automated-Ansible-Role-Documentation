@@ -22,10 +22,8 @@ The main entrypoint for the extended role
 
 | Variable | Description | Type | Required | Default |
 | -------- | ----------- | ---- | -------- | ------- |
-| name | This one contains option-name, which should override
-the name given for the option.
- |  | no |  |
-| choices | ['So many', 'choices', 'to make'] | str | no |  |
+| name | This one contains option-name, which should override the name given for the option. |  | no |  |
+| choices | So many choices to make | str | no |  |
 | default | This one has a default | str | no | long |
 | required | This one is required | str | yes |  |
 | default_type | Type is str by default |  | no |  |

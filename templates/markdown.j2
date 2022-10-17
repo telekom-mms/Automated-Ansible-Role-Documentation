@@ -31,7 +31,12 @@ Role Variables
 {%- else -%}
 {%- set variable_type = variable.type -%}
 {%- endif %}
-| {{ name }} | {{ variable.description }} | {{ variable_type }} | {{ "yes" if variable.required else "no" }} | {{ variable.default }} |
+{%- if variable.description is not string -%}
+{%- set variable_description = " ".join(variable.description) -%}
+{%- else -%}
+{%- set variable_description = variable.description -%}
+{%- endif %}
+| {{ name }} | {{ variable_description | replace("\n", " ") | trim }} | {{ variable_type }} | {{ "yes" if variable.required else "no" }} | {{ variable.default }} |
 {%- endfor %}
 {% endfor %}
 
