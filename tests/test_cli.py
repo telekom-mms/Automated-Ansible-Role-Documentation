@@ -7,7 +7,7 @@ import shutil
 
 from typer.testing import CliRunner
 
-from ansible_docs.cli import app
+from ansible_role_docs.cli import app
 
 ROLES_DIR = pathlib.Path("./tests/fixtures/roles")
 DEFAULT_ROLE = "minimum"

@@ -159,10 +159,11 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
     (or default) output template to be written to the file.
     """
 
-    templates = pathlib.Path(__file__).parent.parent / "templates"
-    loader = jinja2.FileSystemLoader(templates)
+    env = jinja2.Environment(
+        loader=jinja2.PackageLoader("ansible_role_docs"),
+        autoescape=jinja2.select_autoescape(),
+    )
 
-    env = jinja2.Environment(loader=loader)
     content = env.get_template(content_template).render(
         role=ctx.obj["config"]["role"],
         metadata=ctx.obj["data"]["metadata"],

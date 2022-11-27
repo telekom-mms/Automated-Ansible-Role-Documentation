@@ -1,12 +1,9 @@
 [tool.poetry]
-name = "ansible-docs"
+name = "ansible-role-docs"
 version = "0.1.0"
 description = "A tool for generating docs for Ansible roles"
 authors = ["Miika Kankare <miika@kanka.re>"]
 license = "MIT"
-packages = [
-  { include = "ansible_docs" }
-]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -24,7 +21,7 @@ types-PyYAML = "^6.0.12"
 isort = "^5.10.1"
 
 [tool.poetry.scripts]
-ansible-docs = "ansible_docs.cli:app"
+ansible-role-docs = "ansible_role_docs.cli:app"
 
 [tool.pytest.ini_options]
 addopts = [

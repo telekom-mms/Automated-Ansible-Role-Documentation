@@ -9,3 +9,4 @@ build
 htmlcov
 .coverage
 coverage.xml
+dist
