@@ -1,24 +1,23 @@
-Ansible Role: {{ role | capitalize }}
-=========
-
+# Ansible Role: {{ role | capitalize }}
+---
 {{ metadata.galaxy_info.description }}
 {% if metadata.galaxy_info.galaxy_tags | length > 0 %}
 Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
-{% endif %}
-Requirements
-------------
+{%- endif %}
 
+## Requirements
+---
 | Platform | Versions |
 | -------- | -------- |
 {%- for platform in metadata.galaxy_info.platforms %}
 | {{ platform.name }} | {{ platform.versions | join(', ') }} |
 {%- endfor %}
 
-Role Variables
---------------
+## Role Arguments
+---
 {% for entrypoint, specs in argument_specs | items %}
-## {{ entrypoint }}
-
+### Entrypoint: {{ entrypoint }}
+---
 {{ specs.short_description }}
 
 | Variable | Description | Type | Required | Default |
@@ -40,19 +39,18 @@ Role Variables
 {%- endfor %}
 {% endfor %}
 
-Dependencies
-------------
-{% if metadata.dependencies | length > 0 -%}
-{% for dependency in metadata.dependencies %}
+## Dependencies
+---
+{%- if metadata.dependencies | length > 0 %}
+{%- for dependency in metadata.dependencies %}
 - {{ dependency }}
 {%- endfor %}
 {%- else %}
 None.
 {%- endif %}
 
-Example Playbook
-----------------
-
+## Example Playbook
+---
 ```
 - hosts: all
   tasks:
@@ -67,18 +65,17 @@ Example Playbook
         {% endfor %}
 ```
 
-License
--------
-
+## License
+---
 {{ metadata.galaxy_info.license }}
 
-Author Information
-------------------
+## Author and Project Information
+---
 {%- if "company" in metadata.galaxy_info %}
 {{ metadata.galaxy_info.author }} @ {{ metadata.galaxy_info.company }}
 {%- else %}
 {{ metadata.galaxy_info.author }}
 {%- endif %}
 {% if metadata.galaxy_info.issue_tracker_url is defined and metadata.galaxy_info.issue_tracker_url | length > 0 %}
-Issues: {{ metadata.galaxy_info.issue_tracker_url }}
+Issues: [tracker]({{ metadata.galaxy_info.issue_tracker_url }})
 {%- endif -%}
