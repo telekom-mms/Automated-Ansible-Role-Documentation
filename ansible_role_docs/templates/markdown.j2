@@ -33,15 +33,15 @@ Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 {%- else -%}
 {%- set variable_description = variable.description | replace("\n", " ") | trim -%}
 {%- endif -%}
-{%- set variable_required = "yes" if variable.required else "no" -%}
-{%- set variable_default = variable.default | trim %}
+{%- set variable_required = "yes" if variable.required | default(false) else "no" -%}
+{%- set variable_default = variable.default | default("") | trim %}
 | {{ name }} | {{ variable_description }} | {{ variable_type }} | {{ variable_required }} | {{ variable_default }} |
 {%- endfor %}
 {% endfor %}
 
 ## Dependencies
 ---
-{%- if metadata.dependencies | length > 0 %}
+{%- if ("dependencies" in metadata) and (metadata.dependencies | length > 0) %}
 {%- for dependency in metadata.dependencies %}
 - {{ dependency }}
 {%- endfor %}
@@ -59,7 +59,7 @@ None.
         name: {{ role }}
       vars:
         {% for name, variable in argument_specs.main.options | items -%}
-        {%- if variable.required -%}
+        {%- if variable.required | default(false) -%}
         {{ name }}: # required, type: {{ variable.type }}
         {%- endif -%}
         {% endfor %}

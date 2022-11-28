@@ -162,6 +162,7 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
     env = jinja2.Environment(
         loader=jinja2.PackageLoader("ansible_role_docs"),
         autoescape=jinja2.select_autoescape(),
+        undefined=jinja2.StrictUndefined,
     )
 
     content = env.get_template(content_template).render(
