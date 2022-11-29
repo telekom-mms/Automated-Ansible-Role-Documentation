@@ -1,5 +1,8 @@
-# Ansible Role: {{ role | capitalize }}
+# Ansible Role: {{ role }}
 ---
+{%- if "version" in galaxy_collection %}
+Version: {{ galaxy_collection.version }}
+{% endif %}
 {{ metadata.galaxy_info.description }}
 {% if metadata.galaxy_info.galaxy_tags | length > 0 %}
 Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}

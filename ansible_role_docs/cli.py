@@ -99,6 +99,8 @@ def cli(
         ctx.obj["data"]["argument_specs"],
     ) = parse_meta(ctx)
 
+    ctx.obj["data"]["galaxy_collection"] = parse_collection(ctx)
+
 
 def write(ctx: typer.Context, content: str) -> None:
     """
@@ -152,6 +154,26 @@ def parse_meta(ctx: typer.Context) -> tuple[dict, dict]:
     return main, argument_specs
 
 
+def parse_collection(ctx: typer.Context) -> dict:
+    """
+    Parses Ansible Galaxy collection metadata from YAML files.
+    """
+
+    collection_dir = ctx.obj["config"]["role_path"].parent.parent
+
+    galaxy_files = list(collection_dir.glob("galaxy.y*ml"))
+
+    if len(galaxy_files):
+        galaxy_yml = galaxy_files[0]
+
+        with open(galaxy_yml, "r") as f:
+            collection = yaml.safe_load(f)
+
+        return collection
+    else:
+        return {}
+
+
 def render_content(ctx: typer.Context, content_template: str) -> str:
     """
     Renders Jinja2 templates twice, the first time to get the parsed
@@ -165,10 +187,19 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
         undefined=jinja2.StrictUndefined,
     )
 
+    role=ctx.obj["config"]["role"]
+    metadata=ctx.obj["data"]["metadata"]
+    argument_specs=ctx.obj["data"]["argument_specs"]
+    collection=ctx.obj["data"]["galaxy_collection"]
+
+    if "namespace" in collection:
+        role = collection["namespace"] + "." + collection["name"] + "." + role
+
     content = env.get_template(content_template).render(
-        role=ctx.obj["config"]["role"],
-        metadata=ctx.obj["data"]["metadata"],
-        argument_specs=ctx.obj["data"]["argument_specs"],
+        role=role,
+        metadata=metadata,
+        argument_specs=argument_specs,
+        galaxy_collection=collection,
     )
 
     role_path = ctx.obj["config"]["role_path"]
@@ -190,9 +221,10 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
 
     return template.render(
         content=content,
-        role=ctx.obj["config"]["role"],
-        metadata=ctx.obj["data"]["metadata"],
-        argument_specs=ctx.obj["data"]["argument_specs"],
+        role=role,
+        metadata=metadata,
+        argument_specs=argument_specs,
+        galaxy_collection=collection,
     )
 
 
