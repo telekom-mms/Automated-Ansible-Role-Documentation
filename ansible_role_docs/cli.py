@@ -101,6 +101,8 @@ def cli(
 
     ctx.obj["data"]["galaxy_collection"] = parse_collection(ctx)
 
+    ctx.obj["data"]["entrypoint_options"] = parse_options(ctx)
+
 
 def write(ctx: typer.Context, content: str) -> None:
     """
@@ -174,6 +176,69 @@ def parse_collection(ctx: typer.Context) -> dict:
         return {}
 
 
+def gather_options(path: list[str], arguments: dict) -> list[tuple[list[str], dict]]:
+    """
+    Walks through an argument_specs 'options' section gathering groups of suboptions
+    and adding them to a list with a 'path' describing the entrypoint/options they
+    belong to.
+    """
+    results = []
+    options = arguments["options"]
+    results.append((path, options))
+    for name, details in options.items():
+        if "options" in details:
+            results.extend(gather_options(path + [name], details))
+
+    return results
+
+
+def parse_options(ctx: typer.Context) -> dict:
+    """
+    Parses argument_specs into options structure, with sections for subptions
+    and translation of formats into display formats.
+    """
+    entrypoint_options = {}
+    for entrypoint, arguments in ctx.obj["data"]["argument_specs"].items():
+        gathered_options = gather_options([], arguments)
+        for path, options in gathered_options:
+            for option, details in options.items():
+                details["display_required"] = (
+                    "yes" if details.get("required", False) else "no"
+                )
+                description = details["description"]
+                details["display_description"] = (
+                    (
+                        description
+                        if isinstance(description, str)
+                        else description.join(" ")
+                    )
+                    .replace("\n", " ")
+                    .strip()
+                )
+                details["display_type"] = details["type"]
+                if details["type"] == "bool":
+                    details["display_default"] = (
+                        "true" if details.get("default", False) else "false"
+                    )
+                elif details["type"] == "list":
+                    details["display_default"] = "N/A"
+                    if (details["elements"] == "dict") and ("options" in details):
+                        details["display_type"] = f"list of dicts of '{option}' options"
+                    else:
+                        details["display_type"] = (
+                            "list of '" + details["elements"] + "'"
+                        )
+                elif details["type"] == "dict":
+                    details["display_default"] = "N/A"
+                    if "options" in details:
+                        details["display_type"] = f"dict of '{option}' options"
+                else:
+                    details["display_default"] = details.get("default", "").strip()
+        entrypoint_options[entrypoint] = gathered_options
+
+    return entrypoint_options
+
+
 def render_content(ctx: typer.Context, content_template: str) -> str:
     """
     Renders Jinja2 templates twice, the first time to get the parsed
@@ -187,10 +252,11 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
         undefined=jinja2.StrictUndefined,
     )
 
-    role=ctx.obj["config"]["role"]
-    metadata=ctx.obj["data"]["metadata"]
-    argument_specs=ctx.obj["data"]["argument_specs"]
-    collection=ctx.obj["data"]["galaxy_collection"]
+    role = ctx.obj["config"]["role"]
+    metadata = ctx.obj["data"]["metadata"]
+    argument_specs = ctx.obj["data"]["argument_specs"]
+    collection = ctx.obj["data"]["galaxy_collection"]
+    entrypoint_options = ctx.obj["data"]["entrypoint_options"]
 
     if "namespace" in collection:
         role = collection["namespace"] + "." + collection["name"] + "." + role
@@ -200,6 +266,7 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
         metadata=metadata,
         argument_specs=argument_specs,
         galaxy_collection=collection,
+        entrypoint_options=entrypoint_options,
     )
 
     role_path = ctx.obj["config"]["role_path"]
@@ -225,6 +292,7 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
         metadata=metadata,
         argument_specs=argument_specs,
         galaxy_collection=collection,
+        entrypoint_options=entrypoint_options,
     )
 
 

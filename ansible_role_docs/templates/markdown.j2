@@ -18,30 +18,29 @@ Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 
 ## Role Arguments
 ---
-{% for entrypoint, specs in argument_specs | items %}
+{% for entrypoint in argument_specs.keys() %}
+{%- set path, options=entrypoint_options[entrypoint][0] -%}
 ### Entrypoint: {{ entrypoint }}
 ---
-{{ specs.short_description }}
+{{ argument_specs[entrypoint].short_description }}
 
-| Variable | Description | Type | Required | Default |
-| -------- | ----------- | ---- | -------- | ------- |
-{%- for name, variable in specs.options | items %}
-{%- if variable.type == "list" -%}
-{%- set variable_type = "list({})".format(variable.elements) -%}
-{%- else -%}
-{%- set variable_type = variable.type | default("str") -%}
-{%- endif %}
-{%- if variable.description is not string -%}
-{%- set variable_description = " ".join(variable.description) | replace("\n", " ") | trim -%}
-{%- else -%}
-{%- set variable_description = variable.description | replace("\n", " ") | trim -%}
-{%- endif -%}
-{%- set variable_required = "yes" if variable.required | default(false) else "no" -%}
-{%- set variable_default = variable.default | default("") | trim %}
-| {{ name }} | {{ variable_description }} | {{ variable_type }} | {{ variable_required }} | {{ variable_default }} |
+|Option|Description|Type|Required|Default|
+|---|---|---|---|---|
+{%- for name, details in options.items() %}
+| {{ name }} | {{ details.display_description }} | {{ details.display_type }} | {{ details.display_required }} | {{ details.display_default }} |
 {%- endfor %}
-{% endfor %}
 
+{% for path, options in entrypoint_options[entrypoint][1:] %}
+#### Options for {{ path | join(" > ") }}
+---
+|Option|Description|Type|Required|Default|
+|---|---|---|---|---|
+{%- for name, details in options.items() %}
+| {{ name }} | {{ details.display_description }} | {{ details.display_type }} | {{ details.display_required }} | {{ details.display_default }} |
+{%- endfor %}
+
+{% endfor %}
+{% endfor %}
 ## Dependencies
 ---
 {%- if ("dependencies" in metadata) and (metadata.dependencies | length > 0) %}
