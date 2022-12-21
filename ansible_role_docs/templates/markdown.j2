@@ -37,7 +37,6 @@ Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 {%- for name, details in options.items() %}
 | {{ name }} | {{ details.display_description }} | {{ details.display_type }} | {{ details.display_required }} | {{ details.display_default }} |
 {%- endfor %}
-
 {% endfor %}
 {% endfor %}
 ## Dependencies

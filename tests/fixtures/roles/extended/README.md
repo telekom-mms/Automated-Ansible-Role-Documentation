@@ -45,6 +45,21 @@ The dict entry point for the extended role.
 |---|---|---|---|---|
 | dict | A dictionary of keys and values | dict | no | {"dict": {"foo": "bar", "one": 1, "two": 2}} |
 
+### Entrypoint: dict-with-options
+---
+The dict-with-options entry point for the extended role.
+
+|Option|Description|Type|Required|Default|
+|---|---|---|---|---|
+| opts | A dictionary of keys and values | dict of 'opts' options | no |  |
+
+#### Options for dict-with-options > opts
+---
+|Option|Description|Type|Required|Default|
+|---|---|---|---|---|
+| int | An int value | int | no | 1 |
+| json | A JSON value | json | no | {"foo": "bar"} |
+
 ### Entrypoint: bool
 ---
 The bool entry point for the extended role.

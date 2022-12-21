@@ -77,6 +77,22 @@ argument_specs:
             one: 1
             two: 2
         description: A dictionary of keys and values
+  dict-with-options:
+    short_description: The dict-with-options entry point for the extended role.
+    options:
+      opts:
+        type: dict
+        description: A dictionary of keys and values
+        options:
+          int:
+            type: int
+            default: 1
+            description: An int value
+          json:
+            type: json
+            default: >
+              {"foo": "bar"}
+            description: A JSON value
   bool:
     short_description: The bool entry point for the extended role.
     options:

@@ -200,7 +200,7 @@ def parse_options(ctx: typer.Context) -> dict:
     """
     entrypoint_options = {}
     for entrypoint, arguments in ctx.obj["data"]["argument_specs"].items():
-        gathered_options = gather_options([], arguments)
+        gathered_options = gather_options([entrypoint], arguments)
         for path, options in gathered_options:
             for option, details in options.items():
                 details["display_required"] = (
@@ -217,6 +217,7 @@ def parse_options(ctx: typer.Context) -> dict:
                     .strip()
                 )
                 details["display_type"] = details.get("type", "str")
+                details["display_default"] = ""
                 if details["display_type"] == "bool":
                     details["display_default"] = (
                         "true" if details.get("default", False) else "false"
