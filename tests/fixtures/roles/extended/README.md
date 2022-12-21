@@ -22,10 +22,27 @@ The main entrypoint for the extended role
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | name | This one contains option-name, which should override the name given for the option. | str | no |  |
-| choices | So many choices to make | str | no |  |
+| choices-str | So many choices to make | str | no |  |
+| choices-int | So many choices to make | int | no |  |
 | default | This one has a default | str | no | long |
 | required | This one is required | str | yes |  |
 | default_type | Type is str by default | str | no |  |
+
+#### Choices for main > choices-str
+---
+|Choice|
+|---|
+| one |
+| two |
+| three |
+
+#### Choices for main > choices-int
+---
+|Choice|
+|---|
+| 1 |
+| 8 |
+| 42 |
 
 ### Entrypoint: list
 ---
@@ -59,6 +76,13 @@ The dict-with-options entry point for the extended role.
 |---|---|---|---|---|
 | int | An int value | int | no | 1 |
 | json | A JSON value | json | no | {"foo": "bar"} |
+| subopts | A sub-dictionary of keys and values | dict of 'subopts' options | no |  |
+
+#### Options for dict-with-options > opts > subopts
+---
+|Option|Description|Type|Required|Default|
+|---|---|---|---|---|
+| str | A str value | str | no |  |
 
 ### Entrypoint: bool
 ---

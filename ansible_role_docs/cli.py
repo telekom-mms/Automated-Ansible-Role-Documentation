@@ -104,6 +104,8 @@ def cli(
 
     ctx.obj["data"]["entrypoint_options"] = parse_options(ctx)
 
+    ctx.obj["data"]["entrypoint_choices"] = parse_choices(ctx)
+
 
 def write(ctx: typer.Context, content: str) -> None:
     """
@@ -175,6 +177,36 @@ def parse_collection(ctx: typer.Context) -> dict:
         return collection
     else:
         return {}
+
+
+def gather_choices(path: list[str], arguments: dict) -> list[tuple[list[str], list]]:
+    """
+    Walks through an argument_specs 'options' section gathering choices for options
+    and adding them to a list with a 'path' describing the entrypoint/options they
+    belong to.
+    """
+    results = []
+    options = arguments["options"]
+    for name, details in options.items():
+        if "choices" in details:
+            results.append((path + [name], details["choices"]))
+        if "options" in details:
+            results.extend(gather_choices(path + [name], details))
+
+    return results
+
+
+def parse_choices(ctx: typer.Context) -> dict:
+    """
+    Parses argument_specs into options structure, with sections for subptions
+    and translation of formats into display formats.
+    """
+    entrypoint_choices = {}
+    for entrypoint, arguments in ctx.obj["data"]["argument_specs"].items():
+        gathered_choices = gather_choices([entrypoint], arguments)
+        entrypoint_choices[entrypoint] = gathered_choices
+
+    return entrypoint_choices
 
 
 def gather_options(path: list[str], arguments: dict) -> list[tuple[list[str], dict]]:
@@ -263,6 +295,7 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
     argument_specs = ctx.obj["data"]["argument_specs"]
     collection = ctx.obj["data"]["galaxy_collection"]
     entrypoint_options = ctx.obj["data"]["entrypoint_options"]
+    entrypoint_choices = ctx.obj["data"]["entrypoint_choices"]
 
     if "namespace" in collection:
         role = collection["namespace"] + "." + collection["name"] + "." + role
@@ -273,6 +306,7 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
         argument_specs=argument_specs,
         galaxy_collection=collection,
         entrypoint_options=entrypoint_options,
+        entrypoint_choices=entrypoint_choices,
     )
 
     role_path = ctx.obj["config"]["role_path"]
@@ -299,6 +333,7 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
         argument_specs=argument_specs,
         galaxy_collection=collection,
         entrypoint_options=entrypoint_options,
+        entrypoint_choices=entrypoint_choices,
     )
 
 

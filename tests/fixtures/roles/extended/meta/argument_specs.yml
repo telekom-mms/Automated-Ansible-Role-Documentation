@@ -17,7 +17,7 @@ argument_specs:
         description: |
           This one contains option-name, which should override
           the name given for the option.
-      choices:
+      choices-str:
         type: str
         description:
           - So many
@@ -27,6 +27,16 @@ argument_specs:
           - one
           - two
           - three
+      choices-int:
+        type: int
+        description:
+          - So many
+          - choices
+          - to make
+        choices:
+          - 1
+          - 8
+          - 42
       default:
         type: str
         description: This one has a default
@@ -93,6 +103,13 @@ argument_specs:
             default: >
               {"foo": "bar"}
             description: A JSON value
+          subopts:
+            type: dict
+            description: A sub-dictionary of keys and values
+            options:
+              str:
+                type: str
+                description: A str value
   bool:
     short_description: The bool entry point for the extended role.
     options:
