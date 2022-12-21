@@ -27,7 +27,7 @@ isort:
 pytest:
   stage: test
   script:
-    - poetry run pytest -v --cov=ansible_docs
+    - poetry run pytest -v --cov=ansible_role_docs
     - poetry run coverage xml
   coverage: '/(?i)total.*? (100(?:\.0+)?\%|[1-9]?\d(?:\.\d+)?\%)$/'
   artifacts:
