@@ -4,7 +4,7 @@
 Version: {{ galaxy_collection.version }}
 {% endif %}
 {{ metadata.galaxy_info.description }}
-{% if metadata.galaxy_info.galaxy_tags | length > 0 %}
+{% if ("galaxy_tags" in metadata.galaxy_info) and (metadata.galaxy_info.galaxy_tags | length > 0) %}
 Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 {%- endif %}
 
@@ -29,7 +29,6 @@ Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 {%- for name, details in options.items() %}
 | {{ name }} | {{ details.display_description }} | {{ details.display_type }} | {{ details.display_required }} | {{ details.display_default }} |
 {%- endfor %}
-
 {% for path, options in entrypoint_options[entrypoint][1:] %}
 #### Options for {{ path | join(" > ") }}
 ---

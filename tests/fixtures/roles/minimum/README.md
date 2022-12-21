@@ -1,37 +1,33 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
-Ansible Role: Minimum
-=========
-
+# Ansible Role: minimum
+---
 Test role with a minimum amount of metadata
 
-Requirements
-------------
 
+## Requirements
+---
 | Platform | Versions |
 | -------- | -------- |
 | Fedora | all |
 
-Role Variables
---------------
-
-## main
-
+## Role Arguments
+---
+### Entrypoint: main
+---
 The main entry point for the minimum role.
 
-| Variable | Description | Type | Required | Default |
-| -------- | ----------- | ---- | -------- | ------- |
+|Option|Description|Type|Required|Default|
+|---|---|---|---|---|
 | myapp_int | The integer value, defaulting to 42. | int | no | 42 |
 | myapp_str | The string value | str | yes |  |
 
 
-Dependencies
-------------
-
+## Dependencies
+---
 None.
 
-Example Playbook
-----------------
-
+## Example Playbook
+---
 ```
 - hosts: all
   tasks:
@@ -42,14 +38,12 @@ Example Playbook
         myapp_str: # required, type: str
 ```
 
-License
--------
-
+## License
+---
 MIT
 
-Author Information
-------------------
-
+## Author and Project Information
+---
 your name @ ansible-docs
 
 <!-- END_ANSIBLE_DOCS -->

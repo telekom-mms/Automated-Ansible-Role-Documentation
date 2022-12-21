@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import json
 import pathlib
 from enum import Enum
 
@@ -210,30 +211,34 @@ def parse_options(ctx: typer.Context) -> dict:
                     (
                         description
                         if isinstance(description, str)
-                        else description.join(" ")
+                        else (" ").join(description)
                     )
                     .replace("\n", " ")
                     .strip()
                 )
-                details["display_type"] = details["type"]
-                if details["type"] == "bool":
+                details["display_type"] = details.get("type", "str")
+                if details["display_type"] == "bool":
                     details["display_default"] = (
                         "true" if details.get("default", False) else "false"
                     )
-                elif details["type"] == "list":
-                    details["display_default"] = "N/A"
+                elif details["display_type"] == "list":
+                    if default := details.get("default", None):
+                        details["display_default"] = json.dumps(default)
                     if (details["elements"] == "dict") and ("options" in details):
                         details["display_type"] = f"list of dicts of '{option}' options"
                     else:
                         details["display_type"] = (
                             "list of '" + details["elements"] + "'"
                         )
-                elif details["type"] == "dict":
-                    details["display_default"] = "N/A"
+                elif details["display_type"] == "dict":
+                    if default := details.get("default", None):
+                        details["display_default"] = json.dumps(default)
                     if "options" in details:
                         details["display_type"] = f"dict of '{option}' options"
-                else:
+                elif details["display_type"] == "str":
                     details["display_default"] = details.get("default", "").strip()
+                else:
+                    details["display_default"] = str(details.get("default", "")).strip()
         entrypoint_options[entrypoint] = gathered_options
 
     return entrypoint_options
