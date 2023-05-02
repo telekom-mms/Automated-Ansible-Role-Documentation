@@ -13,7 +13,7 @@ Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 | Platform | Versions |
 | -------- | -------- |
 {%- for platform in metadata.galaxy_info.platforms %}
-| {{ platform.name }} | {{ platform.versions | join(', ') }} |
+| {{ platform.name }} | {{ platform.versions | default([]) | join(', ') }} |
 {%- endfor %}
 
 ## Role Arguments
