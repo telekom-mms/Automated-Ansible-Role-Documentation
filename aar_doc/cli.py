@@ -266,12 +266,13 @@ def parse_options(ctx: typer.Context) -> dict:
                 elif details["display_type"] == "list":
                     if default := details.get("default", None):
                         details["display_default"] = json.dumps(default)
-                    if (details["elements"] == "dict") and ("options" in details):
-                        details["display_type"] = f"list of dicts of '{option}' options"
-                    else:
-                        details["display_type"] = (
-                            "list of '" + details["elements"] + "'"
-                        )
+                    if "elements" in details:
+                        if (details["elements"] == "dict") and ("options" in details):
+                            details["display_type"] = f"list of dicts of '{option}' options"
+                        else:
+                            details["display_type"] = (
+                                "list of '" + details["elements"] + "'"
+                            )
                 elif details["display_type"] == "dict":
                     if default := details.get("default", None):
                         details["display_default"] = json.dumps(default)
