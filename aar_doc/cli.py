@@ -279,7 +279,14 @@ def parse_options(ctx: typer.Context) -> dict:
                     if "options" in details:
                         details["display_type"] = f"dict of '{option}' options"
                 elif details["display_type"] == "str":
-                    details["display_default"] = details.get("default", "").strip()
+                    try:
+                        details["display_default"] = details.get("default", "").strip()
+                    except AttributeError:
+                        typer.echo(
+                            f"The default value of the argument {option} "
+                            f"is of type {type(details.get('default')).__name__}, need str"
+                        )
+                        raise typer.Exit(code=1)
                 else:
                     details["display_default"] = str(details.get("default", "")).strip()
         entrypoint_options[entrypoint] = gathered_options
