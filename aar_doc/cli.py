@@ -339,7 +339,7 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
             loader=jinja2.FileSystemLoader([role_path, output_template_file.parent]),
         )
         template = env.get_template(output_template_file.name)
-    except FileNotFoundError:
+    except (FileNotFoundError, OSError):
         env = jinja2.Environment(
             keep_trailing_newline=True, loader=jinja2.FileSystemLoader(role_path)
         )
