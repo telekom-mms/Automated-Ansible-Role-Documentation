@@ -50,7 +50,7 @@ def markdown(ctx: typer.Context) -> None:
 def cli(
     ctx: typer.Context,
     config_file: pathlib.Path = typer.Option(
-        ".ansible-docs.yml",
+        ".aar_doc.yml",
         file_okay=True,
         dir_okay=False,
         readable=True,
@@ -285,7 +285,7 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
     """
 
     env = jinja2.Environment(
-        loader=jinja2.PackageLoader("ansible_role_docs"),
+        loader=jinja2.PackageLoader("aar_doc"),
         autoescape=jinja2.select_autoescape(),
         undefined=jinja2.StrictUndefined,
     )
