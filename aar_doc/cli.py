@@ -127,8 +127,17 @@ def write(ctx: typer.Context, content: str) -> None:
             f.seek(0)
             lines = f.readlines()
 
-            begin = lines.index("<!-- BEGIN_ANSIBLE_DOCS -->\n")
-            end = lines.index("<!-- END_ANSIBLE_DOCS -->\n")
+            try:
+                begin = lines.index("<!-- BEGIN_ANSIBLE_DOCS -->\n")
+            except ValueError:
+                print("Could not find <!-- BEGIN_ANSIBLE_DOCS --> in the output file")
+                raise typer.Exit(code=1)
+
+            try:
+                end = lines.index("<!-- END_ANSIBLE_DOCS -->\n")
+            except ValueError:
+                print("Could not find <!-- END_ANSIBLE_DOCS --> in the output file")
+                raise typer.Exit(code=1)
 
             header = [*lines[:begin]]
             footer = [*lines[1 + end :]]
