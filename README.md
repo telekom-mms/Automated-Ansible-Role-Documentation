@@ -1,25 +1,25 @@
-# ansible-docs
+# aar-doc - Automated Ansible Role Documentation
 
-`ansible-docs` is a tool for generating documentation automatically from an Ansible role's metadata. Specifically, it reads the `meta/main.yml` and `meta/argument_specs.yml` files.
+`aar-doc` is a tool for generating documentation automatically from an Ansible role's metadata. Specifically, it reads the `meta/main.yml` and `meta/argument_specs.yml` files.
 
-This is heavily inspired by [terraform-docs](https://github.com/terraform-docs/terraform-docs) which does a similar thing with Terraform modules. `ansible-docs` isn't nearly as featureful though, but should do the trick!
+This is heavily inspired by [terraform-docs](https://github.com/terraform-docs/terraform-docs) which does a similar thing with Terraform modules. `aar-doc` isn't nearly as featureful though, but should do the trick!
 
-For instance, the only output format supported is Markdown. As with `terraform-docs`, you are able to override the default template however. As Ansible users are familiar with [Jinja2](https://jinja.palletsprojects.com/en/3.1.x/) `ansible-docs` uses it for templating.
+For instance, the only output format supported is Markdown. As with `terraform-docs`, you are able to override the default template however. As Ansible users are familiar with [Jinja2](https://jinja.palletsprojects.com/en/3.1.x/) `aar-doc` uses it for templating.
 
 Contributions are welcome to add support for more output formats!
 
 ## Installation
 
-As `ansible-docs` is a Python utility, the usual `pip install` works, but the tool isn't (yet) published in Pypi. So you'll need to point `pip` at the repository itself:
+As `aar-doc` is a Python utility, the usual `pip install` works, but the tool isn't (yet) published in Pypi. So you'll need to point `pip` at the repository itself:
 
 ``` sh
-pip install git+https://gitlab.com/kankare/ansible-docs
+pip install git+https://gitlab.com/kankare/aar-doc
 ```
 
 ## Usage
 
 ``` sh
-Usage: ansible-docs [OPTIONS] ROLE_PATH COMMAND [ARGS]...
+Usage: aar-doc [OPTIONS] ROLE_PATH COMMAND [ARGS]...
 
   A tool for generating docs for Ansible roles.
 
@@ -27,7 +27,7 @@ Arguments:
   ROLE_PATH  Path to an Ansible role  [required]
 
 Options:
-  --config-file FILE              [default: .ansible-docs.yml]
+  --config-file FILE              [default: .aar-doc.yml]
   --output-file FILE              [default: README.md]
   --output-template TEXT          Output template as a string or a path to a
                                   file.  [default: <!-- BEGIN_ANSIBLE_DOCS -->
@@ -57,7 +57,7 @@ The configuration options can be provided either via CLI arguments shown in `--h
 Examples:
 
 ``` sh
-ansible-docs --output-file ROLE.md --output-mode replace ...
+aar-doc --output-file ROLE.md --output-mode replace ...
 ```
 
 ``` yaml
@@ -86,7 +86,7 @@ As noted above, the template _must_ start and end with the markers as comments, 
 
 `{{ content }}` will contain the rendered builtin output specific template content. For Markdown, see [templates/markdown.j2](./templates/markdown.j2).
 
-You will most likely want to skip using it in your own template however, and use the provided variables containing the [role metadata](https://galaxy.ansible.com/docs/contributing/creating_role.html#role-metadata) and [argument specs](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#specification-format) directly. `ansible-docs` does not manipulate the values coming in from the YAML files in any way.
+You will most likely want to skip using it in your own template however, and use the provided variables containing the [role metadata](https://galaxy.ansible.com/docs/contributing/creating_role.html#role-metadata) and [argument specs](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#specification-format) directly. `aar-doc` does not manipulate the values coming in from the YAML files in any way.
 
 Template variables:
 
@@ -119,7 +119,16 @@ Task file name: {{ entrypoint }}.yml has {{ specs | length }} input variables!
 ```
 
 ``` sh
-ansible-docs --output-template ./path/to/template.j2 ...
+aar-doc --output-template ./path/to/template.j2 ...
 ```
 
 More examples can be found in the [tests](./tests/).
+
+## License
+
+MIT
+
+## Aknowledgements
+
+* Kudos to the original author [Miika Kankare](https://github.com/quulah)!
+* Kudos to [Kevin P. Fleming](https://github.com/kpfleming) for his additions to the original project!

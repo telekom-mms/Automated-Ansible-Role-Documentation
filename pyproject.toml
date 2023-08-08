@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "ansible-role-docs"
+name = "aar_doc"
 version = "0.1.0"
 description = "A tool for generating docs for Ansible roles"
 authors = ["Miika Kankare <miika@kanka.re>"]
@@ -21,7 +21,7 @@ types-PyYAML = "^6.0.12"
 isort = "^5.10.1"
 
 [tool.poetry.scripts]
-ansible-role-docs = "ansible_role_docs.cli:app"
+aar_doc = "aar_doc.cli:app"
 
 [tool.pytest.ini_options]
 addopts = [
