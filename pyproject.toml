@@ -2,8 +2,12 @@
 name = "aar_doc"
 version = "0.1.0"
 description = "A tool for generating docs for Ansible roles"
-authors = ["Miika Kankare <miika@kanka.re>"]
+readme = "README.md"
+authors = ["Miika Kankare <miika@kanka.re>", "Sebastian Gumprich <sebastian.gumprich@telekom.de>"]
 license = "MIT"
+homepage = "https://github.com/telekom-mms/aar_doc/"
+repository = "https://github.com/telekom-mms/aar_doc/" 
+documentation = "https://github.com/telekom-mms/aar_doc/" 
 
 [tool.poetry.dependencies]
 python = "^3.9"
