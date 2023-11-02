@@ -155,15 +155,36 @@ def parse_meta(ctx: typer.Context) -> tuple[dict, dict]:
 
     meta = ctx.obj["config"]["role_path"] / "meta"
 
-    argument_specs_yml = list(meta.glob("argument_specs.y*ml"))[0]
-    main_yml = list(meta.glob("main.y*ml"))[0]
+    try:
+        argument_specs_yml = list(meta.glob("argument_specs.y*ml"))[0]
+    except IndexError:
+        typer.echo("Could not find meta/argument_specs.yml")
+        raise typer.Exit(code=1)
 
     with open(argument_specs_yml, "r") as f:
-        argument_specs = yaml.safe_load(f)
-        argument_specs = argument_specs["argument_specs"]
+        try:
+            argument_specs = yaml.safe_load(f)
+        except yaml.YAMLError:
+            typer.echo("Not a valid YAML file: meta/argument_specs.yml")
+            raise typer.Exit(1)
+        try:
+            argument_specs = argument_specs["argument_specs"]
+        except TypeError:
+            typer.echo("Could not read meta/argument_specs.yml")
+            raise typer.Exit(1)
+
+    try:
+        main_yml = list(meta.glob("main.y*ml"))[0]
+    except:
+        typer.echo("Could not find meta/main.yml")
+        raise typer.Exit(code=1)
 
     with open(main_yml, "r") as f:
-        main = yaml.safe_load(f)
+        try:
+            main = yaml.safe_load(f)
+        except yaml.YAMLError:
+            typer.echo("Not a valid YAML file: meta/main.yml")
+            raise typer.Exit(1)
 
     return main, argument_specs
 
