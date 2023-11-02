@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  role_name: minimum
+  author: your name
+  description: Test role with a minimum amount of metadata
+  company: ansible-docs
+
+  license: MIT
+
+  min_ansible_version: "1.2"
+
+  platforms:
+    - name: Fedora
+      versions:
+        - all
