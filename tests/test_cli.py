@@ -281,3 +281,90 @@ def test_markdown(tmp_path):
         assert result.output == ""
         assert result.exit_code == 0
         assert filecmp.cmp(readme_md, output_file)
+
+def test_missing_arg_spec(tmp_path):
+    role_path = ROLES_DIR / "missing_arg_spec"
+    role_path = str(role_path)
+
+    output_dir = tmp_path
+    output_dir.mkdir(exist_ok=True)
+
+    output_file = output_dir / "README.md"
+
+    result = runner.invoke(
+        app,
+        [
+            "--config-file",
+            ".ansible-docs.yml",
+            "--output-file",
+            output_file,
+            role_path,
+            "markdown",
+        ],
+    )
+    assert result.output == "Could not find meta/argument_specs.yml\n"
+    assert result.exit_code == 1
+
+def test_missing_main_yml(tmp_path):
+    role_path = ROLES_DIR / "missing_main_yml"
+    role_path = str(role_path)
+
+    output_dir = tmp_path
+    output_dir.mkdir(exist_ok=True)
+
+    output_file = output_dir / "README.md"
+
+    result = runner.invoke(
+        app,
+        [
+            "--config-file",
+            ".ansible-docs.yml",
+            "--output-file",
+            output_file,
+            role_path,
+            "markdown",
+        ],
+    )
+    assert result.output == "Could not find meta/main.yml\n"
+    assert result.exit_code == 1
+
+def test_wrong_type(tmp_path):
+    role_path = ROLES_DIR / "wrong_type"
+    role_path = str(role_path)
+
+    output_dir = tmp_path
+    output_dir.mkdir(exist_ok=True)
+
+    output_file = output_dir / "README.md"
+
+    result = runner.invoke(
+        app,
+        [
+            "--config-file",
+            ".ansible-docs.yml",
+            "--output-file",
+            output_file,
+            role_path,
+            "markdown",
+        ],
+    )
+    assert result.output == "The default value of the argument myapp_int is of type int, need str\n"
+    assert result.exit_code == 1
+
+def test_missing_doc_string(tmp_path):
+    role_path = ROLES_DIR / "missing_doc_strings"
+
+    role_path = str(role_path)
+
+    output_dir = tmp_path
+    output_dir.mkdir(exist_ok=True)
+
+    result = runner.invoke(
+        app,
+        [
+            role_path,
+            "markdown",
+        ],
+    )
+    assert result.output == "Could not find <!-- BEGIN_ANSIBLE_DOCS --> in the output file\n"
+    assert result.exit_code == 1

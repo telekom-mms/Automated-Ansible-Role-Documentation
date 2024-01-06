@@ -1,0 +1,10 @@
+---
+argument_specs:
+  main:
+    short_description: The main entry point for the minimum role.
+    options:
+      myapp_int:
+        type: "str"
+        required: false
+        default: 1000
+        description: "The integer value, defaulting to 42."
