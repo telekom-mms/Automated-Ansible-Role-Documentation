@@ -293,9 +293,9 @@ def parse_options(ctx: typer.Context) -> dict:
                         details["display_default"] = json.dumps(default)
                     if "elements" in details:
                         if (details["elements"] == "dict") and ("options" in details):
-                            details[
-                                "display_type"
-                            ] = f"list of dicts of '{option}' options"
+                            details["display_type"] = (
+                                f"list of dicts of '{option}' options"
+                            )
                         else:
                             details["display_type"] = (
                                 "list of '" + details["elements"] + "'"
