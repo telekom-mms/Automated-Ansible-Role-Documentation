@@ -10,7 +10,7 @@ on:  # yamllint disable-line rule:truthy
 jobs:
   generate_changelog:
     name: create release draft
-    if: github.repository == 'telekom-mms/aar_doc'
+    if: github.repository == 'telekom-mms/Automated-Ansible-Role-Documentation'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
