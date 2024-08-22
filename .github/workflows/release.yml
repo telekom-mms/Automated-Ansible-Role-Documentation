@@ -1,6 +1,5 @@
 ---
 name: New release
-
 on:  # yamllint disable-line rule:truthy
   workflow_dispatch:
   push:
@@ -9,24 +8,27 @@ on:  # yamllint disable-line rule:truthy
 
 jobs:
   generate_changelog:
-    name: create release draft
-    if: github.repository == 'telekom-mms/Automated-Ansible-Role-Documentation'
+    if: github.repository_owner == 'telekom-mms' # do not run this elsewhere
+    permissions:
+      contents: write
+      issues: read
+      pull-requests: read
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           fetch-depth: 0
-          ref: main
+          persist-credentials: false
 
-      - name: 'Get Previous tag'
+      - name: Get Previous tag
         id: previoustag
-        uses: "WyriHaximus/github-action-get-previous-tag@master"
+        uses: "WyriHaximus/github-action-get-previous-tag@04e8485ecb6487243907e330d522ff60f02283ce" # v1.4.0
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: calculate next version
         id: version
-        uses: patrickjahns/version-drafter-action@2076fa43abb28f31d0e8b0890253fbd1d1a966fc # v1
+        uses: patrickjahns/version-drafter-action@2076fa43abb28f31d0e8b0890253fbd1d1a966fc # v1.3.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -58,6 +60,12 @@ jobs:
           name: Telekom MMS GmbH
           email: mms@telekom.de
           rebase: true
+
+      # do a second checkout to prevent race situation
+      # changelog gets updated but action works on old commit id
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        with:
+          ref: main
 
       - name: Generate changelog for the release
         run: |
