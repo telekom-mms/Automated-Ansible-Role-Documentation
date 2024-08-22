@@ -1,8 +1,35 @@
 # Changelog
 
-## [1.0.0](https://github.com/telekom-mms/aar_doc/tree/1.0.0) (2023-08-08)
+## [1.0.3](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/1.0.3) (2023-11-03)
 
-[Full Changelog](https://github.com/telekom-mms/aar_doc/compare/c419c32eb35222ffe48c80e869c34d3676a675a5...1.0.0)
+[Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/1.0.2...1.0.3)
+
+## [1.0.2](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/1.0.2) (2023-11-02)
+
+[Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/1.0.1...1.0.2)
+
+**Merged pull requests:**
+
+- Update dependency pytest to v7.4.3 [\#14](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/14) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency black to v23.10.1 [\#13](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/13) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency black to v23 [\#11](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/11) ([renovate[bot]](https://github.com/apps/renovate))
+- Update actions/checkout action to v4 [\#10](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/10) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency typer to ^0.9.0 [\#9](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/9) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency pytest-cov to v4.1.0 [\#8](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/8) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency pytest to v7.4.2 [\#7](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/7) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency isort to v5.12.0 [\#6](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/6) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency black to v22.12.0 [\#5](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/5) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency click to v8.1.7 [\#3](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/3) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency PyYAML to v6.0.1 [\#2](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/2) ([renovate[bot]](https://github.com/apps/renovate))
+- Configure Renovate [\#1](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/1) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [1.0.1](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/1.0.1) (2023-08-08)
+
+[Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/1.0.0...1.0.1)
+
+## [1.0.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/1.0.0) (2023-08-08)
+
+[Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/c419c32eb35222ffe48c80e869c34d3676a675a5...1.0.0)
 
 
 
