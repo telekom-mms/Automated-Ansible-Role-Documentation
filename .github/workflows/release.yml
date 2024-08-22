@@ -48,11 +48,22 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           future_release: ${{ steps.version.outputs.next-version }}
-
+          
+      # the token is needed so the github app can push to the repository
+      # the github app can bypass the branch protection rule (need a PR to merge)
+      # this way it can directly commit to main
+      - name: Obtain a GitHub App Installation Access Token
+        id: githubAppAuth
+        run: |
+          TOKEN="$(npx obtain-github-app-installation-access-token ci ${{ secrets.GH_BRANCH_PROTECTION_APP_TOKEN }})"
+          echo "::add-mask::$TOKEN"
+          echo token=${TOKEN} >> $GITHUB_OUTPUT
+          
       - name: push new version
         uses: github-actions-x/commit@722d56b8968bf00ced78407bbe2ead81062d8baa # v2.9
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # use the token obtained in the step before
+          github-token: ${{ steps.githubAppAuth.outputs.token }}
           push-branch: 'main'
           commit-message: 'update changelog'
           force-add: 'true'
