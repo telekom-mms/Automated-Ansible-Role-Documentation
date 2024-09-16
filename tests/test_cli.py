@@ -282,6 +282,29 @@ def test_markdown(tmp_path):
         assert result.exit_code == 0
         assert filecmp.cmp(readme_md, output_file)
 
+def test_meta_main_yaml(tmp_path):
+    role_path = ROLES_DIR / "meta_main_yaml"
+    readme_md = str(role_path / "README.md")
+    role_path = str(role_path)
+
+    output_dir = tmp_path
+    output_dir.mkdir(exist_ok=True)
+
+    output_file = output_dir / "README.md"
+
+    result = runner.invoke(
+        app,
+        [
+            "--output-file",
+            output_file,
+            role_path,
+            "markdown",
+        ],
+    )
+
+    assert result.exit_code == 0
+    assert filecmp.cmp(readme_md, output_file)
+
 def test_missing_arg_spec(tmp_path):
     role_path = ROLES_DIR / "missing_arg_spec"
     role_path = str(role_path)
@@ -302,11 +325,11 @@ def test_missing_arg_spec(tmp_path):
             "markdown",
         ],
     )
-    assert result.output == "Could not find meta/argument_specs.yml\n"
+    assert result.output == "Could not find meta/main.y[a]ml\n"
     assert result.exit_code == 1
 
-def test_missing_main_yml(tmp_path):
-    role_path = ROLES_DIR / "missing_main_yml"
+def test_missing_meta_main_yaml(tmp_path):
+    role_path = ROLES_DIR / "missing_meta_main_yaml"
     role_path = str(role_path)
 
     output_dir = tmp_path
@@ -325,7 +348,7 @@ def test_missing_main_yml(tmp_path):
             "markdown",
         ],
     )
-    assert result.output == "Could not find meta/main.yml\n"
+    assert result.output == "Could not find meta/main.y[a]ml\n"
     assert result.exit_code == 1
 
 def test_wrong_type(tmp_path):

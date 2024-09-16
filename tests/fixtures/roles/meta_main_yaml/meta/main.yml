@@ -1,0 +1,208 @@
+---
+galaxy_info:
+  role_name: minimum
+  author: your name
+  description: Test role with a minimum amount of metadata
+  company: ansible-docs
+
+  license: MIT
+
+  min_ansible_version: "1.2"
+
+  platforms:
+    - name: Fedora
+      versions:
+        - all
+
+argument_specs:
+  main:
+    short_description: The main entrypoint for the extended role
+    description: |
+      A longer description of the entrypoint.
+
+      Reaching multiple lines.
+
+      This contains the various parameters one can give in argument_specs that do not get tested below.
+    author:
+      - Foo
+      - Bar
+    options:
+      name:
+        option-name: override
+        description: |
+          This one contains option-name, which should override
+          the name given for the option.
+      choices-str:
+        type: str
+        description:
+          - So many
+          - choices
+          - to make
+        choices:
+          - one
+          - two
+          - three
+      choices-int:
+        type: int
+        description:
+          - So many
+          - choices
+          - to make
+        choices:
+          - 1
+          - 8
+          - 42
+      default:
+        type: str
+        description: This one has a default
+        default: long
+      required:
+        type: str
+        required: true
+        description: This one is required
+      default_type:
+        description: Type is str by default
+  list:
+    short_description: The list entry point for the extended role.
+    options:
+      list_int:
+        type: list
+        elements: int
+        default:
+          - 1
+          - 2
+          - 3
+        description: A list of ints
+      list_str:
+        type: list
+        elements: str
+        default:
+          - foo
+          - bar
+          - baz
+        description: A list of strings
+      list_dict:
+        type: list
+        elements: dict
+        default:
+          - dict:
+              foo: bar
+          - dict:
+              one: 1
+              two: 2
+        description: A list of dicts
+  dict:
+    short_description: The dict entry point for the extended role.
+    options:
+      dict:
+        type: dict
+        default:
+          dict:
+            foo: bar
+            one: 1
+            two: 2
+        description: A dictionary of keys and values
+  dict-with-options:
+    short_description: The dict-with-options entry point for the extended role.
+    options:
+      opts:
+        type: dict
+        description: A dictionary of keys and values
+        options:
+          int:
+            type: int
+            default: 1
+            description: An int value
+          json:
+            type: json
+            default: >
+              {"foo": "bar"}
+            description: A JSON value
+          subopts:
+            type: dict
+            description: A sub-dictionary of keys and values
+            options:
+              str:
+                type: str
+                description: A str value
+  bool:
+    short_description: The bool entry point for the extended role.
+    options:
+      bool_true:
+        type: bool
+        default: true
+        description: A true boolean value
+      bool_false:
+        type: bool
+        default: false
+        description: A false boolean value
+      bool_yes:
+        type: bool
+        default: yes
+        description: A truthy boolean value
+      bool_no:
+        type: bool
+        default: no
+        description: A falsy boolean value
+  int:
+    short_description: The int entry point for the extended role.
+    options:
+      int:
+        type: int
+        default: 1
+        description: An int value
+  float:
+    short_description: The float entry point for the extended role.
+    options:
+      float:
+        type: float
+        default: 1.2
+        description: A float value
+  path:
+    short_description: The path entry point for the extended role.
+    options:
+      path:
+        type: path
+        default: /tmp/foo/bar
+        description: A path value
+  raw:
+    short_description: The raw entry point for the extended role.
+    options:
+      raw_str:
+        type: raw
+        default: raw
+        description: A raw str value
+      raw_int:
+        type: raw
+        default: 123
+        description: A raw int value
+  jsonarg:
+    short_description: The jsonarg entry point for the extended role.
+    options:
+      jsonarg:
+        type: jsonarg
+        default: >
+          {"foo": "bar"}
+        description: A JSON value
+  json:
+    short_description: The json entry point for the extended role.
+    options:
+      json:
+        type: json
+        default: >
+          {"foo": "bar"}
+        description: A JSON value
+  bytes:
+    short_description: The bytes entry point for the extended role.
+    options:
+      bytes:
+        type: bytes
+        default: 1.15GB
+        description: A bytes value
+  bits:
+    short_description: The bits entry point for the extended role.
+    options:
+      bytes:
+        type: bits
+        default: 1Mb
+        description: A bit value
