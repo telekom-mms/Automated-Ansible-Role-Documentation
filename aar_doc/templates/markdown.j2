@@ -74,10 +74,13 @@ None.
       ansible.builtin.import_role:
         name: {{ role }}
       vars:
-        {% for name, variable in argument_specs.main.options | items -%}
-        {%- if variable.required | default(false) -%}
-        {{ name }}: # required, type: {{ variable.type }}
+        {%- for entrypoint in argument_specs.keys() -%}
+        {%- set path, options=entrypoint_options[entrypoint][0] -%}
+        {%- for name, details in options.items() -%}
+        {%- if details.display_required == "yes" | default(false) %}
+        {{ name }}: # required, type: {{ details.display_type }}
         {%- endif -%}
+        {% endfor -%}
         {% endfor %}
 ```
 
