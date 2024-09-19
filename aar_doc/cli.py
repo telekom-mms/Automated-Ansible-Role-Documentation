@@ -222,12 +222,13 @@ def gather_choices(path: list[str], arguments: dict) -> list[tuple[list[str], li
     belong to.
     """
     results = []
-    options = arguments["options"]
-    for name, details in options.items():
-        if "choices" in details:
-            results.append((path + [name], details["choices"]))
-        if "options" in details:
-            results.extend(gather_choices(path + [name], details))
+    if "options" in arguments:
+        options = arguments["options"]
+        for name, details in options.items():
+            if "choices" in details:
+                results.append((path + [name], details["choices"]))
+            if "options" in details:
+                results.extend(gather_choices(path + [name], details))
 
     return results
 
@@ -252,11 +253,12 @@ def gather_options(path: list[str], arguments: dict) -> list[tuple[list[str], di
     belong to.
     """
     results = []
-    options = arguments["options"]
-    results.append((path, options))
-    for name, details in options.items():
-        if "options" in details:
-            results.extend(gather_options(path + [name], details))
+    if "options" in arguments:
+        options = arguments["options"]
+        results.append((path, options))
+        for name, details in options.items():
+            if "options" in details:
+                results.extend(gather_options(path + [name], details))
 
     return results
 

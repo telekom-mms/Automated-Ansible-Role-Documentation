@@ -15,6 +15,8 @@ Tags: ansible, docs
 
 ## Role Arguments
 ---
+
+
 ### Entrypoint: main
 ---
 The main entrypoint for the extended role
@@ -44,6 +46,8 @@ The main entrypoint for the extended role
 | 8 |
 | 42 |
 
+
+
 ### Entrypoint: list
 ---
 The list entry point for the extended role.
@@ -54,6 +58,8 @@ The list entry point for the extended role.
 | list_str | A list of strings | list of 'str' | no | ["foo", "bar", "baz"] |
 | list_dict | A list of dicts | list of 'dict' | no | [{"dict": {"foo": "bar"}}, {"dict": {"one": 1, "two": 2}}] |
 
+
+
 ### Entrypoint: dict
 ---
 The dict entry point for the extended role.
@@ -61,6 +67,8 @@ The dict entry point for the extended role.
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | dict | A dictionary of keys and values | dict | no | {"dict": {"foo": "bar", "one": 1, "two": 2}} |
+
+
 
 ### Entrypoint: dict-with-options
 ---
@@ -84,6 +92,8 @@ The dict-with-options entry point for the extended role.
 |---|---|---|---|---|
 | str | A str value | str | no |  |
 
+
+
 ### Entrypoint: bool
 ---
 The bool entry point for the extended role.
@@ -95,6 +105,8 @@ The bool entry point for the extended role.
 | bool_yes | A truthy boolean value | bool | no | true |
 | bool_no | A falsy boolean value | bool | no | false |
 
+
+
 ### Entrypoint: int
 ---
 The int entry point for the extended role.
@@ -102,6 +114,8 @@ The int entry point for the extended role.
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | int | An int value | int | no | 1 |
+
+
 
 ### Entrypoint: float
 ---
@@ -111,6 +125,8 @@ The float entry point for the extended role.
 |---|---|---|---|---|
 | float | A float value | float | no | 1.2 |
 
+
+
 ### Entrypoint: path
 ---
 The path entry point for the extended role.
@@ -118,6 +134,8 @@ The path entry point for the extended role.
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | path | A path value | path | no | /tmp/foo/bar |
+
+
 
 ### Entrypoint: raw
 ---
@@ -128,6 +146,8 @@ The raw entry point for the extended role.
 | raw_str | A raw str value | raw | no | raw |
 | raw_int | A raw int value | raw | no | 123 |
 
+
+
 ### Entrypoint: jsonarg
 ---
 The jsonarg entry point for the extended role.
@@ -135,6 +155,8 @@ The jsonarg entry point for the extended role.
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | jsonarg | A JSON value | jsonarg | no | {"foo": "bar"} |
+
+
 
 ### Entrypoint: json
 ---
@@ -144,6 +166,8 @@ The json entry point for the extended role.
 |---|---|---|---|---|
 | json | A JSON value | json | no | {"foo": "bar"} |
 
+
+
 ### Entrypoint: bytes
 ---
 The bytes entry point for the extended role.
@@ -152,6 +176,8 @@ The bytes entry point for the extended role.
 |---|---|---|---|---|
 | bytes | A bytes value | bytes | no | 1.15GB |
 
+
+
 ### Entrypoint: bits
 ---
 The bits entry point for the extended role.
@@ -159,6 +185,7 @@ The bits entry point for the extended role.
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | bytes | A bit value | bits | no | 1Mb |
+
 
 
 ## Dependencies

@@ -12,6 +12,8 @@ Test role with a multiple_entrypoints amount of metadata
 
 ## Role Arguments
 ---
+
+
 ### Entrypoint: main
 ---
 The main entry point for the multiple_entrypoints role.
@@ -21,6 +23,8 @@ The main entry point for the multiple_entrypoints role.
 | myapp_int | The integer value, defaulting to 42. | int | no | 42 |
 | myapp_str | The string value | str | yes |  |
 
+
+
 ### Entrypoint: second
 ---
 The second entry point for the multiple_entrypoints role.
@@ -29,6 +33,7 @@ The second entry point for the multiple_entrypoints role.
 |---|---|---|---|---|
 | myapp_int_second | The integer value, defaulting to 42. | int | no | 42 |
 | myapp_str_second | The string value | str | yes |  |
+
 
 
 ## Dependencies

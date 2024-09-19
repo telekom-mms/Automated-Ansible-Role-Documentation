@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  role_name: no_options
+  author: your name
+  description: Test role with no options
+  company: ansible-docs
+
+  license: MIT
+
+  min_ansible_version: "1.2"
+
+  platforms:
+    - name: Fedora
+      versions:
+        - all
