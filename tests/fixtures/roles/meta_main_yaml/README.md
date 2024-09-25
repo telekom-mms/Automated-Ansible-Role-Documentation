@@ -1,17 +1,14 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
-# Ansible Role: extended
+# Ansible Role: meta_main_yaml
 ---
-Test role with lots of metadata
+Test role with a minimum amount of metadata
 
-Tags: ansible, docs
 
 ## Requirements
 ---
 | Platform | Versions |
 | -------- | -------- |
 | Fedora | all |
-| Debian | all, bullseye, bookworm, wheezy |
-| Cumulus | 2.5 |
 
 ## Role Arguments
 ---
@@ -197,9 +194,9 @@ None.
 ```
 - hosts: all
   tasks:
-    - name: Importing role: extended
+    - name: Importing role: meta_main_yaml
       ansible.builtin.import_role:
-        name: extended
+        name: meta_main_yaml
       vars:
         required: # required, type: str
 ```
@@ -212,5 +209,4 @@ MIT
 ---
 your name @ ansible-docs
 
-Issues: [tracker](https://gitlab.com/kankare/ansible-docs/-/issues)
 <!-- END_ANSIBLE_DOCS -->

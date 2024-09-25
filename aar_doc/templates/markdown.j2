@@ -19,11 +19,13 @@ Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 ## Role Arguments
 ---
 {% for entrypoint in argument_specs.keys() %}
-{%- set path, options=entrypoint_options[entrypoint][0] -%}
+
 ### Entrypoint: {{ entrypoint }}
 ---
 {{ argument_specs[entrypoint].short_description }}
 
+{% if entrypoint_options[entrypoint] %}
+{%- set path, options=entrypoint_options[entrypoint][0] -%}
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 {%- for name, details in options.items() %}
@@ -41,6 +43,7 @@ Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 {%- endfor %}
 
 {% endfor -%}
+
 {% endif -%}
 {% if entrypoint in entrypoint_choices -%}
 {% for path, choices in entrypoint_choices[entrypoint] -%}
@@ -54,7 +57,14 @@ Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 
 {% endfor -%}
 {% endif -%}
+{% else -%}
+
+This entrypoint has no options.
+
+{% endif -%}
+
 {% endfor %}
+
 ## Dependencies
 ---
 {%- if ("dependencies" in metadata) and (metadata.dependencies | length > 0) %}
@@ -74,9 +84,14 @@ None.
       ansible.builtin.import_role:
         name: {{ role }}
       vars:
-        {% for name, variable in argument_specs.main.options | items -%}
-        {%- if variable.required | default(false) -%}
-        {{ name }}: # required, type: {{ variable.type }}
+        {%- for entrypoint in argument_specs.keys() -%}
+        {% if entrypoint_options[entrypoint] %}
+        {%- set path, options=entrypoint_options[entrypoint][0] -%}
+        {%- for name, details in options.items() -%}
+        {%- if details.display_required == "yes" | default(false) %}
+        {{ name }}: # required, type: {{ details.display_type }}
+        {%- endif -%}
+        {% endfor -%}
         {%- endif -%}
         {% endfor %}
 ```

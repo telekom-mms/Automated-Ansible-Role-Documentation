@@ -1,7 +1,7 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
-# Ansible Role: inject
+# Ansible Role: no_options
 ---
-Test role with some header and footer text outside of the template
+Test role with no options
 
 
 ## Requirements
@@ -16,12 +16,9 @@ Test role with some header and footer text outside of the template
 
 ### Entrypoint: main
 ---
-The main entry point for the minimum role.
+The main entry point for the no_options role.
 
-|Option|Description|Type|Required|Default|
-|---|---|---|---|---|
-| myapp_int | The integer value, defaulting to 42. | int | no | 42 |
-| myapp_str | The string value | str | yes |  |
+This entrypoint has no options.
 
 
 
@@ -34,11 +31,10 @@ None.
 ```
 - hosts: all
   tasks:
-    - name: Importing role: inject
+    - name: Importing role: no_options
       ansible.builtin.import_role:
-        name: inject
+        name: no_options
       vars:
-        myapp_str: # required, type: str
 ```
 
 ## License
