@@ -1,12 +1,16 @@
 # Changelog
 
-## [1.0.5](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/1.0.5) (2024-09-11)
+## [1.1.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/1.1.0) (2024-09-25)
 
-[Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/1.0.4...1.0.5)
+[Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/1.0.4...1.1.0)
 
 **Implemented enhancements:**
 
 - \[Enhancement\] Pypi publish latest releases [\#58](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/58)
+
+**Fixed bugs:**
+
+- \[Bug\] aar\_doc does not support arguments\_spec in meta/main.yaml [\#66](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/66)
 
 ## [1.0.4](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/1.0.4) (2024-08-22)
 
