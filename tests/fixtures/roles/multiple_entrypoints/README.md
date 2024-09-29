@@ -1,41 +1,37 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
-# Ansible Role: multiple_entrypoints
-Test role with a multiple_entrypoints amount of metadata
 
+# Ansible Role: multiple_entrypoints
+
+Test role with a multiple_entrypoints amount of metadata
 
 ## Requirements
 
 | Platform | Versions |
 | -------- | -------- |
-| Fedora | all |
+| Fedora   | all      |
 
 ## Role Arguments
-
-
 
 ### Entrypoint: main
 
 The main entry point for the multiple_entrypoints role.
 
-|Option|Description|Type|Required|Default|
-|---|---|---|---|---|
-| myapp_int | The integer value, defaulting to 42. | int | no | 42 |
-| myapp_str | The string value | str | yes |  |
-
-
+| Option    | Description                          | Type | Required | Default |
+| --------- | ------------------------------------ | ---- | -------- | ------- |
+| myapp_int | The integer value, defaulting to 42. | int  | no       | 42      |
+| myapp_str | The string value                     | str  | yes      |         |
 
 ### Entrypoint: second
 
 The second entry point for the multiple_entrypoints role.
 
-|Option|Description|Type|Required|Default|
-|---|---|---|---|---|
-| myapp_int_second | The integer value, defaulting to 42. | int | no | 42 |
-| myapp_str_second | The string value | str | yes |  |
-
-
+| Option           | Description                          | Type | Required | Default |
+| ---------------- | ------------------------------------ | ---- | -------- | ------- |
+| myapp_int_second | The integer value, defaulting to 42. | int  | no       | 42      |
+| myapp_str_second | The string value                     | str  | yes      |         |
 
 ## Dependencies
+
 None.
 
 ## Example Playbook
@@ -56,6 +52,7 @@ None.
 MIT
 
 ## Author and Project Information
+
 your name @ ansible-docs
 
 <!-- END_ANSIBLE_DOCS -->

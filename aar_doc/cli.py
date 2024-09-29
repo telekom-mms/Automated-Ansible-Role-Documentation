@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
+"""
+Main class for aar_doc
+"""
 
+from enum import Enum
 import json
 import pathlib
-from enum import Enum
 
 import jinja2
 import typer
@@ -12,19 +15,26 @@ app = typer.Typer(no_args_is_help=True)
 
 
 class OutputMode(Enum):
-    inject = "inject"
-    replace = "replace"
+    """
+    Defines the options for the output mode.
+    """
+
+    INJECT = "inject"
+    REPLACE = "replace"
 
 
 def parse_config(
-    ctx: typer.Context, param: typer.CallbackParam, config_file: pathlib.Path
-) -> pathlib.Path:
-    # FIXME: This will change the defaults when called with --help
-    #
+    ctx: typer.Context,
+    config_file: pathlib.Path,
+):
+    """
+    Parses the configuration file
+    """
+    # This will change the defaults when called with --help
     # See: https://github.com/tiangolo/typer/issues/347
     if config_file.exists():
         try:
-            with open(config_file, "r") as f:
+            with open(config_file, "r", encoding="utf-8") as f:
                 content = yaml.safe_load(f)
 
                 ctx.default_map = ctx.default_map or {}
@@ -32,16 +42,12 @@ def parse_config(
         except Exception as ex:
             raise typer.BadParameter(str(ex))
 
-    return config_file
-
 
 @app.command()
 def markdown(ctx: typer.Context) -> None:
     """
     Command for generating role documentation in Markdown format.
     """
-
-    # FIXME: ctx should not be passed to these non-command()'s
     content = render_content(ctx, "markdown.j2")
     write(ctx, content)
 
@@ -49,7 +55,7 @@ def markdown(ctx: typer.Context) -> None:
 @app.callback()
 def cli(
     ctx: typer.Context,
-    config_file: pathlib.Path = typer.Option(
+    config_file: pathlib.Path = typer.Option(  # pylint: disable=W0613
         ".aar_doc.yml",
         file_okay=True,
         dir_okay=False,
@@ -78,8 +84,8 @@ def cli(
         "<!-- BEGIN_ANSIBLE_DOCS -->\n{{ content }}\n<!-- END_ANSIBLE_DOCS -->\n",
         help="Output template as a string or a path to a file.",
     ),
-    output_mode: OutputMode = typer.Option(OutputMode.inject.name),
-):
+    output_mode: OutputMode = typer.Option(OutputMode.INJECT.value),
+) -> None:
     """
     A tool for generating docs for Ansible roles.
     """
@@ -120,28 +126,28 @@ def write(ctx: typer.Context, content: str) -> None:
     output.resolve()
 
     if not output.exists():
-        ctx.obj["config"]["output_mode"] = OutputMode.replace
+        ctx.obj["config"]["output_mode"] = OutputMode.REPLACE
 
-    with open(output, "a+") as f:
-        if ctx.obj["config"]["output_mode"] == OutputMode.inject:
+    with open(output, "a+", encoding="utf-8") as f:
+        if ctx.obj["config"]["output_mode"] == OutputMode.INJECT:
             f.seek(0)
             lines = f.readlines()
 
             try:
                 begin = lines.index("<!-- BEGIN_ANSIBLE_DOCS -->\n")
-            except ValueError:
+            except ValueError as exc:
                 typer.echo(
-                    "Could not find <!-- BEGIN_ANSIBLE_DOCS --> in the output file"
+                    "Could not find <!-- BEGIN_ANSIBLE_DOCS --> in the output file",
                 )
-                raise typer.Exit(code=1)
+                raise typer.Exit(code=1) from exc
 
             try:
                 end = lines.index("<!-- END_ANSIBLE_DOCS -->\n")
-            except ValueError:
+            except ValueError as exc:
                 typer.echo(
-                    "Could not find <!-- END_ANSIBLE_DOCS --> in the output file"
+                    "Could not find <!-- END_ANSIBLE_DOCS --> in the output file",
                 )
-                raise typer.Exit(code=1)
+                raise typer.Exit(code=1) from exc
 
             header = [*lines[:begin]]
             footer = [*lines[1 + end :]]
@@ -157,18 +163,18 @@ def parse_meta(ctx: typer.Context) -> tuple[dict, dict]:
     Parses Ansible role metadata from YAML files in the meta/ directory.
     """
 
-    meta = ctx.obj["config"]["role_path"] / "meta"
-    argument_specs = ""
+    meta: pathlib.Path = ctx.obj["config"]["role_path"] / "meta"
+    argument_specs: dict = {}
 
     try:
-        argument_specs_yml = list(meta.glob("argument_specs.y*ml"))[0]
-        with open(argument_specs_yml, "r") as f:
+        argument_specs_yml: pathlib.Path = list(meta.glob("argument_specs.y*ml"))[0]
+        with open(argument_specs_yml, "r", encoding="utf-8") as f:
             try:
                 argument_specs = yaml.safe_load(f)
             except yaml.YAMLError:
                 typer.echo("Not a valid YAML file: meta/argument_specs.y[a]ml")
             try:
-                argument_specs = argument_specs["argument_specs"]
+                argument_specs = argument_specs.get("argument_specs", {})
             except TypeError:
                 typer.echo("Could not read meta/argument_specs.y[a]ml")
     except (UnboundLocalError, IndexError):
@@ -176,22 +182,24 @@ def parse_meta(ctx: typer.Context) -> tuple[dict, dict]:
 
     try:
         main_yml = list(meta.glob("main.y*ml"))[0]
-    except:
+    except IndexError as exc:
         typer.echo("Could not find meta/main.y[a]ml")
-        raise typer.Exit(code=1)
+        raise typer.Exit(code=1) from exc
 
-    with open(main_yml, "r") as f:
+    with open(main_yml, "r", encoding="utf-8") as f:
         try:
             main = yaml.safe_load(f)
-        except yaml.YAMLError:
+        except yaml.YAMLError as exc:
             typer.echo("Not a valid YAML file: meta/main.y[a]ml")
-            raise typer.Exit(1)
+            raise typer.Exit(1) from exc
         if not argument_specs:
             try:
                 argument_specs = main["argument_specs"]
-            except TypeError:
-                typer.echo("Could not read meta/main.y[a]ml or meta/argument_specs.y[a]ml")
-                raise typer.Exit(1)
+            except TypeError as exc:
+                typer.echo(
+                    "Could not read meta/main.y[a]ml or meta/argument_specs.y[a]ml",
+                )
+                raise typer.Exit(1) from exc
     return main, argument_specs
 
 
@@ -204,15 +212,14 @@ def parse_collection(ctx: typer.Context) -> dict:
 
     galaxy_files = list(collection_dir.glob("galaxy.y*ml"))
 
-    if len(galaxy_files):
+    if galaxy_files:
         galaxy_yml = galaxy_files[0]
 
-        with open(galaxy_yml, "r") as f:
+        with open(galaxy_yml, "r", encoding="utf-8") as f:
             collection = yaml.safe_load(f)
 
         return collection
-    else:
-        return {}
+    return {}
 
 
 def gather_choices(path: list[str], arguments: dict) -> list[tuple[list[str], list]]:
@@ -271,7 +278,7 @@ def parse_options(ctx: typer.Context) -> dict:
     entrypoint_options = {}
     for entrypoint, arguments in ctx.obj["data"]["argument_specs"].items():
         gathered_options = gather_options([entrypoint], arguments)
-        for path, options in gathered_options:
+        for _, options in gathered_options:
             for option, details in options.items():
                 details["display_required"] = (
                     "yes" if details.get("required", False) else "no"
@@ -312,12 +319,12 @@ def parse_options(ctx: typer.Context) -> dict:
                 elif details["display_type"] == "str":
                     try:
                         details["display_default"] = details.get("default", "").strip()
-                    except AttributeError:
+                    except AttributeError as exc:
                         typer.echo(
                             f"The default value of the argument {option} "
-                            f"is of type {type(details.get('default')).__name__}, need str"
+                            f"is of type {type(details.get('default')).__name__}, need str",
                         )
-                        raise typer.Exit(code=1)
+                        raise typer.Exit(code=1) from exc
                 else:
                     details["display_default"] = str(details.get("default", "")).strip()
         entrypoint_options[entrypoint] = gathered_options
@@ -357,8 +364,8 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
         entrypoint_choices=entrypoint_choices,
     )
 
-    role_path = ctx.obj["config"]["role_path"]
-    output_template = ctx.obj["config"]["output_template"].replace("\\n", "\n")
+    role_path: pathlib.Path = ctx.obj["config"]["role_path"]
+    output_template: str = ctx.obj["config"]["output_template"].replace("\\n", "\n")
 
     try:
         output_template_file = pathlib.Path(output_template).resolve(strict=True)
@@ -370,7 +377,8 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
         template = env.get_template(output_template_file.name)
     except (FileNotFoundError, OSError):
         env = jinja2.Environment(
-            keep_trailing_newline=True, loader=jinja2.FileSystemLoader(role_path)
+            keep_trailing_newline=True,
+            loader=jinja2.FileSystemLoader(role_path),
         )
         template = env.from_string(source=output_template)
 

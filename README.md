@@ -12,13 +12,13 @@ Contributions are welcome to add support for more output formats!
 
 As `aar-doc` is a Python utility, the usual `pip install` works, but the tool isn't (yet) published in Pypi. So you'll need to point `pip` at the repository itself:
 
-``` sh
+```sh
 pip install git+https://gitlab.com/kankare/aar-doc
 ```
 
 ## Usage
 
-``` sh
+```sh
 Usage: aar-doc [OPTIONS] ROLE_PATH COMMAND [ARGS]...
 
   A tool for generating docs for Ansible roles.
@@ -56,11 +56,11 @@ The configuration options can be provided either via CLI arguments shown in `--h
 
 Examples:
 
-``` sh
+```sh
 aar-doc --output-file ROLE.md --output-mode replace ...
 ```
 
-``` yaml
+```yaml
 ---
 output_file: ROLE.md
 output_mode: replace
@@ -72,13 +72,13 @@ You can override the `--output-template` used for rendering the document. This m
 
 In the configuration file, easiest is to do a multiline string:
 
-``` yaml
+```yaml
 ---
 output_template: |
   <!-- BEGIN_ANSIBLE_DOCS -->
-  
+
   This is my role: {{ role }}
-  
+
   <!-- END_ANSIBLE_DOCS -->
 ```
 
@@ -118,7 +118,7 @@ Task file name: {{ entrypoint }}.yml has {{ specs | length }} input variables!
 <!-- END_ANSIBLE_DOCS -->
 ```
 
-``` sh
+```sh
 aar-doc --output-template ./path/to/template.j2 ...
 ```
 
@@ -130,5 +130,5 @@ MIT
 
 ## Aknowledgements
 
-* Kudos to the original author [Miika Kankare](https://github.com/quulah)!
-* Kudos to [Kevin P. Fleming](https://github.com/kpfleming) for his additions to the original project!
+- Kudos to the original author [Miika Kankare](https://github.com/quulah)!
+- Kudos to [Kevin P. Fleming](https://github.com/kpfleming) for his additions to the original project!

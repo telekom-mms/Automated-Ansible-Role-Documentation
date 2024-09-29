@@ -1,5 +1,3 @@
 {
-  "extends": [
-    "github>telekom-mms/.github:renovate-preset.json5"
-  ]
+  "extends": ["github>telekom-mms/.github:renovate-preset.json5"]
 }
