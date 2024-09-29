@@ -6,8 +6,8 @@ readme = "README.md"
 authors = ["Miika Kankare <miika@kanka.re>", "Sebastian Gumprich <sebastian.gumprich@telekom.de>"]
 license = "MIT"
 homepage = "https://github.com/telekom-mms/aar_doc/"
-repository = "https://github.com/telekom-mms/aar_doc/" 
-documentation = "https://github.com/telekom-mms/aar_doc/" 
+repository = "https://github.com/telekom-mms/aar_doc/"
+documentation = "https://github.com/telekom-mms/aar_doc/"
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -27,6 +27,11 @@ isort = "^5.10.1"
 [tool.poetry.scripts]
 aar_doc = "aar_doc.cli:app"
 
+[tool.poetry.group.dev.dependencies]
+pylint = "^3.3.1"
+pre-commit = "^3.8.0"
+types-pyyaml = "^6.0.12.20240917"
+
 [tool.pytest.ini_options]
 addopts = [
   "--import-mode=importlib",
@@ -35,6 +40,9 @@ pythonpath = "."
 
 [tool.isort]
 profile = "black"
+
+[tool.pylint]
+disable = ["too-many-arguments","too-many-positional-arguments","too-many-nested-blocks","too-many-branches"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

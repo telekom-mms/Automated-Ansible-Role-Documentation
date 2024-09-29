@@ -1,6 +1,6 @@
 ---
 name: New release
-on:  # yamllint disable-line rule:truthy
+on: # yamllint disable-line rule:truthy
   workflow_dispatch:
   push:
     branches:
@@ -35,7 +35,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3 # v5
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
       - name: Install poetry
         run: pip install poetry
@@ -48,7 +48,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           future_release: ${{ steps.version.outputs.next-version }}
-          
+
       # the token is needed so the github app can push to the repository
       # the github app can bypass the branch protection rule (need a PR to merge)
       # this way it can directly commit to main
@@ -58,15 +58,15 @@ jobs:
           TOKEN="$(npx obtain-github-app-installation-access-token ci ${{ secrets.GH_BRANCH_PROTECTION_APP_TOKEN }})"
           echo "::add-mask::$TOKEN"
           echo token=${TOKEN} >> $GITHUB_OUTPUT
-          
+
       - name: push new version
         uses: github-actions-x/commit@722d56b8968bf00ced78407bbe2ead81062d8baa # v2.9
         with:
           # use the token obtained in the step before
           github-token: ${{ steps.githubAppAuth.outputs.token }}
-          push-branch: 'main'
-          commit-message: 'update changelog'
-          force-add: 'true'
+          push-branch: "main"
+          commit-message: "update changelog"
+          force-add: "true"
           files: pyproject.toml CHANGELOG.md
           name: Telekom MMS GmbH
           email: mms@telekom.de
@@ -97,7 +97,7 @@ jobs:
         id: create_release
         uses: actions/create-release@0cb9c9b65d5d1901c1f53e5e66eaf4afd303e70e # v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # This token is provided by Actions, you do not need to create your own token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
           release_name: ${{ steps.version.outputs.next-version }}
           tag_name: ${{ steps.version.outputs.next-version }}

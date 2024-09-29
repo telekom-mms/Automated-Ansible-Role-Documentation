@@ -48,7 +48,6 @@ pip install aar-doc
 ╭─ Commands ───────────────────────────────────────────────────────────────────╮
 │ markdown   Command for generating role documentation in Markdown format.     │
 ╰──────────────────────────────────────────────────────────────────────────────╯
-
 ```
 
 ### Modes
@@ -63,11 +62,11 @@ The configuration options can be provided either via CLI arguments shown in `--h
 
 Examples:
 
-``` sh
+```sh
 aar-doc --output-file ROLE.md --output-mode replace ...
 ```
 
-``` yaml
+```yaml
 ---
 output_file: ROLE.md
 output_mode: replace
@@ -79,13 +78,13 @@ You can override the `--output-template` used for rendering the document. This m
 
 In the configuration file, easiest is to do a multiline string:
 
-``` yaml
+```yaml
 ---
 output_template: |
   <!-- BEGIN_ANSIBLE_DOCS -->
-  
+
   This is my role: {{ role }}
-  
+
   <!-- END_ANSIBLE_DOCS -->
 ```
 
@@ -125,7 +124,7 @@ Task file name: {{ entrypoint }}.yml has {{ specs | length }} input variables!
 <!-- END_ANSIBLE_DOCS -->
 ```
 
-``` sh
+```sh
 aar-doc --output-template ./path/to/template.j2 ...
 ```
 
@@ -137,5 +136,5 @@ MIT
 
 ## Aknowledgements
 
-* Kudos to the original author [Miika Kankare](https://github.com/quulah)!
-* Kudos to [Kevin P. Fleming](https://github.com/kpfleming) for his additions to the original project!
+- Kudos to the original author [Miika Kankare](https://github.com/quulah)!
+- Kudos to [Kevin P. Fleming](https://github.com/kpfleming) for his additions to the original project!

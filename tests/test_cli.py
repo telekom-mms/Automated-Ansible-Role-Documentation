@@ -275,12 +275,14 @@ def test_markdown(tmp_path):
         output_file = output_dir / "README.md"
 
         result = runner.invoke(
-            app, ["--output-file", output_file, role_path, "markdown"]
+            app,
+            ["--output-file", output_file, role_path, "markdown"],
         )
 
         assert result.output == ""
         assert result.exit_code == 0
         assert filecmp.cmp(readme_md, output_file)
+
 
 def test_meta_main_yaml(tmp_path):
     role_path = ROLES_DIR / "meta_main_yaml"
@@ -305,6 +307,7 @@ def test_meta_main_yaml(tmp_path):
     assert result.exit_code == 0
     assert filecmp.cmp(readme_md, output_file)
 
+
 def test_missing_arg_spec(tmp_path):
     role_path = ROLES_DIR / "missing_arg_spec"
     role_path = str(role_path)
@@ -327,6 +330,7 @@ def test_missing_arg_spec(tmp_path):
     )
     assert result.output == "Could not find meta/main.y[a]ml\n"
     assert result.exit_code == 1
+
 
 def test_missing_meta_main_yaml(tmp_path):
     role_path = ROLES_DIR / "missing_meta_main_yaml"
@@ -351,6 +355,7 @@ def test_missing_meta_main_yaml(tmp_path):
     assert result.output == "Could not find meta/main.y[a]ml\n"
     assert result.exit_code == 1
 
+
 def test_wrong_type(tmp_path):
     role_path = ROLES_DIR / "wrong_type"
     role_path = str(role_path)
@@ -371,8 +376,12 @@ def test_wrong_type(tmp_path):
             "markdown",
         ],
     )
-    assert result.output == "The default value of the argument myapp_int is of type int, need str\n"
+    assert (
+        result.output
+        == "The default value of the argument myapp_int is of type int, need str\n"
+    )
     assert result.exit_code == 1
+
 
 def test_missing_doc_string(tmp_path):
     role_path = ROLES_DIR / "missing_doc_strings"
@@ -389,5 +398,8 @@ def test_missing_doc_string(tmp_path):
             "markdown",
         ],
     )
-    assert result.output == "Could not find <!-- BEGIN_ANSIBLE_DOCS --> in the output file\n"
+    assert (
+        result.output
+        == "Could not find <!-- BEGIN_ANSIBLE_DOCS --> in the output file\n"
+    )
     assert result.exit_code == 1
