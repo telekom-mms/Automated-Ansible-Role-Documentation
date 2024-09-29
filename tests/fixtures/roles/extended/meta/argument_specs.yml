@@ -11,6 +11,12 @@ argument_specs:
     author:
       - Foo
       - Bar
+    examples: |
+      this is an example how to execute the entrypoint:
+
+          - hosts: all
+            roles:
+              - extended
     options:
       name:
         option-name: override
