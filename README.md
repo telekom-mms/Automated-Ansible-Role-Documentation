@@ -10,38 +10,44 @@ Contributions are welcome to add support for more output formats!
 
 ## Installation
 
-As `aar-doc` is a Python utility, the usual `pip install` works, but the tool isn't (yet) published in Pypi. So you'll need to point `pip` at the repository itself:
+As `aar-doc` is a Python utility and [exists](https://pypi.org/project/aar-doc/) on PyPI , the usual `pip install` works:
 
-```sh
-pip install git+https://gitlab.com/kankare/aar-doc
+``` sh
+pip install aar-doc
 ```
 
 ## Usage
 
-```sh
-Usage: aar-doc [OPTIONS] ROLE_PATH COMMAND [ARGS]...
+```
+ Usage: aar-doc [OPTIONS] ROLE_PATH COMMAND [ARGS]...
 
-  A tool for generating docs for Ansible roles.
+ A tool for generating docs for Ansible roles.
 
-Arguments:
-  ROLE_PATH  Path to an Ansible role  [required]
-
-Options:
-  --config-file FILE              [default: .aar-doc.yml]
-  --output-file FILE              [default: README.md]
-  --output-template TEXT          Output template as a string or a path to a
-                                  file.  [default: <!-- BEGIN_ANSIBLE_DOCS -->
-                                  {{ content }} <!-- END_ANSIBLE_DOCS --> ]
-  --output-mode [inject|replace]  [default: inject]
-  --install-completion [bash|zsh|fish|powershell|pwsh]
-                                  Install completion for the specified shell.
-  --show-completion [bash|zsh|fish|powershell|pwsh]
-                                  Show completion for the specified shell, to
-                                  copy it or customize the installation.
-  --help                          Show this message and exit.
-
-Commands:
-  markdown  Command for generating role documentation in Markdown format.
+╭─ Arguments ──────────────────────────────────────────────────────────────────╮
+│ *    role_path      DIRECTORY  Path to an Ansible role [default: None]       │
+│                                [required]                                    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────╮
+│ --config-file               FILE              [default: .aar_doc.yml]        │
+│ --output-file               FILE              [default: README.md]           │
+│ --output-template           TEXT              Output template as a string or │
+│                                               a path to a file.              │
+│                                               [default: <!--                 │
+│                                               BEGIN_ANSIBLE_DOCS -->         │
+│                                               {{ content }}                  │
+│                                               <!-- END_ANSIBLE_DOCS -->      │
+│                                               ]                              │
+│ --output-mode               [inject|replace]  [default: inject]              │
+│ --install-completion                          Install completion for the     │
+│                                               current shell.                 │
+│ --show-completion                             Show completion for the        │
+│                                               current shell, to copy it or   │
+│                                               customize the installation.    │
+│ --help                                        Show this message and exit.    │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ───────────────────────────────────────────────────────────────────╮
+│ markdown   Command for generating role documentation in Markdown format.     │
+╰──────────────────────────────────────────────────────────────────────────────╯
 ```
 
 ### Modes
