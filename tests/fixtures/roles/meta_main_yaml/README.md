@@ -1,21 +1,20 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
 # Ansible Role: meta_main_yaml
----
 Test role with a minimum amount of metadata
 
 
 ## Requirements
----
+
 | Platform | Versions |
 | -------- | -------- |
 | Fedora | all |
 
 ## Role Arguments
----
+
 
 
 ### Entrypoint: main
----
+
 The main entrypoint for the extended role
 
 |Option|Description|Type|Required|Default|
@@ -28,7 +27,7 @@ The main entrypoint for the extended role
 | default_type | Type is str by default | str | no |  |
 
 #### Choices for main > choices-str
----
+
 |Choice|
 |---|
 | one |
@@ -36,7 +35,7 @@ The main entrypoint for the extended role
 | three |
 
 #### Choices for main > choices-int
----
+
 |Choice|
 |---|
 | 1 |
@@ -46,7 +45,7 @@ The main entrypoint for the extended role
 
 
 ### Entrypoint: list
----
+
 The list entry point for the extended role.
 
 |Option|Description|Type|Required|Default|
@@ -58,7 +57,7 @@ The list entry point for the extended role.
 
 
 ### Entrypoint: dict
----
+
 The dict entry point for the extended role.
 
 |Option|Description|Type|Required|Default|
@@ -68,7 +67,7 @@ The dict entry point for the extended role.
 
 
 ### Entrypoint: dict-with-options
----
+
 The dict-with-options entry point for the extended role.
 
 |Option|Description|Type|Required|Default|
@@ -76,7 +75,7 @@ The dict-with-options entry point for the extended role.
 | opts | A dictionary of keys and values | dict of 'opts' options | no |  |
 
 #### Options for dict-with-options > opts
----
+
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | int | An int value | int | no | 1 |
@@ -84,7 +83,7 @@ The dict-with-options entry point for the extended role.
 | subopts | A sub-dictionary of keys and values | dict of 'subopts' options | no |  |
 
 #### Options for dict-with-options > opts > subopts
----
+
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | str | A str value | str | no |  |
@@ -92,7 +91,7 @@ The dict-with-options entry point for the extended role.
 
 
 ### Entrypoint: bool
----
+
 The bool entry point for the extended role.
 
 |Option|Description|Type|Required|Default|
@@ -105,7 +104,7 @@ The bool entry point for the extended role.
 
 
 ### Entrypoint: int
----
+
 The int entry point for the extended role.
 
 |Option|Description|Type|Required|Default|
@@ -115,7 +114,7 @@ The int entry point for the extended role.
 
 
 ### Entrypoint: float
----
+
 The float entry point for the extended role.
 
 |Option|Description|Type|Required|Default|
@@ -125,7 +124,7 @@ The float entry point for the extended role.
 
 
 ### Entrypoint: path
----
+
 The path entry point for the extended role.
 
 |Option|Description|Type|Required|Default|
@@ -135,7 +134,7 @@ The path entry point for the extended role.
 
 
 ### Entrypoint: raw
----
+
 The raw entry point for the extended role.
 
 |Option|Description|Type|Required|Default|
@@ -146,7 +145,7 @@ The raw entry point for the extended role.
 
 
 ### Entrypoint: jsonarg
----
+
 The jsonarg entry point for the extended role.
 
 |Option|Description|Type|Required|Default|
@@ -156,7 +155,7 @@ The jsonarg entry point for the extended role.
 
 
 ### Entrypoint: json
----
+
 The json entry point for the extended role.
 
 |Option|Description|Type|Required|Default|
@@ -166,7 +165,7 @@ The json entry point for the extended role.
 
 
 ### Entrypoint: bytes
----
+
 The bytes entry point for the extended role.
 
 |Option|Description|Type|Required|Default|
@@ -176,7 +175,7 @@ The bytes entry point for the extended role.
 
 
 ### Entrypoint: bits
----
+
 The bits entry point for the extended role.
 
 |Option|Description|Type|Required|Default|
@@ -186,11 +185,10 @@ The bits entry point for the extended role.
 
 
 ## Dependencies
----
 None.
 
 ## Example Playbook
----
+
 ```
 - hosts: all
   tasks:
@@ -202,11 +200,10 @@ None.
 ```
 
 ## License
----
+
 MIT
 
 ## Author and Project Information
----
 your name @ ansible-docs
 
 <!-- END_ANSIBLE_DOCS -->

@@ -1,5 +1,5 @@
 # Ansible Role: {{ role }}
----
+
 {%- if "version" in galaxy_collection %}
 Version: {{ galaxy_collection.version }}
 {% endif %}
@@ -9,7 +9,7 @@ Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 {%- endif %}
 
 ## Requirements
----
+
 | Platform | Versions |
 | -------- | -------- |
 {%- for platform in metadata.galaxy_info.platforms %}
@@ -17,11 +17,11 @@ Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 {%- endfor %}
 
 ## Role Arguments
----
+
 {% for entrypoint in argument_specs.keys() %}
 
 ### Entrypoint: {{ entrypoint }}
----
+
 {{ argument_specs[entrypoint].short_description }}
 
 {% if entrypoint_options[entrypoint] %}
@@ -35,7 +35,7 @@ Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 {% if entrypoint_options[entrypoint] | length > 1 -%}
 {% for path, options in entrypoint_options[entrypoint][1:] -%}
 #### Options for {{ path | join(" > ") }}
----
+
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 {%- for name, details in options.items() %}
@@ -45,10 +45,11 @@ Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 {% endfor -%}
 
 {% endif -%}
+
 {% if entrypoint in entrypoint_choices -%}
 {% for path, choices in entrypoint_choices[entrypoint] -%}
 #### Choices for {{ path | join(" > ") }}
----
+
 |Choice|
 |---|
 {%- for item in choices %}
@@ -63,10 +64,17 @@ This entrypoint has no options.
 
 {% endif -%}
 
+{%- if "examples" in argument_specs[entrypoint] -%}
+
+#### Examples
+
+{{ argument_specs[entrypoint].examples }}
+
+{%- endif -%}
 {% endfor %}
 
 ## Dependencies
----
+
 {%- if ("dependencies" in metadata) and (metadata.dependencies | length > 0) %}
 {%- for dependency in metadata.dependencies %}
 - {{ dependency }}
@@ -76,7 +84,7 @@ None.
 {%- endif %}
 
 ## Example Playbook
----
+
 ```
 - hosts: all
   tasks:
@@ -97,11 +105,11 @@ None.
 ```
 
 ## License
----
+
 {{ metadata.galaxy_info.license }}
 
 ## Author and Project Information
----
+
 {%- if "company" in metadata.galaxy_info %}
 {{ metadata.galaxy_info.author }} @ {{ metadata.galaxy_info.company }}
 {%- else %}

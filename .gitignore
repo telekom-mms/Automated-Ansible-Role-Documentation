@@ -10,3 +10,5 @@ htmlcov
 .coverage
 coverage.xml
 dist
+
+.venv
