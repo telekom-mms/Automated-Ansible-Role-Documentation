@@ -23,17 +23,6 @@ repos:
     hooks:
       - id: remove-tabs
 
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    # keep it before yamllint
-    rev: v4.0.0-alpha.8
-    hooks:
-      - id: prettier
-        always_run: true
-        additional_dependencies:
-          - prettier
-          - prettier-plugin-toml
-          - prettier-plugin-sort-json
-
   - repo: https://github.com/psf/black
     rev: 24.8.0
     hooks:
