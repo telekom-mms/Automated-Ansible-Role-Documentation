@@ -403,3 +403,30 @@ def test_missing_doc_string(tmp_path):
         == "Could not find <!-- BEGIN_ANSIBLE_DOCS --> in the output file\n"
     )
     assert result.exit_code == 1
+
+
+def test_expand_home_path(tmp_path):
+    os.environ["HOME"] = str(ROLES_DIR / "home_dir_expand/")
+
+    role_path = pathlib.Path("~/")
+    readme_md = pathlib.Path("~/README.md").expanduser()
+    config_file = str(role_path / ".ansible-docs.yml")
+
+    output_dir = tmp_path
+    output_dir.mkdir(exist_ok=True)
+    output_file = output_dir / "README.md"
+
+    result = runner.invoke(
+        app,
+        [
+            "--config-file",
+            config_file,
+            "--output-file",
+            output_file,
+            os.environ["HOME"],
+            "markdown",
+        ],
+    )
+    print(result.output)
+    assert result.exit_code == 0
+    assert filecmp.cmp(readme_md, output_file)
