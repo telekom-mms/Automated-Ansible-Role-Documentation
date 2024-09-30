@@ -32,9 +32,12 @@ def parse_config(
     """
     # This will change the defaults when called with --help
     # See: https://github.com/tiangolo/typer/issues/347
-    if config_file.exists():
+
+    config_file_full_path: pathlib.Path = config_file.expanduser()
+
+    if config_file_full_path.exists():
         try:
-            with open(config_file, "r", encoding="utf-8") as f:
+            with open(config_file_full_path, "r", encoding="utf-8") as f:
                 content = yaml.safe_load(f)
 
                 ctx.default_map = ctx.default_map or {}
@@ -118,7 +121,7 @@ def write(ctx: typer.Context, content: str) -> None:
     Writes a content string to the given file.
     """
 
-    output = ctx.obj["config"]["output_file"]
+    output = ctx.obj["config"]["output_file"].expanduser()
 
     if "/" not in str(output):
         output = ctx.obj["config"]["role_path"] / output
