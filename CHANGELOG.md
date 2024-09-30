@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/1.2.0) (2024-09-30)
+
+[Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/1.1.0...1.2.0)
+
+**Closed issues:**
+
+- \[Bug\] output\_template not used [\#69](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/69)
+
 ## [1.1.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/1.1.0) (2024-09-29)
 
 [Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/1.0.4...1.1.0)
@@ -7,10 +15,22 @@
 **Implemented enhancements:**
 
 - \[Enhancement\] Pypi publish latest releases [\#58](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/58)
+- Feature/examples in docs [\#71](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/71) ([rndmh3ro](https://github.com/rndmh3ro))
+- feat\(meta\): add support for reading from meta/main [\#68](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/68) ([rndmh3ro](https://github.com/rndmh3ro))
 
 **Fixed bugs:**
 
 - \[Bug\] aar\_doc does not support arguments\_spec in meta/main.yaml [\#66](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/66)
+
+**Merged pull requests:**
+
+- Linting [\#73](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/73) ([rndmh3ro](https://github.com/rndmh3ro))
+- feat\(docs\): update readme [\#72](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/72) ([rndmh3ro](https://github.com/rndmh3ro))
+- chore\(deps\): update actions/checkout action to v4.2.0 [\#70](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/70) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency pytest to v8.3.3 [\#67](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/67) ([renovate[bot]](https://github.com/apps/renovate))
+- Update actions/setup-python digest to f677139 [\#65](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/65) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency typer to v0.12.5 [\#64](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/64) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency mypy to v1.11.2 [\#63](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/63) ([renovate[bot]](https://github.com/apps/renovate))
 
 ## [1.0.4](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/1.0.4) (2024-08-22)
 
