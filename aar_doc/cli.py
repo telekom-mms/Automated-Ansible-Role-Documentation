@@ -52,7 +52,7 @@ def markdown(ctx: typer.Context) -> None:
     Command for generating role documentation in Markdown format.
     """
     content = render_content(ctx, "markdown.j2")
-    write(ctx, content)
+    write_doc(ctx, content)
 
 
 @app.callback()
@@ -116,7 +116,7 @@ def cli(
     ctx.obj["data"]["entrypoint_choices"] = parse_choices(ctx)
 
 
-def write(ctx: typer.Context, content: str) -> None:
+def write_doc(ctx: typer.Context, content: str) -> None:
     """
     Writes a content string to the given file.
     """
