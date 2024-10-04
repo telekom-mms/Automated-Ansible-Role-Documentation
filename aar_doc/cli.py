@@ -396,5 +396,24 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
     )
 
 
+def generate_defaults(ctx: typer.Context) -> dict[str, any]:
+    """
+    Generates a dictionary from all options in the
+    argument_specs with default values.The dictionary contains
+    defaults from all entry points.
+    """
+    defaults = {}
+    argument_spec_data = ctx.obj["data"]["argument_specs"]
+
+    for entry_point in argument_spec_data:
+        for name, spec in argument_spec_data[entry_point]["options"].items():
+            value = spec.get("default")
+            if isinstance(value, str):
+                value = value.strip()
+            if value:
+                defaults[name] = value
+    return defaults
+
+
 if __name__ == "__main__":
     app()  # pragma: no cover
