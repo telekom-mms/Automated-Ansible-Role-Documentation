@@ -17,6 +17,12 @@ Test role with a minimum amount of metadata
 
 The main entrypoint for the extended role
 
+A longer description of the entrypoint.
+
+Reaching multiple lines.
+
+This contains the various parameters one can give in argument_specs that do not get tested below.
+
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | name | This one contains option-name, which should override the name given for the option. | str | no |  |
