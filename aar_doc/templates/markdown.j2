@@ -24,6 +24,16 @@ Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 
 {{ argument_specs[entrypoint].short_description }}
 
+{% if "description" in argument_specs[entrypoint] %}
+{%- if argument_specs[entrypoint].description is string -%}
+{{ argument_specs[entrypoint].description }}
+{% else %}
+{%- for line in argument_specs[entrypoint].description -%}
+{{ line }}
+{% endfor -%}
+{% endif -%}
+{% endif -%}
+
 {% if entrypoint_options[entrypoint] %}
 {%- set path, options=entrypoint_options[entrypoint][0] -%}
 |Option|Description|Type|Required|Default|
