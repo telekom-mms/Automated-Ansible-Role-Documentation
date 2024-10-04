@@ -56,6 +56,15 @@ def markdown(ctx: typer.Context) -> None:
     write_doc(ctx, content)
 
 
+@app.command()
+def defaults(ctx: typer.Context) -> None:
+    """
+    Command for generating role defaults.
+    """
+    defaults = generate_defaults(ctx)
+    write_defaults(ctx, defaults)
+
+
 @app.callback()
 def cli(
     ctx: typer.Context,
