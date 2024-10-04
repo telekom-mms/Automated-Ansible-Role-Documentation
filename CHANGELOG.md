@@ -1,12 +1,24 @@
 # Changelog
 
-## [1.2.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/1.2.0) (2024-09-30)
+## [1.2.1](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/1.2.1) (2024-10-04)
 
-[Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/1.1.0...1.2.0)
+[Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/1.2.0...1.2.1)
+
+**Fixed bugs:**
+
+- \[Bug\] aar-doc command unknown after installation [\#75](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/75)
 
 **Closed issues:**
 
 - \[Bug\] output\_template not used [\#69](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/69)
+
+## [1.2.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/1.2.0) (2024-09-30)
+
+[Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/1.1.0...1.2.0)
+
+**Implemented enhancements:**
+
+- fix\(aar\_doc\): handle tilde home-expansion [\#74](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/74) ([rndmh3ro](https://github.com/rndmh3ro))
 
 ## [1.1.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/1.1.0) (2024-09-29)
 
