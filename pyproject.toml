@@ -29,7 +29,7 @@ aar-doc = "aar_doc.cli:app"
 
 [tool.poetry.group.dev.dependencies]
 pylint = "^3.3.1"
-pre-commit = "^3.8.0"
+pre-commit = "^4.0.0"
 types-pyyaml = "^6.0.12.20240917"
 
 [tool.pytest.ini_options]
