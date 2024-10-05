@@ -1,0 +1,40 @@
+---
+argument_specs:
+  main:
+    short_description: The main entry point for the defaults role.
+    options:
+      zero:
+        type: int
+        default: 0
+        description: An integer with value of 0
+      int:
+        type: int
+        default: 42
+        description: An integer value
+      bool:
+        type: bool
+        default: False
+        description: A bool value
+      str:
+        type: str
+        default: Some string
+        description: A string value
+      str_multiline:
+        type: str
+        default: |
+          This is a multi line string.
+
+          It contains a lot of lines.
+
+          Yar har har.
+        description: A multiline string value
+      jsonarg:
+        type: jsonarg
+        default: >
+          {"foo": "bar"}
+        description: A JSON value
+      json:
+        type: json
+        default: >
+          {"foo": "bar"}
+        description: A JSON value

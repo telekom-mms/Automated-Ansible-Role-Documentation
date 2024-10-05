@@ -430,3 +430,20 @@ def test_expand_home_path(tmp_path):
     print(result.output)
     assert result.exit_code == 0
     assert filecmp.cmp(readme_md, output_file)
+
+
+def test_generate_defaults(tmp_path):
+    role_path = ROLES_DIR / "generate_defaults"
+    expected_defaults_file = str(role_path / "defaults" / "main.yml")
+    role_path = str(role_path)
+
+    output_dir = tmp_path
+    output_dir.mkdir(exist_ok=True)
+    output_file = output_dir / "defaults.yml"
+
+    result = runner.invoke(
+        app,
+        [role_path, "defaults", "--defaults-file", output_file],
+    )
+    assert result.exit_code == 0
+    assert filecmp.cmp(expected_defaults_file, output_file)
