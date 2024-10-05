@@ -38,3 +38,7 @@ argument_specs:
         default: >
           {"foo": "bar"}
         description: A JSON value
+      non_default:
+        type: str
+        required: true
+        description: An option without a default
