@@ -446,7 +446,7 @@ def generate_defaults(ctx: typer.Context) -> dict[str, any]:
             value = spec.get("default")
             if isinstance(value, str):
                 value = value.strip()
-            if value:
+            if value is not None:
                 defaults[name] = value
     return defaults
 
