@@ -57,10 +57,20 @@ def markdown(ctx: typer.Context) -> None:
 
 
 @app.command()
-def defaults(ctx: typer.Context) -> None:
+def defaults(
+    ctx: typer.Context,
+    defaults_file: pathlib.Path = typer.Option(
+        None,
+        file_okay=True,
+        dir_okay=False,
+        readable=True,
+        writable=True,
+    )
+    ) -> None:
     """
     Command for generating role defaults.
     """
+    ctx.obj["config"]["defaults_file"] = defaults_file
     defaults = generate_defaults(ctx)
     write_defaults(ctx, defaults)
 
@@ -175,8 +185,13 @@ def write_defaults(ctx: typer.Context, defaults: dict[str, any]) -> None:
     """
     Writes the generated defaults dictionary to the given file.
     """
-    # By default, it should be: <role_path>/defaults/main.yml
-    output: pathlib.Path = ctx.obj["config"]["role_path"] / "defaults/main.yml"
+    defaults_file_param = ctx.obj["config"]["defaults_file"]
+
+    if defaults_file_param is not None:
+        output: pathlib.Path = defaults_file_param
+    else:
+        # By default, it should be: <role_path>/defaults/main.yml
+        output: pathlib.Path = ctx.obj["config"]["role_path"] / "defaults/main.yml"
     output.resolve()
     # Create parent directories if they don't exist yet.
     # Needed if the <role_path>/defaults was not created yet.
