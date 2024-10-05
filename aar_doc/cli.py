@@ -193,6 +193,7 @@ def write_defaults(ctx: typer.Context, defaults: dict[str, any]) -> None:
             default_style="|",
             default_flow_style=False,
             allow_unicode=True,
+            sort_keys=False,
             indent=2,
             encoding="utf-8",
             )
