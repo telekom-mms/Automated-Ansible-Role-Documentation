@@ -19,6 +19,14 @@ argument_specs:
         type: str
         default: Some string
         description: A string value
+      generate_defaults_truthy_string:
+        type: str
+        default: "yes"
+        description: A truthy string value
+      generate_defaults_umask:
+        type: str
+        default: "0755"
+        description: A umask string value
       generate_defaults_list:
         type: list
         default:

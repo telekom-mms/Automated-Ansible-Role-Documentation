@@ -4,6 +4,8 @@ generate_defaults_zero: 0
 generate_defaults_int: 42
 generate_defaults_bool: false
 generate_defaults_str: Some string
+generate_defaults_truthy_string: 'yes'
+generate_defaults_umask: '0755'
 generate_defaults_list:
   - value1
   - value2
