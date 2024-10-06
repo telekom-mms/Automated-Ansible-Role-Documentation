@@ -3,23 +3,48 @@ argument_specs:
   main:
     short_description: The main entry point for the defaults role.
     options:
-      zero:
+      generate_defaults_zero:
         type: int
         default: 0
         description: An integer with value of 0
-      int:
+      generate_defaults_int:
         type: int
         default: 42
         description: An integer value
-      bool:
+      generate_defaults_bool:
         type: bool
-        default: False
+        default: false
         description: A bool value
-      str:
+      generate_defaults_str:
         type: str
         default: Some string
         description: A string value
-      str_multiline:
+      generate_defaults_list:
+        type: list
+        default:
+          - value1
+          - value2
+          - value3
+        description: A list value
+      generate_defaults_dict:
+        type: dict
+        default:
+          value1: first value
+          value2: second value
+          value3: third value
+        description: A dictionary value
+      generate_defaults_overwrite:
+        type: str
+        default: original value
+        description: A string value that will be overwritten
+      generate_defaults_non_default:
+        type: str
+        required: true
+        description: An option without a default
+  alternate:
+    short_description: The alternate entry point for the defaults role.
+    options:
+      generate_defaults_str_multiline:
         type: str
         default: |
           This is a multi line string.
@@ -28,17 +53,21 @@ argument_specs:
 
           Yar har har.
         description: A multiline string value
-      jsonarg:
+      generate_defaults_jsonarg:
         type: jsonarg
         default: >
           {"foo": "bar"}
         description: A JSON value
-      json:
+      generate_defaults_json:
         type: json
         default: >
           {"foo": "bar"}
         description: A JSON value
-      non_default:
+      generate_defaults_overwrite:
+        type: str
+        default: overwritten value
+        description: A string value that was be overwritten
+      generate_defaults_another_non_default:
         type: str
         required: true
-        description: An option without a default
+        description: Another option without a default
