@@ -5,9 +5,9 @@ generate_defaults_int: 42
 generate_defaults_bool: false
 generate_defaults_str: Some string
 generate_defaults_list:
-- value1
-- value2
-- value3
+  - value1
+  - value2
+  - value3
 generate_defaults_dict:
   value1: first value
   value2: second value
