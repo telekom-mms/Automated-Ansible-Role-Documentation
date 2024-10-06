@@ -204,7 +204,7 @@ def write_defaults(ctx: typer.Context, defaults: dict[str, any]) -> None:
         yaml.safe_dump(
             defaults,
             defaults_file,
-            default_style="|",
+            default_style=None,
             default_flow_style=False,
             allow_unicode=True,
             sort_keys=False,
