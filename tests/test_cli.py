@@ -447,3 +447,16 @@ def test_generate_defaults(tmp_path):
     )
     assert result.exit_code == 0
     assert filecmp.cmp(expected_defaults_file, output_file)
+
+
+def test_generate_defaults_no_defaults(tmp_path):
+    role_path = ROLES_DIR / "generate_defaults_no_defaults"
+    role_path = str(role_path)
+
+    result = runner.invoke(app, [role_path, "defaults"])
+
+    assert result.exit_code == 0
+    assert (
+        result.output
+        == "No defaults configured in argument_specs. Nothing to do." + os.linesep
+    )

@@ -81,6 +81,9 @@ def defaults(
     """
     ctx.obj["config"]["defaults_file"] = defaults_file
     defaults = generate_defaults(ctx)
+    if not defaults:
+        typer.echo("No defaults configured in argument_specs. Nothing to do.")
+        raise typer.Exit(code=0)
     write_defaults(ctx, defaults)
 
 
