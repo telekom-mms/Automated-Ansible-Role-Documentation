@@ -449,7 +449,7 @@ def test_generate_defaults(tmp_path):
     assert filecmp.cmp(expected_defaults_file, output_file)
 
 
-def test_generate_defaults_no_defaults(tmp_path):
+def test_generate_defaults_no_defaults():
     role_path = ROLES_DIR / "generate_defaults_no_defaults"
     role_path = str(role_path)
 
