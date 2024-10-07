@@ -433,6 +433,10 @@ def test_expand_home_path(tmp_path):
 
 
 def test_generate_defaults(tmp_path):
+    """
+    This test ensures that the default use case of generating
+    defaults for an argument_spec is handled as expected.
+    """
     role_path = ROLES_DIR / "generate_defaults"
     expected_defaults_file = str(role_path / "defaults" / "main.yml")
     role_path = str(role_path)
@@ -450,6 +454,10 @@ def test_generate_defaults(tmp_path):
 
 
 def test_generate_defaults_no_defaults():
+    """
+    This test ensures that generating defaults for an argument_spec
+    without any configured defaults is handled as expected.
+    """
     role_path = ROLES_DIR / "generate_defaults_no_defaults"
     role_path = str(role_path)
 
