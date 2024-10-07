@@ -477,7 +477,10 @@ def generate_defaults(ctx: typer.Context) -> dict[str, Any]:
     argument_spec_data = ctx.obj["data"]["argument_specs"]
 
     for entry_point in argument_spec_data:
-        for name, spec in argument_spec_data[entry_point]["options"].items():
+        options = argument_spec_data.get(entry_point, {}).get("options")
+        if not options:
+            continue
+        for name, spec in options.items():
             value = spec.get("default")
             if isinstance(value, str):
                 value = value.strip()

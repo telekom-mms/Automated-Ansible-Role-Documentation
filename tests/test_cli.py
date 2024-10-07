@@ -460,3 +460,20 @@ def test_generate_defaults_no_defaults():
         result.output
         == "No defaults configured in argument_specs. Nothing to do." + os.linesep
     )
+
+
+def test_generate_defaults_no_options():
+    """
+    This test ensures that generating defaults for an argument_spec
+    without any options is handled as expected.
+    """
+    role_path = ROLES_DIR / "no_options"
+    role_path = str(role_path)
+
+    result = runner.invoke(app, [role_path, "defaults"])
+
+    assert result.exit_code == 0
+    assert (
+        result.output
+        == "No defaults configured in argument_specs. Nothing to do." + os.linesep
+    )
