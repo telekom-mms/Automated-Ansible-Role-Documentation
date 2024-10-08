@@ -442,12 +442,16 @@ def test_generate_defaults(tmp_path):
     role_path = str(role_path)
 
     output_dir = tmp_path
-    output_dir.mkdir(exist_ok=True)
     output_file = output_dir / "defaults.yml"
 
     result = runner.invoke(
         app,
-        [role_path, "defaults", "--defaults-file", output_file],
+        [
+            "--output-file",
+            output_file,
+            role_path,
+            "defaults",
+        ],
     )
     assert result.exit_code == 0
     assert filecmp.cmp(expected_defaults_file, output_file)

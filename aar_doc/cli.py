@@ -32,20 +32,10 @@ def markdown(ctx: typer.Context) -> None:
 
 
 @app.command()
-def defaults(
-    ctx: typer.Context,
-    defaults_file: pathlib.Path = typer.Option(
-        None,
-        file_okay=True,
-        dir_okay=False,
-        readable=True,
-        writable=True,
-    ),
-) -> None:
+def defaults(ctx: typer.Context) -> None:
     """
     Command for generating role defaults.
     """
-    ctx.obj["config"]["defaults_file"] = defaults_file
     role_defaults = generate_defaults(ctx)
     if not role_defaults:
         typer.echo("No defaults configured in argument_specs. Nothing to do.")
