@@ -1,8 +1,12 @@
 # Changelog
 
-## [2.0.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.0.0) (2024-10-04)
+## [2.0.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.0.0) (2024-10-08)
 
 [Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/1.2.0...2.0.0)
+
+**Implemented enhancements:**
+
+- \[Enhancement\] The markdown template should include the content of the description field [\#78](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/78)
 
 **Fixed bugs:**
 
