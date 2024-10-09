@@ -13,7 +13,7 @@ from typing import Any
 import typer
 from ruamel.yaml import YAML
 from ruamel.yaml.comments import CommentedMap
-from ruamel.yaml.scalarstring import LiteralScalarString
+from ruamel.yaml.scalarstring import LiteralScalarString, SingleQuotedScalarString
 
 yaml = YAML()
 yaml.indent(mapping=2, sequence=2, offset=2)
@@ -82,8 +82,11 @@ class RoleDefaultsManager:
         commented_defaults = CommentedMap()
         for role_default in self.defaults:
             value = role_default.value
-            if isinstance(value, str) and "\n" in value:
-                value = LiteralScalarString(value)
+            if isinstance(value, str):
+                if value in ("yes", "no"):
+                    value = SingleQuotedScalarString(value)
+                if "\n" in value:
+                    value = LiteralScalarString(value)
             commented_defaults[role_default.name] = value
             commented_defaults.yaml_set_comment_before_after_key(
                 role_default.name,
