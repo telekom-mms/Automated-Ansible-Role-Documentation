@@ -50,11 +50,15 @@ def defaults(
     if not role_defaults:
         typer.echo("No defaults configured in argument_specs. Nothing to do.")
         raise typer.Exit(code=0)
-    write_defaults(
-        output_file_path=ctx.obj["config"]["output_file"],
-        role_path=ctx.obj["config"]["role_path"],
-        role_defaults=role_defaults,
-    )
+    try:
+        write_defaults(
+            output_file_path=ctx.obj["config"]["output_file"],
+            role_path=ctx.obj["config"]["role_path"],
+            role_defaults=role_defaults,
+        )
+    except OSError as exc:
+        typer.echo(f"Error writing the defaults file: {exc}")
+        raise typer.Exit(1) from exc
 
 
 @app.callback()
