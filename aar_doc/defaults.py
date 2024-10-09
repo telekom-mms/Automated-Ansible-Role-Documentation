@@ -34,11 +34,15 @@ class RoleDefault:
 
 @dataclass
 class RoleDefaultsManager:
-    """
-    Class for managing all the role defaults of a role.
+    """Class for managing all the role defaults of a role.
+
+    Args:
+        _overwrite (bool): Whether a default should be overwritten,
+        if it's already known. Defaults to False.
     """
 
-    _defaults: dict[str, RoleDefault] = field(default_factory=lambda: {})
+    _defaults: dict[str, RoleDefault] = field(default_factory=lambda: {}, init=False)
+    _overwrite: bool = False
 
     @property
     def defaults(self) -> list[RoleDefault]:
@@ -54,7 +58,6 @@ class RoleDefaultsManager:
         name: str,
         value: Any,
         description: str = "No description provided.",
-        overwrite=False,
     ) -> None:
         """Add a default.
 
@@ -63,13 +66,11 @@ class RoleDefaultsManager:
             value (Any): Value of the default.
             description (str, optional): Description of the default.
             Defaults to "No description provided.".
-            overwrite (bool, optional): Whether a default should be overwritten,
-            if it's already known. Defaults to True.
         """
         if isinstance(value, str):
             value = value.strip()
 
-        if overwrite:
+        if self._overwrite:
             self._defaults[name] = RoleDefault(name, value, description)
         else:
             self._defaults.setdefault(name, RoleDefault(name, value, description))
@@ -96,7 +97,7 @@ def generate_commented_defaults(
     overwrite_duplicate_defaults: bool,
 ) -> CommentedMap:
     """Generates the inital RoleDefaults"""
-    defaults_manager = RoleDefaultsManager()
+    defaults_manager = RoleDefaultsManager(overwrite_duplicate_defaults)
 
     argument_spec_data = ctx.obj["data"]["argument_specs"]
 
@@ -112,7 +113,6 @@ def generate_commented_defaults(
                     name,
                     value,
                     description,
-                    overwrite=overwrite_duplicate_defaults,
                 )
     return defaults_manager.to_commented_map()
 
