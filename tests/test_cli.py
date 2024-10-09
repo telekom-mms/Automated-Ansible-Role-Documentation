@@ -438,21 +438,39 @@ def test_generate_defaults(tmp_path):
     defaults for an argument_spec is handled as expected.
     """
     role_path = ROLES_DIR / "generate_defaults"
-    expected_defaults_file = str(role_path / "defaults" / "main.yml")
-    role_path = str(role_path)
 
     output_dir = tmp_path
     output_file = output_dir / "defaults.yml"
+
+    # Default case without extra options
+    expected_defaults_file = str(role_path / "defaults" / "main.yml")
 
     result = runner.invoke(
         app,
         [
             "--output-file",
             output_file,
-            role_path,
+            str(role_path),
             "defaults",
         ],
     )
+    assert result.exit_code == 0
+    assert filecmp.cmp(expected_defaults_file, output_file)
+
+    # Using --overwrite-duplicates option
+    expected_defaults_file = str(role_path / "defaults" / "overwrite.yml")
+
+    result = runner.invoke(
+        app,
+        [
+            "--output-file",
+            output_file,
+            str(role_path),
+            "defaults",
+            "--overwrite-duplicates",
+        ],
+    )
+
     assert result.exit_code == 0
     assert filecmp.cmp(expected_defaults_file, output_file)
 

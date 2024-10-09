@@ -44,7 +44,7 @@ argument_specs:
       generate_defaults_overwrite:
         type: str
         default: original value
-        description: A string value that will be overwritten
+        description: A string value that can be overwritten
       generate_defaults_non_default:
         type: str
         required: true
@@ -74,7 +74,7 @@ argument_specs:
       generate_defaults_overwrite:
         type: str
         default: overwritten value
-        description: A string value that was be overwritten
+        description: A string value that was overwritten
       generate_defaults_another_non_default:
         type: str
         required: true

@@ -44,6 +44,7 @@ repos:
           - jinja2
           - typer
           - pyyaml
+          - ruamel.yaml
 
   - repo: https://github.com/pre-commit/mirrors-mypy.git
     rev: v1.11.2

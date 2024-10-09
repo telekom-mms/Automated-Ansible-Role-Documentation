@@ -16,7 +16,7 @@ from aar_doc.core import (
     parse_options,
     render_content,
 )
-from aar_doc.defaults import generate_defaults, write_defaults
+from aar_doc.defaults import generate_commented_defaults, write_defaults
 from aar_doc.markdown import write_markdown
 
 app = typer.Typer(no_args_is_help=True)
@@ -32,11 +32,18 @@ def markdown(ctx: typer.Context) -> None:
 
 
 @app.command()
-def defaults(ctx: typer.Context) -> None:
+def defaults(
+    ctx: typer.Context,
+    overwrite_duplicates: bool = typer.Option(
+        False,
+        help="If set, a duplicate default will be overwritten "
+        "with the newly discovered one.",
+    ),
+) -> None:
     """
     Command for generating role defaults.
     """
-    role_defaults = generate_defaults(ctx)
+    role_defaults = generate_commented_defaults(ctx, overwrite_duplicates)
     if not role_defaults:
         typer.echo("No defaults configured in argument_specs. Nothing to do.")
         raise typer.Exit(code=0)
