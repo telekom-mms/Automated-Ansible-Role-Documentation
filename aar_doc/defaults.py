@@ -5,9 +5,9 @@ This module provides utilities for collecting the default values
 of an argument_spec and writing the final defaults file.
 """
 
-import pathlib
 from dataclasses import dataclass, field
 from os import linesep
+from pathlib import Path
 from typing import Any
 
 import typer
@@ -93,13 +93,11 @@ class RoleDefaultsManager:
 
 
 def generate_commented_defaults(
-    ctx: typer.Context,
+    argument_spec_data: dict,
     overwrite_duplicate_defaults: bool,
 ) -> CommentedMap:
     """Generates the inital RoleDefaults"""
     defaults_manager = RoleDefaultsManager(overwrite_duplicate_defaults)
-
-    argument_spec_data = ctx.obj["data"]["argument_specs"]
 
     for entry_point in argument_spec_data:
         options = argument_spec_data.get(entry_point, {}).get("options")
@@ -117,18 +115,20 @@ def generate_commented_defaults(
     return defaults_manager.to_commented_map()
 
 
-def write_defaults(ctx: typer.Context, role_defaults: CommentedMap) -> None:
+def write_defaults(
+    output_file_path: Path,
+    role_path: Path,
+    role_defaults: CommentedMap,
+) -> None:
     """
     Writes the generated defaults CommentedMap to the given file.
     """
-    output_file_param: pathlib.Path = ctx.obj["config"]["output_file"]
-
-    if output_file_param.name == "README.md":
-        output: pathlib.Path = ctx.obj["config"]["role_path"] / "defaults" / "main.yml"
-    elif output_file_param.is_absolute():
-        output = output_file_param
+    if output_file_path.name == "README.md":
+        output: Path = role_path / "defaults" / "main.yml"
+    elif output_file_path.is_absolute():
+        output = output_file_path
     else:
-        output = ctx.obj["config"]["role_path"] / "defaults" / output_file_param
+        output = role_path / "defaults" / output_file_path
     output.resolve()
 
     try:

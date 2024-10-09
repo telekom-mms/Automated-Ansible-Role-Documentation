@@ -43,11 +43,18 @@ def defaults(
     """
     Command for generating role defaults.
     """
-    role_defaults = generate_commented_defaults(ctx, overwrite_duplicates)
+    role_defaults = generate_commented_defaults(
+        argument_spec_data=ctx.obj["data"]["argument_specs"],
+        overwrite_duplicate_defaults=overwrite_duplicates,
+    )
     if not role_defaults:
         typer.echo("No defaults configured in argument_specs. Nothing to do.")
         raise typer.Exit(code=0)
-    write_defaults(ctx, role_defaults)
+    write_defaults(
+        output_file_path=ctx.obj["config"]["output_file"],
+        role_path=ctx.obj["config"]["role_path"],
+        role_defaults=role_defaults,
+    )
 
 
 @app.callback()
