@@ -110,7 +110,7 @@ def generate_commented_defaults(
     defaults_manager = RoleDefaultsManager(overwrite_duplicate_defaults)
 
     for entry_point in argument_spec_data:
-        options = argument_spec_data.get(entry_point, {}).get("options")
+        options: dict[str, Any] = argument_spec_data.get(entry_point, {}).get("options")
         if not options:
             continue
         for name, spec in options.items():
