@@ -8,7 +8,7 @@ of an argument_spec and writing the final defaults file.
 from dataclasses import dataclass, field
 from os import linesep
 from pathlib import Path
-from typing import Any
+from typing import Any, Union
 
 from ruamel.yaml import YAML
 from ruamel.yaml.comments import CommentedMap
@@ -28,7 +28,7 @@ class RoleDefault:
 
     name: str
     value: Any
-    description: str | list[str]
+    description: Union[str, list[str]]
 
 
 @dataclass
@@ -56,7 +56,7 @@ class RoleDefaultsManager:
         self,
         name: str,
         value: Any,
-        description: str | list = "No description provided.",
+        description: Union[str, list],
     ) -> None:
         """Add a default.
 
@@ -64,7 +64,6 @@ class RoleDefaultsManager:
             name (str): Variable name of the default.
             value (Any): Value of the default.
             description (str, optional): Description of the default.
-            Defaults to "No description provided.".
         """
         if isinstance(value, str):
             value = value.strip()

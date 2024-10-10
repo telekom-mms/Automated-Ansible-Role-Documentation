@@ -171,7 +171,7 @@ def parse_options(ctx: typer.Context) -> dict:
                 details["display_required"] = (
                     "yes" if details.get("required", False) else "no"
                 )
-                description = details["description"]
+                description = details["description"] if "description" in details else ""
                 details["display_description"] = (
                     (
                         description

@@ -67,6 +67,10 @@ argument_specs:
         type: str
         required: true
         description: An option without a default
+      generate_defaults_no_description:
+        type: str
+        required: true
+        default: "foo"
   alternate:
     short_description: The alternate entry point for the defaults role.
     options:
