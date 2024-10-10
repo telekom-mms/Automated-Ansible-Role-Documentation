@@ -21,6 +21,7 @@ generate_defaults_truthy_false_string: 'false'
 # A umask string value
 generate_defaults_umask: '0755'
 # A list value
+# with a list description with a rather long description, maybe too long.
 generate_defaults_list:
   - value1
   - value2

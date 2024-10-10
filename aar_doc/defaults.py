@@ -28,7 +28,7 @@ class RoleDefault:
 
     name: str
     value: Any
-    description: str
+    description: str | list[str]
 
 
 @dataclass
@@ -56,7 +56,7 @@ class RoleDefaultsManager:
         self,
         name: str,
         value: Any,
-        description: str = "No description provided.",
+        description: str | list = "No description provided.",
     ) -> None:
         """Add a default.
 
@@ -87,10 +87,18 @@ class RoleDefaultsManager:
                 if "\n" in value:
                     value = LiteralScalarString(value)
             commented_defaults[role_default.name] = value
-            commented_defaults.yaml_set_comment_before_after_key(
-                role_default.name,
-                role_default.description,
+            description_items = (
+                role_default.description
+                if isinstance(role_default.description, list)
+                else [role_default.description]
             )
+
+            for description_item in description_items:
+                commented_defaults.yaml_set_comment_before_after_key(
+                    key=role_default.name,
+                    before=description_item,
+                )
+
         return commented_defaults
 
 
