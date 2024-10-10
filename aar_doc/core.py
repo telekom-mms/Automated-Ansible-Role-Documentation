@@ -26,7 +26,7 @@ class OutputMode(Enum):
 def parse_config(
     ctx: typer.Context,
     config_file: pathlib.Path,
-):
+) -> None:
     """
     Parses the configuration file
     """
