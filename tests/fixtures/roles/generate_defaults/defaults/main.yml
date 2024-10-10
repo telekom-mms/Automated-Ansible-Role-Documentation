@@ -33,6 +33,7 @@ generate_defaults_dict:
   value3: third value
 # A string value that can be overwritten
 generate_defaults_overwrite: original value
+generate_defaults_no_description: foo
 # A multiline string value
 generate_defaults_str_multiline: |-
   This is a multi line string.
