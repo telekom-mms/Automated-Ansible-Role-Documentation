@@ -1,0 +1,13 @@
+---
+argument_specs:
+  main:
+    short_description: The main entry point for the defaults_no_defaults role.
+    options:
+      generate_defaults_no_defaults_foo:
+        type: str
+        required: true
+        description: A string value for foo
+      generate_defaults_no_defaults_bar:
+        type: str
+        required: true
+        description: A string value for bar

@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  role_name: generate_defaults_no_defaults
+  author: your name
+  description: Test generation of defaults
+  company: ansible-docs
+
+  license: MIT
+
+  min_ansible_version: "1.2"
+
+  platforms:
+    - name: Fedora
+      versions:
+        - all
