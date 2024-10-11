@@ -11,7 +11,14 @@ from enum import Enum
 
 import jinja2
 import typer
-import yaml
+
+from ruamel.yaml import YAML, YAMLError
+
+yaml = YAML()
+yaml.indent(mapping=2, sequence=2, offset=2)
+yaml.version = "1.1"
+yaml.encoding = "utf-8"
+yaml.allow_unicode = True
 
 
 class OutputMode(Enum):
@@ -38,7 +45,7 @@ def parse_config(
     if config_file_full_path.exists():
         try:
             with open(config_file_full_path, "r", encoding="utf-8") as f:
-                content = yaml.safe_load(f)
+                content = yaml.load(f)
 
                 ctx.default_map = ctx.default_map or {}
                 ctx.default_map.update(content)
@@ -58,8 +65,8 @@ def parse_meta(ctx: typer.Context) -> tuple[dict, dict]:
         argument_specs_yml: pathlib.Path = list(meta.glob("argument_specs.y*ml"))[0]
         with open(argument_specs_yml, "r", encoding="utf-8") as f:
             try:
-                argument_specs = yaml.safe_load(f)
-            except yaml.YAMLError:
+                argument_specs = yaml.load(f)
+            except YAMLError:
                 typer.echo("Not a valid YAML file: meta/argument_specs.y[a]ml")
             try:
                 argument_specs = argument_specs.get("argument_specs", {})
@@ -76,8 +83,8 @@ def parse_meta(ctx: typer.Context) -> tuple[dict, dict]:
 
     with open(main_yml, "r", encoding="utf-8") as f:
         try:
-            main = yaml.safe_load(f)
-        except yaml.YAMLError as exc:
+            main = yaml.load(f)
+        except YAMLError as exc:
             typer.echo("Not a valid YAML file: meta/main.y[a]ml")
             raise typer.Exit(1) from exc
         if not argument_specs:
@@ -104,7 +111,7 @@ def parse_collection(ctx: typer.Context) -> dict:
         galaxy_yml = galaxy_files[0]
 
         with open(galaxy_yml, "r", encoding="utf-8") as f:
-            collection = yaml.safe_load(f)
+            collection = yaml.load(f)
 
         return collection
     return {}
