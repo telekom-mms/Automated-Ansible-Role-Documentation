@@ -188,40 +188,41 @@ def parse_options(ctx: typer.Context) -> dict:
                     .replace("\n", " ")
                     .strip()
                 )
-                details["display_type"] = details.get("type", "str")
-                details["display_default"] = ""
-                if details["display_type"] == "bool":
-                    details["display_default"] = (
-                        "true" if details.get("default", False) else "false"
-                    )
-                elif details["display_type"] == "list":
-                    if default := details.get("default", None):
-                        details["display_default"] = json.dumps(default)
-                    if "elements" in details:
-                        if (details["elements"] == "dict") and ("options" in details):
-                            details["display_type"] = (
-                                f"list of dicts of '{option}' options"
-                            )
-                        else:
-                            details["display_type"] = (
-                                "list of '" + details["elements"] + "'"
-                            )
-                elif details["display_type"] == "dict":
-                    if default := details.get("default", None):
-                        details["display_default"] = json.dumps(default)
+
+                display_type = details.get("type", "str")
+
+                if display_type == "list":
+                    elements = details.get("elements", "")
+                    if elements == "dict" and "options" in details:
+                        display_type = f"list of dicts of '{option}' options"
+                    else:
+                        display_type = f"list of '{elements}'"
+                elif display_type == "dict":
                     if "options" in details:
-                        details["display_type"] = f"dict of '{option}' options"
-                elif details["display_type"] == "str":
-                    try:
-                        details["display_default"] = details.get("default", "").strip()
-                    except AttributeError as exc:
-                        typer.echo(
-                            f"The default value of the argument {option} "
-                            f"is of type {type(details.get('default')).__name__}, need str",
+                        display_type = f"dict of '{option}' options"
+
+                details["display_type"] = display_type
+
+                if "default" in details:
+                    default_value = details.get("default", "")
+                    details["display_default"] = str(default_value).strip()
+
+                    if display_type in ["list", "dict"]:
+                        details["display_default"] = (
+                            json.dumps(default_value) if default_value else ""
                         )
-                        raise typer.Exit(code=1) from exc
+
+                    elif display_type == "str":
+                        if not isinstance(default_value, str):
+                            typer.echo(
+                                f"The default value of the argument {option} "
+                                f"is of type {type(default_value).__name__}, need str",
+                            )
+                            raise typer.Exit(1)
+
                 else:
-                    details["display_default"] = str(details.get("default", "")).strip()
+                    details["display_default"] = ""
+
         entrypoint_options[entrypoint] = gathered_options
 
     return entrypoint_options

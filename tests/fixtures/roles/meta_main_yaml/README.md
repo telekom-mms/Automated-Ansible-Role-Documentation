@@ -102,10 +102,10 @@ The bool entry point for the extended role.
 
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
-| bool_true | A true boolean value | bool | no | true |
-| bool_false | A false boolean value | bool | no | false |
-| bool_yes | A truthy boolean value | bool | no | true |
-| bool_no | A falsy boolean value | bool | no | false |
+| bool_true | A true boolean value | bool | no | True |
+| bool_false | A false boolean value | bool | no | False |
+| bool_yes | A truthy boolean value | bool | no | yes |
+| bool_no | A falsy boolean value | bool | no | no |
 
 
 
