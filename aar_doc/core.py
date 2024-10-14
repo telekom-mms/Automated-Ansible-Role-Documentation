@@ -11,7 +11,14 @@ from enum import Enum
 
 import jinja2
 import typer
-import yaml
+
+from ruamel.yaml import YAML, YAMLError
+
+yaml = YAML()
+yaml.indent(mapping=2, sequence=2, offset=2)
+yaml.version = "1.1"
+yaml.encoding = "utf-8"
+yaml.allow_unicode = True
 
 
 class OutputMode(Enum):
@@ -26,7 +33,7 @@ class OutputMode(Enum):
 def parse_config(
     ctx: typer.Context,
     config_file: pathlib.Path,
-):
+) -> None:
     """
     Parses the configuration file
     """
@@ -38,7 +45,7 @@ def parse_config(
     if config_file_full_path.exists():
         try:
             with open(config_file_full_path, "r", encoding="utf-8") as f:
-                content = yaml.safe_load(f)
+                content = yaml.load(f)
 
                 ctx.default_map = ctx.default_map or {}
                 ctx.default_map.update(content)
@@ -58,8 +65,8 @@ def parse_meta(ctx: typer.Context) -> tuple[dict, dict]:
         argument_specs_yml: pathlib.Path = list(meta.glob("argument_specs.y*ml"))[0]
         with open(argument_specs_yml, "r", encoding="utf-8") as f:
             try:
-                argument_specs = yaml.safe_load(f)
-            except yaml.YAMLError:
+                argument_specs = yaml.load(f)
+            except YAMLError:
                 typer.echo("Not a valid YAML file: meta/argument_specs.y[a]ml")
             try:
                 argument_specs = argument_specs.get("argument_specs", {})
@@ -76,8 +83,8 @@ def parse_meta(ctx: typer.Context) -> tuple[dict, dict]:
 
     with open(main_yml, "r", encoding="utf-8") as f:
         try:
-            main = yaml.safe_load(f)
-        except yaml.YAMLError as exc:
+            main = yaml.load(f)
+        except YAMLError as exc:
             typer.echo("Not a valid YAML file: meta/main.y[a]ml")
             raise typer.Exit(1) from exc
         if not argument_specs:
@@ -104,7 +111,7 @@ def parse_collection(ctx: typer.Context) -> dict:
         galaxy_yml = galaxy_files[0]
 
         with open(galaxy_yml, "r", encoding="utf-8") as f:
-            collection = yaml.safe_load(f)
+            collection = yaml.load(f)
 
         return collection
     return {}
@@ -171,7 +178,7 @@ def parse_options(ctx: typer.Context) -> dict:
                 details["display_required"] = (
                     "yes" if details.get("required", False) else "no"
                 )
-                description = details["description"]
+                description = details["description"] if "description" in details else ""
                 details["display_description"] = (
                     (
                         description
@@ -181,40 +188,41 @@ def parse_options(ctx: typer.Context) -> dict:
                     .replace("\n", " ")
                     .strip()
                 )
-                details["display_type"] = details.get("type", "str")
-                details["display_default"] = ""
-                if details["display_type"] == "bool":
-                    details["display_default"] = (
-                        "true" if details.get("default", False) else "false"
-                    )
-                elif details["display_type"] == "list":
-                    if default := details.get("default", None):
-                        details["display_default"] = json.dumps(default)
-                    if "elements" in details:
-                        if (details["elements"] == "dict") and ("options" in details):
-                            details["display_type"] = (
-                                f"list of dicts of '{option}' options"
-                            )
-                        else:
-                            details["display_type"] = (
-                                "list of '" + details["elements"] + "'"
-                            )
-                elif details["display_type"] == "dict":
-                    if default := details.get("default", None):
-                        details["display_default"] = json.dumps(default)
+
+                display_type = details.get("type", "str")
+
+                if display_type == "list":
+                    elements = details.get("elements", "")
+                    if elements == "dict" and "options" in details:
+                        display_type = f"list of dicts of '{option}' options"
+                    else:
+                        display_type = f"list of '{elements}'"
+                elif display_type == "dict":
                     if "options" in details:
-                        details["display_type"] = f"dict of '{option}' options"
-                elif details["display_type"] == "str":
-                    try:
-                        details["display_default"] = details.get("default", "").strip()
-                    except AttributeError as exc:
-                        typer.echo(
-                            f"The default value of the argument {option} "
-                            f"is of type {type(details.get('default')).__name__}, need str",
+                        display_type = f"dict of '{option}' options"
+
+                details["display_type"] = display_type
+
+                if "default" in details:
+                    default_value = details.get("default", "")
+                    details["display_default"] = str(default_value).strip()
+
+                    if display_type in ["list", "dict"]:
+                        details["display_default"] = (
+                            json.dumps(default_value) if default_value else ""
                         )
-                        raise typer.Exit(code=1) from exc
+
+                    elif display_type == "str":
+                        if not isinstance(default_value, str):
+                            typer.echo(
+                                f"The default value of the argument {option} "
+                                f"is of type {type(default_value).__name__}, need str",
+                            )
+                            raise typer.Exit(1)
+
                 else:
-                    details["display_default"] = str(details.get("default", "")).strip()
+                    details["display_default"] = ""
+
         entrypoint_options[entrypoint] = gathered_options
 
     return entrypoint_options

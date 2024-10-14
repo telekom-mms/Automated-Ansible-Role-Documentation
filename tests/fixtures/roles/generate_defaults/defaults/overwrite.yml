@@ -21,6 +21,7 @@ generate_defaults_truthy_false_string: 'false'
 # A umask string value
 generate_defaults_umask: '0755'
 # A list value
+# with a list description with a rather long description, maybe too long.
 generate_defaults_list:
   - value1
   - value2
@@ -32,6 +33,7 @@ generate_defaults_dict:
   value3: third value
 # A string value that was overwritten
 generate_defaults_overwrite: overwritten value
+generate_defaults_no_description: foo
 # A multiline string value
 generate_defaults_str_multiline: |-
   This is a multi line string.

@@ -57,8 +57,8 @@ The list entry point for the extended role.
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | list_int | A list of ints | list of 'int' | no | [1, 2, 3] |
-| list_str | A list of strings | list of 'str' | no | ["foo", "bar", "baz"] |
-| list_dict | A list of dicts | list of 'dict' | no | [{"dict": {"foo": "bar"}}, {"dict": {"one": 1, "two": 2}}] |
+| list_str | A list of strings | list of 'str' | no | ['foo', 'bar', 'baz'] |
+| list_dict | A list of dicts | list of 'dict' | no | [{'dict': {'foo': 'bar'}}, {'dict': {'one': 1, 'two': 2}}] |
 
 
 
@@ -102,10 +102,10 @@ The bool entry point for the extended role.
 
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
-| bool_true | A true boolean value | bool | no | true |
-| bool_false | A false boolean value | bool | no | false |
-| bool_yes | A truthy boolean value | bool | no | true |
-| bool_no | A falsy boolean value | bool | no | false |
+| bool_true | A true boolean value | bool | no | True |
+| bool_false | A false boolean value | bool | no | False |
+| bool_yes | A truthy boolean value | bool | no | yes |
+| bool_no | A falsy boolean value | bool | no | no |
 
 
 

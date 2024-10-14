@@ -8,7 +8,7 @@ of an argument_spec and writing the final defaults file.
 from dataclasses import dataclass, field
 from os import linesep
 from pathlib import Path
-from typing import Any
+from typing import Any, Union
 
 from ruamel.yaml import YAML
 from ruamel.yaml.comments import CommentedMap
@@ -28,7 +28,7 @@ class RoleDefault:
 
     name: str
     value: Any
-    description: str
+    description: Union[str, list[str]]
 
 
 @dataclass
@@ -56,7 +56,7 @@ class RoleDefaultsManager:
         self,
         name: str,
         value: Any,
-        description: str = "No description provided.",
+        description: Union[str, list],
     ) -> None:
         """Add a default.
 
@@ -64,7 +64,6 @@ class RoleDefaultsManager:
             name (str): Variable name of the default.
             value (Any): Value of the default.
             description (str, optional): Description of the default.
-            Defaults to "No description provided.".
         """
         if isinstance(value, str):
             value = value.strip()
@@ -87,10 +86,18 @@ class RoleDefaultsManager:
                 if "\n" in value:
                     value = LiteralScalarString(value)
             commented_defaults[role_default.name] = value
-            commented_defaults.yaml_set_comment_before_after_key(
-                role_default.name,
-                role_default.description,
+            description_items = (
+                role_default.description
+                if isinstance(role_default.description, list)
+                else [role_default.description]
             )
+
+            for description_item in description_items:
+                commented_defaults.yaml_set_comment_before_after_key(
+                    key=role_default.name,
+                    before=description_item,
+                )
+
         return commented_defaults
 
 
@@ -102,7 +109,7 @@ def generate_commented_defaults(
     defaults_manager = RoleDefaultsManager(overwrite_duplicate_defaults)
 
     for entry_point in argument_spec_data:
-        options = argument_spec_data.get(entry_point, {}).get("options")
+        options: dict[str, Any] = argument_spec_data.get(entry_point, {}).get("options")
         if not options:
             continue
         for name, spec in options.items():
