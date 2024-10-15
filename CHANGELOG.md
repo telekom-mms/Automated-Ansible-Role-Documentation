@@ -7,6 +7,8 @@
 **Implemented enhancements:**
 
 - \[Enhancement\] The markdown template should include the content of the description field [\#78](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/78)
+- Feature/generate defaults [\#81](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/81) ([moritzrp](https://github.com/moritzrp))
+- feat\(template\): add description to markdown template [\#79](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/79) ([rndmh3ro](https://github.com/rndmh3ro))
 
 **Fixed bugs:**
 
@@ -15,6 +17,16 @@
 **Closed issues:**
 
 - \[Bug\] output\_template not used [\#69](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/69)
+
+**Merged pull requests:**
+
+- chore\(deps\): update dependency black to v24.10.0 [\#86](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/86) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency pre-commit to v4.0.1 [\#85](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/85) ([renovate[bot]](https://github.com/apps/renovate))
+- Fix/stuff [\#84](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/84) ([rndmh3ro](https://github.com/rndmh3ro))
+- chore\(deps\): update actions/checkout action to v4.2.1 [\#83](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/83) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update actions/checkout digest to eef6144 [\#82](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/82) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency pre-commit to v4 [\#80](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/80) ([renovate[bot]](https://github.com/apps/renovate))
+- Change entry point to aar-doc  [\#76](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/76) ([moritzrp](https://github.com/moritzrp))
 
 ## [1.2.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/1.2.0) (2024-09-30)
 
