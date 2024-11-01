@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.1](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.0.1) (2024-11-01)
+
+[Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/2.0.0...2.0.1)
+
+**Fixed bugs:**
+
+- \[Bug\] URL to role metadata in README.md broken [\#93](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/93)
+
 ## [2.0.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.0.0) (2024-10-14)
 
 [Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/1.2.0...2.0.0)
