@@ -8,6 +8,17 @@
 
 - \[Bug\] URL to role metadata in README.md broken [\#93](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/93)
 
+**Merged pull requests:**
+
+- chore\(deps\): update dependency pytest-cov to v6 [\#96](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/96) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update actions/setup-python digest to 0b93645 [\#95](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/95) ([renovate[bot]](https://github.com/apps/renovate))
+- doc: Fix Ansible Galaxy role metadata URL [\#94](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/94) ([lingling9000](https://github.com/lingling9000))
+- chore\(deps\): update actions/checkout action to v4.2.2 [\#92](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/92) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update actions/checkout digest to 11bd719 [\#91](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/91) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency mypy to v1.13.0 [\#90](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/90) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency mypy to v1.12.1 [\#89](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/89) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency mypy to v1.12.0 [\#88](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/88) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [2.0.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.0.0) (2024-10-14)
 
 [Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/1.2.0...2.0.0)
