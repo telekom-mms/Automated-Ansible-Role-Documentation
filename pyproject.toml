@@ -21,7 +21,7 @@ black = "^24.0.0"
 mypy = "^1.0.0"
 pytest = "^8.0.0"
 pytest-cov = "^6.0.0"
-isort = "^5.10.1"
+isort = "^6.0.0"
 
 [tool.poetry.scripts]
 aar-doc = "aar_doc.cli:app"
