@@ -29,10 +29,10 @@ Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 {{ argument_specs[entrypoint].description }}
 {% else %}
 {%- for line in argument_specs[entrypoint].description -%}
-{{ line }}
-{% endfor -%}
-{% endif -%}
-{% endif -%}
+{{ line }}  
+{% endfor %}
+{% endif %}
+{% endif %}
 
 {% if entrypoint_options[entrypoint] %}
 {%- set path, options=entrypoint_options[entrypoint][0] -%}
