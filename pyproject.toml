@@ -17,7 +17,7 @@ typer = "^0.15.0"
 ruamel-yaml = "^0.18.6"
 
 [tool.poetry.dev-dependencies]
-black = "24.10.0"
+black = "25.1.0"
 mypy = "1.15.0"
 pytest = "8.3.4"
 pytest-cov = "6.0.0"
