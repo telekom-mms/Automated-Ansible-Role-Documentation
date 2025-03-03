@@ -21,7 +21,7 @@ black = "24.10.0"
 mypy = "1.15.0"
 pytest = "8.3.4"
 pytest-cov = "6.0.0"
-isort = "5.13.2"
+isort = "6.0.1"
 
 [tool.poetry.scripts]
 aar-doc = "aar_doc.cli:app"
