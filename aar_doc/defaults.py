@@ -15,7 +15,7 @@ from ruamel.yaml.comments import CommentedMap
 from ruamel.yaml.scalarstring import LiteralScalarString, SingleQuotedScalarString
 
 yaml = YAML()
-yaml.indent(mapping=2, sequence=2, offset=2)
+yaml.indent(mapping=2, sequence=4, offset=2)
 yaml.encoding = "utf-8"
 yaml.allow_unicode = True
 
