@@ -1,0 +1,26 @@
+---
+argument_specs:
+  main:
+    short_description: >-
+      This summary contains B(bold), I(italic) and C(monospace) text as well as an L(URL,https://github.com/telekom-mms/Automated-Ansible-Role-Documentation).
+    description:
+      - This is an example of B(bold) text.
+      - This is an example of I(italic) text.
+      - This is an example of C(monospace) text.
+      - This is an example of an L(URL,https://github.com/telekom-mms/Automated-Ansible-Role-Documentation).
+    options:
+      myapp_int:
+        type: "int"
+        required: false
+        default: 42
+        description:
+          - The integer value.
+          - Defaults to C(42).
+          - For string, see O(myapp_str).
+      myapp_str:
+        type: "str"
+        required: true
+        description:
+          - The string value.
+          - No default value.
+          - For int, see O(myapp_int).

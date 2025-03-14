@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  role_name: multiline
+  author: your name
+  description: Test role with multiline descriptions
+  company: ansible-docs
+
+  license: MIT
+
+  min_ansible_version: "1.2"
+
+  platforms:
+    - name: Fedora
+      versions:
+        - all

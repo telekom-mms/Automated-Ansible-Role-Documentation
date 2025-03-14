@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  role_name: markup
+  author: your name
+  description: Test role with markup in descriptions
+  company: ansible-docs
+
+  license: MIT
+
+  min_ansible_version: "1.2"
+
+  platforms:
+    - name: Fedora
+      versions:
+        - all
