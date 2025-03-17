@@ -254,7 +254,7 @@ def test_output_template(tmp_path):
 
 
 def test_markdown(tmp_path):
-    roles = ["minimum", "extended", "multiple_entrypoints", "no_options"]
+    roles = ["minimum", "extended", "multiple_entrypoints", "no_options", "multiline", "markup"]
 
     for role_path in [ROLES_DIR / x for x in roles]:
         role = role_path.stem

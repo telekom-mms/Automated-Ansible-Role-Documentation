@@ -3,7 +3,7 @@
 {%- if "version" in galaxy_collection %}
 Version: {{ galaxy_collection.version }}
 {% endif %}
-{{ metadata.galaxy_info.description }}
+{{ metadata.galaxy_info.description | ansible_doc_markup }}
 {% if ("galaxy_tags" in metadata.galaxy_info) and (metadata.galaxy_info.galaxy_tags | length > 0) %}
 Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 {%- endif %}
@@ -22,14 +22,15 @@ Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 
 ### Entrypoint: {{ entrypoint }}
 
-{{ argument_specs[entrypoint].short_description }}
+{{ argument_specs[entrypoint].short_description | ansible_doc_markup }}
 
 {% if "description" in argument_specs[entrypoint] %}
 {%- if argument_specs[entrypoint].description is string -%}
-{{ argument_specs[entrypoint].description }}
+{{ argument_specs[entrypoint].description | ansible_doc_markup }}
 {% else %}
 {%- for line in argument_specs[entrypoint].description -%}
-{{ line }}
+{{ line | ansible_doc_markup }}
+
 {% endfor -%}
 {% endif -%}
 {% endif -%}
@@ -39,7 +40,7 @@ Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 {%- for name, details in options.items() %}
-| {{ name }} | {{ details.display_description }} | {{ details.display_type }} | {{ details.display_required }} | {{ details.display_default }} |
+| {{ name }} | {{ details.display_description | ansible_doc_markup }} | {{ details.display_type }} | {{ details.display_required }} | {{ details.display_default }} |
 {%- endfor %}
 
 {% if entrypoint_options[entrypoint] | length > 1 -%}
@@ -49,7 +50,7 @@ Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 {%- for name, details in options.items() %}
-| {{ name }} | {{ details.display_description }} | {{ details.display_type }} | {{ details.display_required }} | {{ details.display_default }} |
+| {{ name }} | {{ details.display_description | ansible_doc_markup }} | {{ details.display_type }} | {{ details.display_required }} | {{ details.display_default }} |
 {%- endfor %}
 
 {% endfor -%}
