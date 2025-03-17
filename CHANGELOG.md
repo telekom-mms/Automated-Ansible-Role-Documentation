@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.1.0) (2025-03-17)
+
+[Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/2.0.1...2.1.0)
+
+**Implemented enhancements:**
+
+- \[Enhancement\] Add support for Ansible documentation markup [\#125](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/125)
+
+**Closed issues:**
+
+- \[Bug\] Readme template markdown.j2 breaks table rendering due to missing whitespace. [\#123](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/123)
+
 ## [2.0.1](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.0.1) (2024-11-01)
 
 [Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/2.0.0...2.0.1)

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aar_doc"
-version = "2.0.2"
+version = "2.1.0"
 description = "A tool for generating docs for Ansible roles"
 readme = "README.md"
 authors = ["Miika Kankare <miika@kanka.re>", "Sebastian Gumprich <sebastian.gumprich@telekom.de>"]
