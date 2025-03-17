@@ -7,6 +7,7 @@ and rendering jinja2 templates from processing data.
 
 import json
 import pathlib
+import re
 from enum import Enum
 
 import jinja2
@@ -19,6 +20,24 @@ yaml.indent(mapping=2, sequence=2, offset=2)
 yaml.version = "1.1"
 yaml.encoding = "utf-8"
 yaml.allow_unicode = True
+
+
+def ansible_doc_markup(text):
+    # Regular expressions copied from ansible-doc:
+    # https://github.com/ansible/ansible/blob/devel/lib/ansible/cli/doc.py#L436
+    out = re.sub(r'\bI\(([^)]+)\)', r'*\1*', text)                # I(text)     -> *text*
+    out = re.sub(r'\bB\(([^)]+)\)', r'**\1**', out)               # B(text)     -> **text**
+    out = re.sub(r'\bC\(([^)]+)\)', r'`\1`', out)                 # C(text)     -> `text`
+    out = re.sub(r'\bM\(([^)]+)\)', r'`\1`', out)                 # M(module)   -> `module`
+    out = re.sub(r'\bO\(((?:[^\\)]+|\\.)+)\)', r'`\1`', out)      # O(option)   -> `option`
+    out = re.sub(r'\bV\(((?:[^\\)]+|\\.)+)\)', r'`\1`', out)      # V(value)    -> `value`
+    out = re.sub(r'\bV\(((?:[^\\)]+|\\.)+)\)', r'`\1`', out)      # E(env)      -> `env`
+    out = re.sub(r'\bV\(((?:[^\\)]+|\\.)+)\)', r'`\1`', out)      # RV(retval)  -> `retval`
+    out = re.sub(r'\bU\(([^)]+)\)', r'[\1]', out)                 # U(url)      -> [url]
+    out = re.sub(r'\bL\(([^)]+), *([^)]+)\)', r'[\1](\2)', out)   # L(text,url) -> [text](url)
+    out = re.sub(r'\bR\(([^)]+), *([^)]+)\)', r'[\1](#\2)', out)  # R(text,frag) -> [text](#frag)
+    out = re.sub(r'\bHORIZONTALLINE\b', r'\n\n---\n', out)        # HORIZONTALLINE -> ---
+    return out
 
 
 class OutputMode(Enum):
@@ -240,6 +259,7 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
         autoescape=jinja2.select_autoescape(),
         undefined=jinja2.StrictUndefined,
     )
+    env.filters['ansible_doc_markup'] = ansible_doc_markup
 
     role = ctx.obj["config"]["role"]
     metadata = ctx.obj["data"]["metadata"]
@@ -270,12 +290,14 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
             keep_trailing_newline=True,
             loader=jinja2.FileSystemLoader([role_path, output_template_file.parent]),
         )
+        env.filters['ansible_doc_markup'] = ansible_doc_markup
         template = env.get_template(output_template_file.name)
     except (FileNotFoundError, OSError):
         env = jinja2.Environment(
             keep_trailing_newline=True,
             loader=jinja2.FileSystemLoader(role_path),
         )
+        env.filters['ansible_doc_markup'] = ansible_doc_markup
         template = env.from_string(source=output_template)
 
     return template.render(

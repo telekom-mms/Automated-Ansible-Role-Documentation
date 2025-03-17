@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aar_doc"
-version = "2.0.2"
+version = "2.1.0"
 description = "A tool for generating docs for Ansible roles"
 readme = "README.md"
 authors = ["Miika Kankare <miika@kanka.re>", "Sebastian Gumprich <sebastian.gumprich@telekom.de>"]
@@ -19,7 +19,7 @@ ruamel-yaml = "^0.18.6"
 [tool.poetry.dev-dependencies]
 black = "25.1.0"
 mypy = "1.15.0"
-pytest = "8.3.4"
+pytest = "8.3.5"
 pytest-cov = "6.0.0"
 isort = "6.0.1"
 
@@ -27,7 +27,7 @@ isort = "6.0.1"
 aar-doc = "aar_doc.cli:app"
 
 [tool.poetry.group.dev.dependencies]
-pylint = "3.3.4"
+pylint = "3.3.5"
 pre-commit = "4.1.0"
 
 [tool.pytest.ini_options]
