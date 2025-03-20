@@ -27,7 +27,7 @@ isort = "6.0.1"
 aar-doc = "aar_doc.cli:app"
 
 [tool.poetry.group.dev.dependencies]
-pylint = "3.3.5"
+pylint = "3.3.6"
 pre-commit = "4.2.0"
 
 [tool.pytest.ini_options]
