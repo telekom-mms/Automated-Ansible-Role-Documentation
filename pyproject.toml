@@ -28,7 +28,7 @@ aar-doc = "aar_doc.cli:app"
 
 [tool.poetry.group.dev.dependencies]
 pylint = "3.3.5"
-pre-commit = "4.1.0"
+pre-commit = "4.2.0"
 
 [tool.pytest.ini_options]
 addopts = [
