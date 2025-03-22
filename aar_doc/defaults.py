@@ -73,18 +73,27 @@ class RoleDefaultsManager:
         else:
             self._defaults.setdefault(name, RoleDefault(name, value, description))
 
+    def safe_quote_recursive(self, value):
+        if isinstance(value, list):
+            return [self.safe_quote_recursive(v) for v in value]
+        elif isinstance(value, dict):
+            return {k: self.safe_quote_recursive(v) for k, v in value.items()}
+        elif isinstance(value, str):
+            if value in ("yes", "no"):
+                return SingleQuotedScalarString(value)
+            elif "\n" in value:
+                return LiteralScalarString(value)
+            elif ":" in value:
+                return SingleQuotedScalarString(value)
+        return value
+
     def to_commented_map(self) -> CommentedMap:
         """
         Returns all tracked defaults as a CommentedMap.
         """
         commented_defaults = CommentedMap()
         for role_default in self.defaults:
-            value = role_default.value
-            if isinstance(value, str):
-                if value in ("yes", "no"):
-                    value = SingleQuotedScalarString(value)
-                if "\n" in value:
-                    value = LiteralScalarString(value)
+            value = self.safe_quote_recursive(role_default.value)
             commented_defaults[role_default.name] = value
             description_items = (
                 role_default.description
