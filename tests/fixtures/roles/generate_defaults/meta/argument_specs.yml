@@ -63,6 +63,14 @@ argument_specs:
           value2: second value
           value3: third value
         description: A dictionary value
+      generate_defaults_list_of_dict:
+        type: list
+        default:
+          - value1: first value
+            value2: second value
+          - value3: third value
+            value4: fourth value
+        description: A list-of-dict value
       generate_defaults_overwrite:
         type: str
         default: original value

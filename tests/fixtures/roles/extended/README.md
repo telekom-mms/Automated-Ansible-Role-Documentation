@@ -23,6 +23,7 @@ The main entrypoint for the extended role
 A longer description of the entrypoint.
 
 Reaching multiple lines.
+And a line.
 
 This contains the various parameters one can give in argument_specs that do not get tested below.
 

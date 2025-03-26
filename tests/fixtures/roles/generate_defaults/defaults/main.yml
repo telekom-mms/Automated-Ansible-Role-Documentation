@@ -33,6 +33,12 @@ generate_defaults_dict:
   value1: first value
   value2: second value
   value3: third value
+# A list-of-dict value
+generate_defaults_list_of_dict:
+  - value1: first value
+    value2: second value
+  - value3: third value
+    value4: fourth value
 # A string value that can be overwritten
 generate_defaults_overwrite: original value
 generate_defaults_no_description: foo
