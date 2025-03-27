@@ -43,6 +43,12 @@ argument_specs:
         type: str
         default: "::1"
         description: A string value with colons
+      generate_defaults_truthy_colon_nested:
+        type: list
+        default:
+          - foo:
+              bar: "::1"
+        description: A nested dict/list with colons
       generate_defaults_umask:
         type: str
         default: "0755"
