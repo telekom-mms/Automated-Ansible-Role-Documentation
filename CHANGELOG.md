@@ -7,12 +7,50 @@
 **Implemented enhancements:**
 
 - \[Enhancement\] Add support for Ansible documentation markup [\#125](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/125)
+- add basic handling of Ansible doc markup [\#127](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/127) ([s3lph](https://github.com/s3lph))
 
 **Fixed bugs:**
 
 - \[Bug\] Readme template markdown.j2 breaks table rendering due to missing whitespace. [\#123](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/123)
 - \[Bug\] aar-doc defaults produces invalid YAML when duming sequence-of-mapping [\#120](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/120)
 - \[Bug\] Ansible can't parse generated defaults due to unquoted colons [\#119](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/119)
+- quote strings containing colons [\#122](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/122) ([s3lph](https://github.com/s3lph))
+- proper indentation of sequence-of-mapping [\#121](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/121) ([s3lph](https://github.com/s3lph))
+
+**Merged pull requests:**
+
+- Update linting and tests  [\#138](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/138) ([rndmh3ro](https://github.com/rndmh3ro))
+- chore\(deps\): update actions/setup-python digest to 8d9ed9a [\#137](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/137) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency pylint to v3.3.6 [\#135](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/135) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency pre-commit to v4.2.0 [\#134](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/134) ([renovate[bot]](https://github.com/apps/renovate))
+- Extend Codeowners [\#133](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/133) ([schurzi](https://github.com/schurzi))
+- chore\(deps\): update dependency python to 3.13 [\#131](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/131) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency pylint to v3.3.5 [\#130](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/130) ([renovate[bot]](https://github.com/apps/renovate))
+- fix\(deps\): update dependency jinja2 to v3.1.6 \[security\] [\#129](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/129) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency pytest to v8.3.5 [\#128](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/128) ([renovate[bot]](https://github.com/apps/renovate))
+- fix\(deps\): update dependency typer to v0.15.2 [\#126](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/126) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): pin dependencies [\#118](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/118) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency mypy to v1.15.0 [\#117](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/117) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency pylint to v3.3.4 [\#116](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/116) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update actions/setup-python digest to 4237552 [\#115](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/115) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency isort to v6 [\#114](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/114) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency black to v25 [\#113](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/113) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency pre-commit to v4.1.0 [\#112](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/112) ([renovate[bot]](https://github.com/apps/renovate))
+- fix\(deps\): update dependency ruamel-yaml to v0.18.10 [\#111](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/111) ([renovate[bot]](https://github.com/apps/renovate))
+- fix\(deps\): update dependency ruamel-yaml to v0.18.8 [\#110](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/110) ([renovate[bot]](https://github.com/apps/renovate))
+- fix\(deps\): update dependency ruamel-yaml to v0.18.7 [\#109](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/109) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency mypy to v1.14.1 [\#108](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/108) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency pylint to v3.3.3 [\#107](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/107) ([renovate[bot]](https://github.com/apps/renovate))
+- fix\(deps\): update dependency jinja2 to v3.1.5 [\#106](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/106) ([renovate[bot]](https://github.com/apps/renovate))
+- fix\(deps\): update dependency click to v8.1.8 [\#105](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/105) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency mypy to v1.14.0 [\#104](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/104) ([renovate[bot]](https://github.com/apps/renovate))
+- fix\(deps\): update dependency typer to v0.15.1 [\#103](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/103) ([renovate[bot]](https://github.com/apps/renovate))
+- fix\(deps\): update dependency typer to ^0.15.0 [\#102](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/102) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency pylint to v3.3.2 [\#101](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/101) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency pytest to v8.3.4 [\#100](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/100) ([renovate[bot]](https://github.com/apps/renovate))
+- fix\(deps\): update dependency typer to ^0.14.0 [\#99](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/99) ([renovate[bot]](https://github.com/apps/renovate))
+- fix\(deps\): update dependency typer to v0.13.1 [\#98](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/98) ([renovate[bot]](https://github.com/apps/renovate))
+- fix\(deps\): update dependency typer to ^0.13.0 [\#97](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/97) ([renovate[bot]](https://github.com/apps/renovate))
 
 ## [2.0.1](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.0.1) (2024-11-01)
 
