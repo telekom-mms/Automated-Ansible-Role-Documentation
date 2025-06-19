@@ -242,7 +242,9 @@ def parse_options(ctx: typer.Context) -> dict:
                         )
 
                     elif display_type == "str":
-                        if not isinstance(default_value, str):
+                        if not (
+                            isinstance(default_value, str) or default_value is None
+                        ):
                             typer.echo(
                                 f"The default value of the argument {option} "
                                 f"is of type {type(default_value).__name__}, need str",

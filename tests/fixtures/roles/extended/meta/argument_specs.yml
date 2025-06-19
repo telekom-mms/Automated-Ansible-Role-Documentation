@@ -48,6 +48,10 @@ argument_specs:
         type: str
         description: This one has a default
         default: long
+      default_null:
+        type: str
+        description: This one has null as a default
+        default: null
       required:
         type: str
         required: true
@@ -65,6 +69,11 @@ argument_specs:
           - 2
           - 3
         description: A list of ints
+      list_int_null:
+        type: list
+        elements: int
+        default: null
+        description: A list of ints, null as a default
       list_str:
         type: list
         elements: str
@@ -73,6 +82,11 @@ argument_specs:
           - bar
           - baz
         description: A list of strings
+      list_str_null:
+        type: list
+        elements: str
+        default: null
+        description: A list of strings, null as a default
       list_dict:
         type: list
         elements: dict
@@ -83,6 +97,11 @@ argument_specs:
               one: 1
               two: 2
         description: A list of dicts
+      list_dict_null:
+        type: list
+        elements: dict
+        default: null
+        description: A list of dicts, null as a default
   dict:
     short_description: The dict entry point for the extended role.
     options:
@@ -94,6 +113,12 @@ argument_specs:
             one: 1
             two: 2
         description: A dictionary of keys and values
+      dict_null:
+        type: dict
+        default:
+          dict:
+            foo: null
+        description: A dictionary of keys and values, null as values
   dict-with-options:
     short_description: The dict-with-options entry point for the extended role.
     options:
@@ -117,6 +142,27 @@ argument_specs:
               str:
                 type: str
                 description: A str value
+      opts_null:
+        type: dict
+        description: A dictionary of keys and values, null as a default
+        options:
+          int:
+            type: int
+            default: 1
+            description: An int value
+          json:
+            type: json
+            default: >
+              {"foo": "bar"}
+            description: A JSON value
+          subopts:
+            type: dict
+            description: A sub-dictionary of keys and values
+            options:
+              str:
+                type: str
+                description: A str value
+        default: null
   bool:
     short_description: The bool entry point for the extended role.
     options:
@@ -143,6 +189,10 @@ argument_specs:
         type: int
         default: 1
         description: An int value
+      int_null:
+        type: int
+        default: null
+        description: An int value, null as a default
   float:
     short_description: The float entry point for the extended role.
     options:
@@ -150,6 +200,10 @@ argument_specs:
         type: float
         default: 1.2
         description: A float value
+      float_null:
+        type: float
+        default: null
+        description: A float value, null as a default
   path:
     short_description: The path entry point for the extended role.
     options:
@@ -157,6 +211,10 @@ argument_specs:
         type: path
         default: /tmp/foo/bar
         description: A path value
+      path_null:
+        type: path
+        default: null
+        description: A path value, null as a default
   raw:
     short_description: The raw entry point for the extended role.
     options:
@@ -164,10 +222,18 @@ argument_specs:
         type: raw
         default: raw
         description: A raw str value
+      raw_str_null:
+        type: raw
+        default: null
+        description: A raw str value, null as a default
       raw_int:
         type: raw
         default: 123
         description: A raw int value
+      raw_int_null:
+        type: raw
+        default: null
+        description: A raw int value, null as a default
   jsonarg:
     short_description: The jsonarg entry point for the extended role.
     options:
@@ -176,6 +242,10 @@ argument_specs:
         default: >
           {"foo": "bar"}
         description: A JSON value
+      jsonarg_null:
+        type: jsonarg
+        default: null
+        description: A JSON value, null as a default
   json:
     short_description: The json entry point for the extended role.
     options:
@@ -184,6 +254,10 @@ argument_specs:
         default: >
           {"foo": "bar"}
         description: A JSON value
+      json_null:
+        type: json
+        default: null
+        description: A JSON value, null as a default
   bytes:
     short_description: The bytes entry point for the extended role.
     options:
@@ -191,6 +265,10 @@ argument_specs:
         type: bytes
         default: 1.15GB
         description: A bytes value
+      bytes_null:
+        type: bytes
+        default: null
+        description: A bytes value, null as a default
   bits:
     short_description: The bits entry point for the extended role.
     options:
@@ -198,3 +276,7 @@ argument_specs:
         type: bits
         default: 1Mb
         description: A bit value
+      bytes_null:
+        type: bits
+        default: null
+        description: A bit value, null as a default

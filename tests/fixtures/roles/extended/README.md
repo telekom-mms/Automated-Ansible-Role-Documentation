@@ -33,6 +33,7 @@ This contains the various parameters one can give in argument_specs that do not 
 | choices-str | So many choices to make | str | no |  |
 | choices-int | So many choices to make | int | no |  |
 | default | This one has a default | str | no | long |
+| default_null | This one has null as a default | str | no | None |
 | required | This one is required | str | yes |  |
 | default_type | Type is str by default | str | no |  |
 
@@ -68,8 +69,11 @@ The list entry point for the extended role.
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | list_int | A list of ints | list of 'int' | no | [1, 2, 3] |
+| list_int_null | A list of ints, null as a default | list of 'int' | no | None |
 | list_str | A list of strings | list of 'str' | no | ['foo', 'bar', 'baz'] |
+| list_str_null | A list of strings, null as a default | list of 'str' | no | None |
 | list_dict | A list of dicts | list of 'dict' | no | [{'dict': {'foo': 'bar'}}, {'dict': {'one': 1, 'two': 2}}] |
+| list_dict_null | A list of dicts, null as a default | list of 'dict' | no | None |
 
 
 
@@ -80,6 +84,7 @@ The dict entry point for the extended role.
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | dict | A dictionary of keys and values | dict | no | {"dict": {"foo": "bar", "one": 1, "two": 2}} |
+| dict_null | A dictionary of keys and values, null as values | dict | no | {"dict": {"foo": null}} |
 
 
 
@@ -90,6 +95,7 @@ The dict-with-options entry point for the extended role.
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | opts | A dictionary of keys and values | dict of 'opts' options | no |  |
+| opts_null | A dictionary of keys and values, null as a default | dict of 'opts_null' options | no | None |
 
 #### Options for dict-with-options > opts
 
@@ -100,6 +106,20 @@ The dict-with-options entry point for the extended role.
 | subopts | A sub-dictionary of keys and values | dict of 'subopts' options | no |  |
 
 #### Options for dict-with-options > opts > subopts
+
+|Option|Description|Type|Required|Default|
+|---|---|---|---|---|
+| str | A str value | str | no |  |
+
+#### Options for dict-with-options > opts_null
+
+|Option|Description|Type|Required|Default|
+|---|---|---|---|---|
+| int | An int value | int | no | 1 |
+| json | A JSON value | json | no | {"foo": "bar"} |
+| subopts | A sub-dictionary of keys and values | dict of 'subopts' options | no |  |
+
+#### Options for dict-with-options > opts_null > subopts
 
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
@@ -127,6 +147,7 @@ The int entry point for the extended role.
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | int | An int value | int | no | 1 |
+| int_null | An int value, null as a default | int | no | None |
 
 
 
@@ -137,6 +158,7 @@ The float entry point for the extended role.
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | float | A float value | float | no | 1.2 |
+| float_null | A float value, null as a default | float | no | None |
 
 
 
@@ -147,6 +169,7 @@ The path entry point for the extended role.
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | path | A path value | path | no | /tmp/foo/bar |
+| path_null | A path value, null as a default | path | no | None |
 
 
 
@@ -157,7 +180,9 @@ The raw entry point for the extended role.
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | raw_str | A raw str value | raw | no | raw |
+| raw_str_null | A raw str value, null as a default | raw | no | None |
 | raw_int | A raw int value | raw | no | 123 |
+| raw_int_null | A raw int value, null as a default | raw | no | None |
 
 
 
@@ -168,6 +193,7 @@ The jsonarg entry point for the extended role.
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | jsonarg | A JSON value | jsonarg | no | {"foo": "bar"} |
+| jsonarg_null | A JSON value, null as a default | jsonarg | no | None |
 
 
 
@@ -178,6 +204,7 @@ The json entry point for the extended role.
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | json | A JSON value | json | no | {"foo": "bar"} |
+| json_null | A JSON value, null as a default | json | no | None |
 
 
 
@@ -188,6 +215,7 @@ The bytes entry point for the extended role.
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | bytes | A bytes value | bytes | no | 1.15GB |
+| bytes_null | A bytes value, null as a default | bytes | no | None |
 
 
 
@@ -198,6 +226,7 @@ The bits entry point for the extended role.
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 | bytes | A bit value | bits | no | 1Mb |
+| bytes_null | A bit value, null as a default | bits | no | None |
 
 
 
