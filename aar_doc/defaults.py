@@ -14,6 +14,8 @@ from ruamel.yaml import YAML
 from ruamel.yaml.comments import CommentedMap
 from ruamel.yaml.scalarstring import LiteralScalarString, SingleQuotedScalarString
 
+from aar_doc.core import DescriptionTags
+
 yaml = YAML()
 yaml.indent(mapping=2, sequence=4, offset=2)
 yaml.encoding = "utf-8"
@@ -29,6 +31,7 @@ class RoleDefault:
     name: str
     value: Any
     description: Union[str, list[str]]
+    depth: int
 
 
 @dataclass
@@ -57,6 +60,7 @@ class RoleDefaultsManager:
         name: str,
         value: Any,
         description: Union[str, list],
+        depth=0,
     ) -> None:
         """Add a default.
 
@@ -69,15 +73,17 @@ class RoleDefaultsManager:
             value = value.strip()
 
         if self._overwrite:
-            self._defaults[name] = RoleDefault(name, value, description)
+            self._defaults[name] = RoleDefault(name, value, description, depth)
         else:
-            self._defaults.setdefault(name, RoleDefault(name, value, description))
+            self._defaults.setdefault(name, RoleDefault(name, value, description, depth))
 
     def safe_quote_recursive(self, value):
         if isinstance(value, list):
             return [self.safe_quote_recursive(v) for v in value]
         elif isinstance(value, dict):
-            return {k: self.safe_quote_recursive(v) for k, v in value.items()}
+            for k, v in value.items():
+                value[k] = self.safe_quote_recursive(v)
+                return value
         elif isinstance(value, str):
             if value in ("yes", "no"):
                 return SingleQuotedScalarString(value)
@@ -105,31 +111,61 @@ class RoleDefaultsManager:
                 commented_defaults.yaml_set_comment_before_after_key(
                     key=role_default.name,
                     before=description_item,
+                    indent=2 * role_default.depth,
                 )
 
         return commented_defaults
+
+
+def walk_options(options, overwrite_duplicate_defaults, depth=-1) -> RoleDefaultsManager:
+    defaults_manager = RoleDefaultsManager(overwrite_duplicate_defaults)
+    depth += 1
+
+    for name, spec in options.items():
+        # Handle special case for vars that are intended to have prefix.
+        if spec.get("description"):
+            tags = DescriptionTags(spec.get("description"))
+            if tags.defaults_prefix != "":
+                spec["description"] = tags.replace()
+                name = tags.defaults_prefix + name
+
+        if spec.get("options"):
+            value = walk_options(spec.get("options"), overwrite_duplicate_defaults, depth)
+            value = value.to_commented_map()
+        elif "default" in spec.keys():
+            value = spec.get("default")
+        else:
+            continue
+
+        defaults_manager.add_default(
+            name,
+            value,
+            spec.get("description"),
+            depth,
+        )
+
+    return defaults_manager
 
 
 def generate_commented_defaults(
     argument_spec_data: dict,
     overwrite_duplicate_defaults: bool,
 ) -> CommentedMap:
-    """Generates the inital RoleDefaults"""
+    """Generates the initial RoleDefaults"""
     defaults_manager = RoleDefaultsManager(overwrite_duplicate_defaults)
-
     for entry_point in argument_spec_data:
         options: dict[str, Any] = argument_spec_data.get(entry_point, {}).get("options")
         if not options:
             continue
-        for name, spec in options.items():
-            value = spec.get("default")
-            if value is not None:
-                description = spec.get("description")
-                defaults_manager.add_default(
-                    name,
-                    value,
-                    description,
-                )
+
+        for i in walk_options(options, overwrite_duplicate_defaults).defaults:
+            defaults_manager.add_default(
+                name=i.name,
+                value=i.value,
+                description=i.description,
+                depth=i.depth,
+            )
+
     return defaults_manager.to_commented_map()
 
 
