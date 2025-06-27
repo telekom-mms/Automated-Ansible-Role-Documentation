@@ -6,6 +6,7 @@ and rendering jinja2 templates from processing data.
 """
 
 import json
+import logging
 import pathlib
 import re
 from enum import Enum
@@ -13,6 +14,8 @@ from enum import Enum
 import jinja2
 import typer
 from ruamel.yaml import YAML, YAMLError
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
 yaml = YAML()
 yaml.indent(mapping=2, sequence=2, offset=2)
@@ -204,16 +207,10 @@ def parse_options(ctx: typer.Context) -> dict:
         gathered_options = gather_options([entrypoint], arguments)
         for _, options in gathered_options:
             for option, details in options.items():
-                details["display_required"] = (
-                    "yes" if details.get("required", False) else "no"
-                )
+                details["display_required"] = "yes" if details.get("required", False) else "no"
                 description = details["description"] if "description" in details else ""
                 details["display_description"] = (
-                    (
-                        description
-                        if isinstance(description, str)
-                        else (" ").join(description)
-                    )
+                    (description if isinstance(description, str) else (" ").join(description))
                     .replace("\n", " ")
                     .strip()
                 )
@@ -242,9 +239,7 @@ def parse_options(ctx: typer.Context) -> dict:
                         )
 
                     elif display_type == "str":
-                        if not (
-                            isinstance(default_value, str) or default_value is None
-                        ):
+                        if not (isinstance(default_value, str) or default_value is None):
                             typer.echo(
                                 f"The default value of the argument {option} "
                                 f"is of type {type(default_value).__name__}, need str",
@@ -321,3 +316,60 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
         entrypoint_options=entrypoint_options,
         entrypoint_choices=entrypoint_choices,
     )
+
+
+class DescriptionTags:
+    # https://regex101.com/r/0L0dmL/5
+    match_tags = re.compile(
+        r"\s?\*\*\*((?:[a-z|A-Z|0-9|_|-]+:\"[a-z|A-Z|0-9|_|-|\?|\$|\s]+\"\s?)+)\*\*\*"
+    )
+
+    # Tags
+    supported_tags: list[str] = ["defaults_prefix"]
+
+    def __init__(self, description):
+        if isinstance(description, str):
+            self.description = [description]
+        else:
+            self.description = description
+
+        description_matches = []
+        for i in self.description:
+            description_matches.append(re.search(self.match_tags, i))
+
+        self.tags_text = "".join(
+            [" ".join(i.groups()) for i in description_matches if i is not None]
+        )
+
+        self._tags = {}
+        self._parse_tags()
+        self.defaults_prefix = self._tags.get("defaults_prefix", "")
+
+    def _parse_list_description(self, description):
+        pass
+
+    def _parse_tags(self):
+        if self.tags_text:
+            # https://regex101.com/r/Zuh2vQ/1
+            tags = re.findall(r"(\w+):\"([^\"]*)", self.tags_text)
+
+            for i in tags:
+                self._tags[i[0]] = i[1]
+
+                if i[0] not in self.supported_tags:
+                    logging.warning(
+                        f"'{i[0]}' tag is not in the supported tags: {self.supported_tags}"
+                    )
+
+    def replace(self):
+        """
+        Replace the tags with empty string and return.
+        """
+        if len(self.description) == 1:
+            return re.sub(self.match_tags, "", self.description[0]).rstrip()
+
+        out = []
+        for i in self.description:
+            out.append(re.sub(self.match_tags, "", i).rstrip())
+
+        return out
