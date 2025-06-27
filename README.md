@@ -145,6 +145,18 @@ More examples can be found in the [tests](./tests/).
 
 MIT
 
+## Development
+
+Example VSCode `settings.json`
+
+```json
+{
+  "python.testing.pytestArgs": ["tests"],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true
+}
+```
+
 ## Aknowledgements
 
 - Kudos to the original author [Miika Kankare](https://github.com/quulah)!
