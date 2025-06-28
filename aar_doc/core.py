@@ -15,7 +15,9 @@ import jinja2
 import typer
 from ruamel.yaml import YAML, YAMLError
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s"
+)
 
 yaml = YAML()
 yaml.indent(mapping=2, sequence=2, offset=2)
@@ -207,10 +209,16 @@ def parse_options(ctx: typer.Context) -> dict:
         gathered_options = gather_options([entrypoint], arguments)
         for _, options in gathered_options:
             for option, details in options.items():
-                details["display_required"] = "yes" if details.get("required", False) else "no"
+                details["display_required"] = (
+                    "yes" if details.get("required", False) else "no"
+                )
                 description = details["description"] if "description" in details else ""
                 details["display_description"] = (
-                    (description if isinstance(description, str) else (" ").join(description))
+                    (
+                        description
+                        if isinstance(description, str)
+                        else (" ").join(description)
+                    )
                     .replace("\n", " ")
                     .strip()
                 )
@@ -239,7 +247,9 @@ def parse_options(ctx: typer.Context) -> dict:
                         )
 
                     elif display_type == "str":
-                        if not (isinstance(default_value, str) or default_value is None):
+                        if not (
+                            isinstance(default_value, str) or default_value is None
+                        ):
                             typer.echo(
                                 f"The default value of the argument {option} "
                                 f"is of type {type(default_value).__name__}, need str",

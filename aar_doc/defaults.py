@@ -102,9 +102,7 @@ class RoleDefaultsManager:
             value = self.safe_quote_recursive(role_default.value)
             commented_defaults[role_default.name] = value
             description_items = (
-                role_default.description
-                if isinstance(role_default.description, list)
-                else [role_default.description]
+                role_default.description if isinstance(role_default.description, list) else [role_default.description]
             )
 
             for description_item in description_items:
@@ -130,8 +128,7 @@ def walk_options(options, overwrite_duplicate_defaults, depth=-1) -> RoleDefault
                 name = tags.defaults_prefix + name
 
         if spec.get("options"):
-            value = walk_options(spec.get("options"), overwrite_duplicate_defaults, depth)
-            value = value.to_commented_map()
+            value = walk_options(spec.get("options"), overwrite_duplicate_defaults, depth).to_commented_map()
         elif "default" in spec.keys():
             value = spec.get("default")
         else:
