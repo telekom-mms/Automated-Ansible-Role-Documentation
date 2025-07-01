@@ -89,6 +89,10 @@ argument_specs:
         type: str
         required: true
         default: "foo"
+      generate_default_null:
+        type: str
+        description: This one has null as a default
+        default: null
       generate_nested_log_config:
         type: dict
         description: |

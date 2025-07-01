@@ -16,8 +16,15 @@ from ruamel.yaml.scalarstring import LiteralScalarString, SingleQuotedScalarStri
 
 from aar_doc.core import DescriptionTags
 
+
+def represent_none(self, _):
+    """Represents None as 'null' in YAML."""
+    return self.represent_scalar("tag:yaml.org,2002:null", "null")
+
+
 yaml = YAML()
 yaml.indent(mapping=2, sequence=4, offset=2)
+yaml.representer.add_representer(type(None), represent_none)
 yaml.encoding = "utf-8"
 yaml.allow_unicode = True
 

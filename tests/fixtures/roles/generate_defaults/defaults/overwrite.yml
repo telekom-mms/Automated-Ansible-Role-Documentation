@@ -46,6 +46,8 @@ generate_defaults_list_of_dict:
 # A string value that was overwritten
 generate_defaults_overwrite: overwritten value
 generate_defaults_no_description: foo
+# This one has null as a default
+generate_default_null: null
 # Logging configuration.
 # See: https://example.com/docs/common/logging
 generate_nested_log_config:
