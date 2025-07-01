@@ -60,6 +60,8 @@ generate_nested_log_config:
 __generate_nested_log_config_tag:
   # Log level (e.g., info, debug, warn, error).
   level: info
+  # This one has null as a default
+  default_null: null
 # Logging configuration.
 # See: https://example.com/docs/common/logging
 generate_very_nested_log_config:

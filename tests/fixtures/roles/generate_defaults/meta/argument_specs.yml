@@ -118,6 +118,10 @@ argument_specs:
             type: str
             default: "info"
             description: Log level (e.g., info, debug, warn, error).
+          default_null:
+            type: str
+            description: This one has null as a default
+            default: null
       generate_very_nested_log_config:
         type: dict
         description: |
