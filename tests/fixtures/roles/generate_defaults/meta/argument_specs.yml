@@ -89,6 +89,57 @@ argument_specs:
         type: str
         required: true
         default: "foo"
+      generate_default_null:
+        type: str
+        description: This one has null as a default
+        default: null
+      generate_nested_log_config:
+        type: dict
+        description: |
+          Logging configuration.
+          See: https://example.com/docs/common/logging
+        options:
+          level:
+            type: str
+            default: "info"
+            description: Log level (e.g., info, debug, warn, error).
+          default_null:
+            type: str
+            description: This one has null as a default
+            default: null
+      generate_nested_log_config_tag:
+        type: dict
+        description: |
+          Logging configuration.
+          See: https://example.com/docs/common/logging
+          ***defaults_prefix:"__" foo_tag:"brenson asdfdf"***
+        options:
+          level:
+            type: str
+            default: "info"
+            description: Log level (e.g., info, debug, warn, error).
+          default_null:
+            type: str
+            description: This one has null as a default
+            default: null
+      generate_very_nested_log_config:
+        type: dict
+        description: |
+          Logging configuration.
+          See: https://example.com/docs/common/logging
+        options:
+          level:
+            type: str
+            default: "info"
+            description: Log level (e.g., info, debug, warn, error).
+          tls:
+            type: dict
+            description: TLS configuration for API server.
+            options:
+              enable:
+                type: bool
+                default: false
+                description: Enable TLS for logs shipper.
   alternate:
     short_description: The alternate entry point for the defaults role.
     options:

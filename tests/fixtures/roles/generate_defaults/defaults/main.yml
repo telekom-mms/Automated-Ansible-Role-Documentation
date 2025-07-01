@@ -46,6 +46,31 @@ generate_defaults_list_of_dict:
 # A string value that can be overwritten
 generate_defaults_overwrite: original value
 generate_defaults_no_description: foo
+# This one has null as a default
+generate_default_null: null
+# Logging configuration.
+# See: https://example.com/docs/common/logging
+generate_nested_log_config:
+  # Log level (e.g., info, debug, warn, error).
+  level: info
+  # This one has null as a default
+  default_null: null
+# Logging configuration.
+# See: https://example.com/docs/common/logging
+__generate_nested_log_config_tag:
+  # Log level (e.g., info, debug, warn, error).
+  level: info
+  # This one has null as a default
+  default_null: null
+# Logging configuration.
+# See: https://example.com/docs/common/logging
+generate_very_nested_log_config:
+  # Log level (e.g., info, debug, warn, error).
+  level: info
+  # TLS configuration for API server.
+  tls:
+    # Enable TLS for logs shipper.
+    enable: false
 # A multiline string value
 generate_defaults_str_multiline: |-
   This is a multi line string.

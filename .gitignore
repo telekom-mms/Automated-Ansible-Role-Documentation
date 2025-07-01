@@ -1,5 +1,6 @@
 .DS_Store
 .idea
+.vscode
 *.log
 tmp/
 
@@ -10,5 +11,6 @@ htmlcov
 .coverage
 coverage.xml
 dist
-
 .venv
+
+.ansible
