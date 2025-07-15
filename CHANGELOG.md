@@ -1,5 +1,29 @@
 # Changelog
 
+## [2.2.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.2.0) (2025-07-15)
+
+[Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/2.1.0...2.2.0)
+
+**Implemented enhancements:**
+
+- feat: Support nested defaults [\#154](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/154) ([maksym-iv](https://github.com/maksym-iv))
+
+**Merged pull requests:**
+
+- chore\(deps\): update dependency pytest to v8.4.1 [\#153](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/153) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency mypy to v1.16.1 [\#152](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/152) ([renovate[bot]](https://github.com/apps/renovate))
+- fix: Support for "null" value in arguments\_specs defaults [\#151](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/151) ([maksym-iv](https://github.com/maksym-iv))
+- chore\(deps\): update dependency pytest-cov to v6.2.1 [\#150](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/150) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency pytest to v8.4.0 [\#149](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/149) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency mypy to v1.16.0 [\#148](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/148) ([renovate[bot]](https://github.com/apps/renovate))
+- fix\(deps\): update dependency typer to ^0.16.0 [\#146](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/146) ([renovate[bot]](https://github.com/apps/renovate))
+- fix\(deps\): update dependency typer to v0.15.4 [\#144](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/144) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency pylint to v3.3.7 [\#143](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/143) ([renovate[bot]](https://github.com/apps/renovate))
+- fix\(deps\): update dependency typer to v0.15.3 [\#142](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/142) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update actions/setup-python digest to a26af69 [\#141](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/141) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency pytest-cov to v6.1.1 [\#140](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/140) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update dependency pytest-cov to v6.1.0 [\#139](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/139) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [2.1.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.1.0) (2025-03-27)
 
 [Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/2.0.1...2.1.0)
