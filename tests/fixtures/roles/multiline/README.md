@@ -12,7 +12,6 @@ Test role with multiline descriptions
 ## Role Arguments
 
 
-
 ### Entrypoint: main
 
 The main entry point for the multiline role.

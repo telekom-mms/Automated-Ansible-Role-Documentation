@@ -12,7 +12,6 @@ Test role with a minimum amount of metadata
 ## Role Arguments
 
 
-
 ### Entrypoint: main
 
 The main entry point for the minimum role.

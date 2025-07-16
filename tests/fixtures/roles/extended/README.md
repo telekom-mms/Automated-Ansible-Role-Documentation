@@ -15,7 +15,6 @@ Tags: ansible, docs
 ## Role Arguments
 
 
-
 ### Entrypoint: main
 
 The main entrypoint for the extended role
