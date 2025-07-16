@@ -12,7 +12,6 @@ Test role with markup in descriptions
 ## Role Arguments
 
 
-
 ### Entrypoint: main
 
 This summary contains **bold**, *italic* and `monospace` text as well as an [URL](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation).

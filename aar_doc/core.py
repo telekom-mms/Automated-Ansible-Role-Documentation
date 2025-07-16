@@ -123,7 +123,7 @@ def parse_meta(ctx: typer.Context) -> tuple[dict, dict]:
             raise typer.Exit(1) from exc
         if not argument_specs:
             try:
-                argument_specs = main["argument_specs"]
+                argument_specs = main.get("argument_specs", {})
             except TypeError as exc:
                 typer.echo(
                     "Could not read meta/main.y[a]ml or meta/argument_specs.y[a]ml",

@@ -1,64 +1,38 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
+# Ansible Role: missing_arg_spec
+Test role without argument_specs
 
-# Ansible Role: minimum
-
----
-
-Test role with a minimum amount of metadata
 
 ## Requirements
 
----
-
 | Platform | Versions |
 | -------- | -------- |
-| Fedora   | all      |
+| Fedora | all |
 
 ## Role Arguments
+No arguments are defined for this role.
 
----
 
-### Entrypoint: main
-
----
-
-The main entry point for the minimum role.
-
-| Option    | Description                          | Type | Required | Default |
-| --------- | ------------------------------------ | ---- | -------- | ------- |
-| myapp_int | The integer value, defaulting to 42. | int  | no       | 42      |
-| myapp_str | The string value                     | str  | yes      |         |
 
 ## Dependencies
-
----
-
 None.
 
 ## Example Playbook
 
----
-
 ```
 - hosts: all
   tasks:
-    - name: Importing role: minimum
+    - name: Importing role: missing_arg_spec
       ansible.builtin.import_role:
-        name: minimum
+        name: missing_arg_spec
       vars:
-        myapp_str: # required, type: str
 ```
 
 ## License
 
----
-
 MIT
 
 ## Author and Project Information
-
----
-
 your name @ ansible-docs
 
 <!-- END_ANSIBLE_DOCS -->

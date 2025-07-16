@@ -12,7 +12,6 @@ Test role with some header and footer text outside of the template
 ## Role Arguments
 
 
-
 ### Entrypoint: main
 
 The main entry point for the minimum role.

@@ -12,7 +12,6 @@ Test role with a multiple_entrypoints amount of metadata
 ## Role Arguments
 
 
-
 ### Entrypoint: main
 
 The main entry point for the multiple_entrypoints role.

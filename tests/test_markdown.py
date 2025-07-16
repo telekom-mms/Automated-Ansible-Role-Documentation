@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import filecmp
 import os
 import pathlib
 import shutil
@@ -174,7 +173,7 @@ def test_inject_content(tmp_path):
     )
 
     assert result.exit_code == 0
-    assert filecmp.cmp(readme_md, output_file)
+    assert open(readme_md).read() == open(output_file).read(), f"Generated output differs from fixture"
 
 
 def test_role_path(tmp_path):
@@ -235,7 +234,7 @@ def test_output_template(tmp_path):
     )
 
     assert result.exit_code == 0
-    assert filecmp.cmp(readme_md, output_file)
+    assert open(readme_md).read() == open(output_file).read(), f"Generated output differs from fixture"
 
     result = runner.invoke(
         app,
@@ -250,7 +249,7 @@ def test_output_template(tmp_path):
     )
 
     assert result.exit_code == 0
-    assert filecmp.cmp(readme_md, output_file)
+    assert open(readme_md).read() == open(output_file).read(), f"Generated output differs from fixture"
 
 
 def test_markdown(tmp_path):
@@ -280,7 +279,7 @@ def test_markdown(tmp_path):
 
         assert result.output == ""
         assert result.exit_code == 0
-        assert filecmp.cmp(readme_md, output_file)
+        assert open(readme_md).read() == open(output_file).read(), f"Generated output differs from fixture for role: {role}"
 
 
 def test_meta_main_yaml(tmp_path):
@@ -304,11 +303,12 @@ def test_meta_main_yaml(tmp_path):
     )
 
     assert result.exit_code == 0
-    assert filecmp.cmp(readme_md, output_file)
+    assert open(readme_md).read() == open(output_file).read(), f"Generated output differs from fixture"
 
 
 def test_missing_arg_spec(tmp_path):
     role_path = ROLES_DIR / "missing_arg_spec"
+    readme_md = str(role_path / "README.md")
     role_path = str(role_path)
 
     output_dir = tmp_path
@@ -327,8 +327,8 @@ def test_missing_arg_spec(tmp_path):
             "markdown",
         ],
     )
-    assert result.output == "Could not find meta/main.y[a]ml\n"
-    assert result.exit_code == 1
+    assert result.exit_code == 0
+    assert open(readme_md).read() == open(output_file).read(), f"Generated output differs from fixture"
 
 
 def test_missing_meta_main_yaml(tmp_path):
@@ -428,4 +428,4 @@ def test_expand_home_path(tmp_path):
     )
     print(result.output)
     assert result.exit_code == 0
-    assert filecmp.cmp(readme_md, output_file)
+    assert open(readme_md).read() == open(output_file).read(), f"Generated output differs from fixture"

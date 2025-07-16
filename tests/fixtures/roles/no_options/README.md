@@ -12,7 +12,6 @@ Test role with no options
 ## Role Arguments
 
 
-
 ### Entrypoint: main
 
 The main entry point for the no_options role.

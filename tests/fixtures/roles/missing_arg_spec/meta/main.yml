@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  role_name: missing_arg_spec
+  author: your name
+  description: Test role without argument_specs
+  company: ansible-docs
+
+  license: MIT
+
+  min_ansible_version: "1.2"
+
+  platforms:
+    - name: Fedora
+      versions:
+        - all

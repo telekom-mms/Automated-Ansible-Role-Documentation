@@ -17,7 +17,10 @@ Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 {%- endfor %}
 
 ## Role Arguments
+{%- if argument_specs|length == 0 %}
+No arguments are defined for this role.
 
+{% else %}
 {% for entrypoint in argument_specs.keys() %}
 
 ### Entrypoint: {{ entrypoint }}
@@ -83,6 +86,7 @@ This entrypoint has no options.
 
 {%- endif -%}
 {% endfor %}
+{%- endif %}
 
 ## Dependencies
 
