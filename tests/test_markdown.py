@@ -309,6 +309,7 @@ def test_meta_main_yaml(tmp_path):
 
 def test_missing_arg_spec(tmp_path):
     role_path = ROLES_DIR / "missing_arg_spec"
+    readme_md = str(role_path / "README.md")
     role_path = str(role_path)
 
     output_dir = tmp_path
@@ -327,8 +328,8 @@ def test_missing_arg_spec(tmp_path):
             "markdown",
         ],
     )
-    assert result.output == "Could not find meta/main.y[a]ml\n"
-    assert result.exit_code == 1
+    assert result.exit_code == 0
+    assert open(readme_md).read() == open(output_file).read(), f"Generated output differs from fixture"
 
 
 def test_missing_meta_main_yaml(tmp_path):
