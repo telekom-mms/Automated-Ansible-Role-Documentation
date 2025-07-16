@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import filecmp
 import os
 import pathlib
 
@@ -38,7 +37,7 @@ def test_generate_defaults(tmp_path):
         ],
     )
     assert result.exit_code == 0
-    assert filecmp.cmp(expected_defaults_file, output_file)
+    assert open(expected_defaults_file).read() == open(output_file).read(), f"Generated output differs from fixture"
 
     # Using --overwrite-duplicates option
     expected_defaults_file = str(role_path / "defaults" / "overwrite.yml")
@@ -55,7 +54,7 @@ def test_generate_defaults(tmp_path):
     )
 
     assert result.exit_code == 0
-    assert filecmp.cmp(expected_defaults_file, output_file)
+    assert open(expected_defaults_file).read() == open(output_file).read(), f"Generated output differs from fixture"
 
 
 def test_generate_defaults_no_defaults():
