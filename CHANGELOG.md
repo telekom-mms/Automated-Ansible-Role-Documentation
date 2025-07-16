@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.3.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.3.0) (2025-07-16)
+
+[Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/2.2.0...2.3.0)
+
+**Implemented enhancements:**
+
+- Handle missing argument specs [\#155](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/155) ([mmslkr](https://github.com/mmslkr))
+
+**Fixed bugs:**
+
+- \[Bug\] Unhandled error when no argument specs are defined [\#87](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/87)
+
 ## [2.2.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.2.0) (2025-07-15)
 
 [Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/2.1.0...2.2.0)
