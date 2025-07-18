@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.3.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.3.0) (2025-07-16)
+## [2.3.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.3.0) (2025-07-18)
 
 [Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/2.2.0...2.3.0)
 
@@ -11,6 +11,10 @@
 **Fixed bugs:**
 
 - \[Bug\] Unhandled error when no argument specs are defined [\#87](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/87)
+
+**Merged pull requests:**
+
+- chore\(deps\): pin dependency isort to 6.0.1 [\#156](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/156) ([renovate[bot]](https://github.com/apps/renovate))
 
 ## [2.2.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.2.0) (2025-07-15)
 
