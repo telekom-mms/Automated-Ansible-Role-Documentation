@@ -14,6 +14,7 @@
 
 **Merged pull requests:**
 
+- chore\(deps\): update dependency mypy to v1.17.0 [\#157](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/157) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): pin dependency isort to 6.0.1 [\#156](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/156) ([renovate[bot]](https://github.com/apps/renovate))
 
 ## [2.2.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.2.0) (2025-07-15)
