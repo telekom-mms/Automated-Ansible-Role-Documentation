@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.3.1](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.3.1) (2025-08-10)
+
+[Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/2.3.0...2.3.1)
+
+**Merged pull requests:**
+
+- chore\(deps\): update dependency pylint to v3.3.8 [\#161](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/161) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [2.3.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.3.0) (2025-08-01)
 
 [Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/2.2.0...2.3.0)
