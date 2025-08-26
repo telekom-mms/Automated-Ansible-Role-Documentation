@@ -232,7 +232,9 @@ def parse_options(ctx: typer.Context) -> dict:
 
                 if "default" in details:
                     default_value = details.get("default", "")
-                    details["display_default"] = f"`{str(default_value).strip()}`"
+                    details["display_default"] = (
+                        f"`{str(default_value).strip()}`" if len(str(default_value).strip()) > 0 else ""
+                    )
 
                     if display_type in ["list", "dict"]:
                         details["display_default"] = f"`{json.dumps(default_value)}`" if default_value else ""
