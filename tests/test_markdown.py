@@ -4,6 +4,7 @@ import os
 import pathlib
 import shutil
 
+import pytest
 from typer.testing import CliRunner
 
 from aar_doc.cli import app
@@ -252,34 +253,37 @@ def test_output_template(tmp_path):
     assert open(readme_md).read() == open(output_file).read(), f"Generated output differs from fixture"
 
 
-def test_markdown(tmp_path):
-    roles = [
-        "minimum",
-        "extended",
-        "multiple_entrypoints",
-        "no_options",
-        "multiline",
-        "markup",
-    ]
+@pytest.mark.parametrize(
+    ("role"),
+    [
+        ("minimum"),
+        ("extended"),
+        ("multiple_entrypoints"),
+        ("no_options"),
+        ("multiline"),
+        ("markup"),
+    ],
+)
+def test_markdown(tmp_path, role):
+    role_path = ROLES_DIR / role
 
-    for role_path in [ROLES_DIR / x for x in roles]:
-        role = role_path.stem
-        readme_md = str(role_path / "README.md")
-        role_path = str(role_path)
+    role = role_path.stem
+    readme_md = str(role_path / "README.md")
+    role_path = str(role_path)
 
-        output_dir = tmp_path / role
-        output_dir.mkdir(exist_ok=True)
+    output_dir = tmp_path / role
+    output_dir.mkdir(exist_ok=True)
 
-        output_file = output_dir / "README.md"
+    output_file = output_dir / "README.md"
 
-        result = runner.invoke(
-            app,
-            ["--output-file", output_file, role_path, "markdown"],
-        )
+    result = runner.invoke(
+        app,
+        ["--output-file", output_file, role_path, "markdown"],
+    )
 
-        assert result.output == ""
-        assert result.exit_code == 0
-        assert open(readme_md).read() == open(output_file).read(), f"Generated output differs from fixture for role: {role}"
+    assert result.output == ""
+    assert result.exit_code == 0
+    assert open(readme_md).read() == open(output_file).read(), f"Generated output differs from fixture for role: {role}"
 
 
 def test_meta_main_yaml(tmp_path):
@@ -375,10 +379,7 @@ def test_wrong_type(tmp_path):
             "markdown",
         ],
     )
-    assert (
-        result.output
-        == "The default value of the argument myapp_int is of type int, need str\n"
-    )
+    assert result.output == "The default value of the argument `myapp_int` is of type int, need str\n"
     assert result.exit_code == 1
 
 
@@ -397,10 +398,7 @@ def test_missing_doc_string(tmp_path):
             "markdown",
         ],
     )
-    assert (
-        result.output
-        == "Could not find <!-- BEGIN_ANSIBLE_DOCS --> in the output file\n"
-    )
+    assert result.output == "Could not find <!-- BEGIN_ANSIBLE_DOCS --> in the output file\n"
     assert result.exit_code == 1
 
 
