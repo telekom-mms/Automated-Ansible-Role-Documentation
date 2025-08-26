@@ -227,8 +227,6 @@ def parse_options(ctx: typer.Context) -> dict:
                 elif display_type == "dict":
                     if "options" in details:
                         display_type = f"dict of `{option}` [options]({link})"
-                        if option == "tls":
-                            print("a")
 
                 details["display_type"] = display_type
 
