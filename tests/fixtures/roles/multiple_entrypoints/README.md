@@ -18,7 +18,7 @@ The main entry point for the multiple_entrypoints role.
 
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
-| myapp_int | The integer value, defaulting to 42. | int | no | 42 |
+| myapp_int | The integer value, defaulting to 42. | int | no | `42` |
 | myapp_str | The string value | str | yes |  |
 
 
@@ -29,7 +29,7 @@ The second entry point for the multiple_entrypoints role.
 
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
-| myapp_int_second | The integer value, defaulting to 42. | int | no | 42 |
+| myapp_int_second | The integer value, defaulting to 42. | int | no | `42` |
 | myapp_str_second | The string value | str | yes |  |
 
 

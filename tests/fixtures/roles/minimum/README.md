@@ -18,7 +18,7 @@ The main entry point for the minimum role.
 
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
-| myapp_int | The integer value, defaulting to 42. | int | no | 42 |
+| myapp_int | The integer value, defaulting to 42. | int | no | `42` |
 | myapp_str | The string value | str | yes |  |
 
 
