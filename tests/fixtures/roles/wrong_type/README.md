@@ -26,7 +26,7 @@ The main entry point for the minimum role.
 
 | Option    | Description                          | Type | Required | Default |
 | --------- | ------------------------------------ | ---- | -------- | ------- |
-| myapp_int | The integer value, defaulting to 42. | int  | no       | foo     |
+| myapp_int | The integer value, defaulting to 42. | int  | no       | `foo`     |
 
 ## Dependencies
 

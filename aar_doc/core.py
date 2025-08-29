@@ -15,9 +15,7 @@ import jinja2
 import typer
 from ruamel.yaml import YAML, YAMLError
 
-logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s"
-)
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
 yaml = YAML()
 yaml.indent(mapping=2, sequence=2, offset=2)
@@ -207,18 +205,13 @@ def parse_options(ctx: typer.Context) -> dict:
     entrypoint_options = {}
     for entrypoint, arguments in ctx.obj["data"]["argument_specs"].items():
         gathered_options = gather_options([entrypoint], arguments)
-        for _, options in gathered_options:
+        for path, options in gathered_options:
             for option, details in options.items():
-                details["display_required"] = (
-                    "yes" if details.get("required", False) else "no"
-                )
+                link = f"#options-for-{'--'.join(path)}--{option}"
+                details["display_required"] = "yes" if details.get("required", False) else "no"
                 description = details["description"] if "description" in details else ""
                 details["display_description"] = (
-                    (
-                        description
-                        if isinstance(description, str)
-                        else (" ").join(description)
-                    )
+                    (description if isinstance(description, str) else (" ").join(description))
                     .replace("\n", " ")
                     .strip()
                 )
@@ -228,30 +221,28 @@ def parse_options(ctx: typer.Context) -> dict:
                 if display_type == "list":
                     elements = details.get("elements", "")
                     if elements == "dict" and "options" in details:
-                        display_type = f"list of dicts of '{option}' options"
+                        display_type = f"list of dicts of `{option}` [options]({link})"
                     else:
-                        display_type = f"list of '{elements}'"
+                        display_type = f"list of `{elements}`"
                 elif display_type == "dict":
                     if "options" in details:
-                        display_type = f"dict of '{option}' options"
+                        display_type = f"dict of `{option}` [options]({link})"
 
                 details["display_type"] = display_type
 
                 if "default" in details:
                     default_value = details.get("default", "")
-                    details["display_default"] = str(default_value).strip()
+                    details["display_default"] = (
+                        f"`{str(default_value).strip()}`" if len(str(default_value).strip()) > 0 else ""
+                    )
 
                     if display_type in ["list", "dict"]:
-                        details["display_default"] = (
-                            json.dumps(default_value) if default_value else ""
-                        )
+                        details["display_default"] = f"`{json.dumps(default_value)}`" if default_value else ""
 
                     elif display_type == "str":
-                        if not (
-                            isinstance(default_value, str) or default_value is None
-                        ):
+                        if not (isinstance(default_value, str) or default_value is None):
                             typer.echo(
-                                f"The default value of the argument {option} "
+                                f"The default value of the argument `{option}` "
                                 f"is of type {type(default_value).__name__}, need str",
                             )
                             raise typer.Exit(1)
@@ -330,9 +321,7 @@ def render_content(ctx: typer.Context, content_template: str) -> str:
 
 class DescriptionTags:
     # https://regex101.com/r/0L0dmL/5
-    match_tags = re.compile(
-        r"\s?\*\*\*((?:[a-z|A-Z|0-9|_|-]+:\"[a-z|A-Z|0-9|_|-|\?|\$|\s]+\"\s?)+)\*\*\*"
-    )
+    match_tags = re.compile(r"\s?\*\*\*((?:[a-z|A-Z|0-9|_|-]+:\"[a-z|A-Z|0-9|_|-|\?|\$|\s]+\"\s?)+)\*\*\*")
 
     # Tags
     supported_tags: list[str] = ["defaults_prefix"]
@@ -347,9 +336,7 @@ class DescriptionTags:
         for i in self.description:
             description_matches.append(re.search(self.match_tags, i))
 
-        self.tags_text = "".join(
-            [" ".join(i.groups()) for i in description_matches if i is not None]
-        )
+        self.tags_text = "".join([" ".join(i.groups()) for i in description_matches if i is not None])
 
         self._tags = {}
         self._parse_tags()
@@ -367,9 +354,7 @@ class DescriptionTags:
                 self._tags[i[0]] = i[1]
 
                 if i[0] not in self.supported_tags:
-                    logging.warning(
-                        f"'{i[0]}' tag is not in the supported tags: {self.supported_tags}"
-                    )
+                    logging.warning(f"'{i[0]}' tag is not in the supported tags: {self.supported_tags}")
 
     def replace(self):
         """
