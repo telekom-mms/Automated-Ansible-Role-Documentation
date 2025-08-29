@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.3.1](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.3.1) (2025-08-27)
+## [2.3.1](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.3.1) (2025-08-29)
 
 [Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/2.3.0...2.3.1)
 
@@ -11,6 +11,7 @@
 - chore\(deps\): update dependency pre-commit to v4.3.0 [\#163](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/163) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update actions/checkout action to v5 [\#162](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/162) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update dependency pylint to v3.3.8 [\#161](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/161) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update hugo19941994/delete-draft-releases action to v2 [\#159](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/159) ([renovate[bot]](https://github.com/apps/renovate))
 
 ## [2.3.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.3.0) (2025-08-01)
 
