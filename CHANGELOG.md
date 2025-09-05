@@ -1,11 +1,12 @@
 # Changelog
 
-## [2.3.1](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.3.1) (2025-09-01)
+## [2.3.1](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.3.1) (2025-09-05)
 
 [Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/2.3.0...2.3.1)
 
 **Merged pull requests:**
 
+- chore\(deps\): update dependency pytest to v8.4.2 [\#168](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/168) ([renovate[bot]](https://github.com/apps/renovate))
 - fix\(deps\): update dependency typer to ^0.17.0 [\#166](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/166) ([renovate[bot]](https://github.com/apps/renovate))
 - feat: Add links to nested objects [\#165](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/165) ([maksym-iv](https://github.com/maksym-iv))
 - fix\(deps\): update dependency typer to v0.16.1 [\#164](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/164) ([renovate[bot]](https://github.com/apps/renovate))
