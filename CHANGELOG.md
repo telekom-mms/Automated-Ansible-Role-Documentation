@@ -6,6 +6,7 @@
 
 **Merged pull requests:**
 
+- chore\(deps\): update dependency black to v25.9.0 [\#174](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/174) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update dependency mypy to v1.18.2 [\#173](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/173) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update dependency mypy to v1.18.1 [\#172](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/172) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update dependency pytest-cov to v7 [\#171](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/171) ([renovate[bot]](https://github.com/apps/renovate))
