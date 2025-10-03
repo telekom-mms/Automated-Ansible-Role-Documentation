@@ -21,7 +21,7 @@ black = "25.9.0"
 mypy = "1.18.2"
 pytest = "8.4.2"
 pytest-cov = "7.0.0"
-isort = "6.0.1"
+isort = "6.1.0"
 
 [tool.poetry.scripts]
 aar-doc = "aar_doc.cli:app"
@@ -29,7 +29,7 @@ aar-doc = "aar_doc.cli:app"
 [tool.poetry.group.dev.dependencies]
 pylint = "3.3.8"
 pre-commit = "4.3.0"
-isort = "6.0.1"
+isort = "6.1.0"
 
 [tool.pytest.ini_options]
 addopts = [
