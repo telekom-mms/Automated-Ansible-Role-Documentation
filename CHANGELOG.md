@@ -1,11 +1,12 @@
 # Changelog
 
-## [2.3.1](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.3.1) (2025-10-07)
+## [2.3.1](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.3.1) (2025-10-08)
 
 [Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/2.3.0...2.3.1)
 
 **Merged pull requests:**
 
+- chore\(deps\): update dependency python to 3.14 [\#179](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/179) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update dependency pylint to v3.3.9 [\#178](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/178) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update dependency isort to v6.1.0 [\#177](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/177) ([renovate[bot]](https://github.com/apps/renovate))
 - fix\(deps\): update dependency typer to v0.19.2 [\#176](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/176) ([renovate[bot]](https://github.com/apps/renovate))
