@@ -1,7 +1,7 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
 # Ansible Role: multiple_entrypoints
-Test role with a multiple_entrypoints amount of metadata
 
+Test role with a multiple_entrypoints amount of metadata
 
 ## Requirements
 
@@ -10,7 +10,6 @@ Test role with a multiple_entrypoints amount of metadata
 | Fedora | all |
 
 ## Role Arguments
-
 
 ### Entrypoint: main
 
@@ -21,8 +20,6 @@ The main entry point for the multiple_entrypoints role.
 | myapp_int | The integer value, defaulting to 42. | int | no | `42` |
 | myapp_str | The string value | str | yes |  |
 
-
-
 ### Entrypoint: second
 
 The second entry point for the multiple_entrypoints role.
@@ -32,9 +29,8 @@ The second entry point for the multiple_entrypoints role.
 | myapp_int_second | The integer value, defaulting to 42. | int | no | `42` |
 | myapp_str_second | The string value | str | yes |  |
 
-
-
 ## Dependencies
+
 None.
 
 ## Example Playbook
@@ -55,6 +51,7 @@ None.
 MIT
 
 ## Author and Project Information
+
 your name @ ansible-docs
 
 <!-- END_ANSIBLE_DOCS -->

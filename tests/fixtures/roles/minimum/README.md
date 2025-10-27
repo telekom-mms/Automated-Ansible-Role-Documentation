@@ -1,7 +1,7 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
 # Ansible Role: minimum
-Test role with a minimum amount of metadata
 
+Test role with a minimum amount of metadata
 
 ## Requirements
 
@@ -10,7 +10,6 @@ Test role with a minimum amount of metadata
 | Fedora | all |
 
 ## Role Arguments
-
 
 ### Entrypoint: main
 
@@ -21,9 +20,8 @@ The main entry point for the minimum role.
 | myapp_int | The integer value, defaulting to 42. | int | no | `42` |
 | myapp_str | The string value | str | yes |  |
 
-
-
 ## Dependencies
+
 None.
 
 ## Example Playbook
@@ -43,6 +41,7 @@ None.
 MIT
 
 ## Author and Project Information
+
 your name @ ansible-docs
 
 <!-- END_ANSIBLE_DOCS -->

@@ -1,5 +1,6 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
 # Ansible Role: extended
+
 Test role with lots of metadata
 
 Tags: ansible, docs
@@ -13,7 +14,6 @@ Tags: ansible, docs
 | Cumulus | 2.5 |
 
 ## Role Arguments
-
 
 ### Entrypoint: main
 
@@ -60,7 +60,6 @@ this is an example how to execute the entrypoint:
       roles:
         - extended
 
-
 ### Entrypoint: list
 
 The list entry point for the extended role.
@@ -74,8 +73,6 @@ The list entry point for the extended role.
 | list_dict | A list of dicts | list of `dict` | no | `[{'dict': {'foo': 'bar'}}, {'dict': {'one': 1, 'two': 2}}]` |
 | list_dict_null | A list of dicts, null as a default | list of `dict` | no | `None` |
 
-
-
 ### Entrypoint: dict
 
 The dict entry point for the extended role.
@@ -84,8 +81,6 @@ The dict entry point for the extended role.
 |---|---|---|---|---|
 | dict | A dictionary of keys and values | dict | no | `{"dict": {"foo": "bar", "one": 1, "two": 2}}` |
 | dict_null | A dictionary of keys and values, null as values | dict | no | `{"dict": {"foo": null}}` |
-
-
 
 ### Entrypoint: dict-with-options
 
@@ -124,8 +119,6 @@ The dict-with-options entry point for the extended role.
 |---|---|---|---|---|
 | str | A str value | str | no |  |
 
-
-
 ### Entrypoint: bool
 
 The bool entry point for the extended role.
@@ -137,8 +130,6 @@ The bool entry point for the extended role.
 | bool_yes | A truthy boolean value | bool | no | `yes` |
 | bool_no | A falsy boolean value | bool | no | `no` |
 
-
-
 ### Entrypoint: int
 
 The int entry point for the extended role.
@@ -147,8 +138,6 @@ The int entry point for the extended role.
 |---|---|---|---|---|
 | int | An int value | int | no | `1` |
 | int_null | An int value, null as a default | int | no | `None` |
-
-
 
 ### Entrypoint: float
 
@@ -159,8 +148,6 @@ The float entry point for the extended role.
 | float | A float value | float | no | `1.2` |
 | float_null | A float value, null as a default | float | no | `None` |
 
-
-
 ### Entrypoint: path
 
 The path entry point for the extended role.
@@ -169,8 +156,6 @@ The path entry point for the extended role.
 |---|---|---|---|---|
 | path | A path value | path | no | `/tmp/foo/bar` |
 | path_null | A path value, null as a default | path | no | `None` |
-
-
 
 ### Entrypoint: raw
 
@@ -183,8 +168,6 @@ The raw entry point for the extended role.
 | raw_int | A raw int value | raw | no | `123` |
 | raw_int_null | A raw int value, null as a default | raw | no | `None` |
 
-
-
 ### Entrypoint: jsonarg
 
 The jsonarg entry point for the extended role.
@@ -193,8 +176,6 @@ The jsonarg entry point for the extended role.
 |---|---|---|---|---|
 | jsonarg | A JSON value | jsonarg | no | `{"foo": "bar"}` |
 | jsonarg_null | A JSON value, null as a default | jsonarg | no | `None` |
-
-
 
 ### Entrypoint: json
 
@@ -205,8 +186,6 @@ The json entry point for the extended role.
 | json | A JSON value | json | no | `{"foo": "bar"}` |
 | json_null | A JSON value, null as a default | json | no | `None` |
 
-
-
 ### Entrypoint: bytes
 
 The bytes entry point for the extended role.
@@ -215,8 +194,6 @@ The bytes entry point for the extended role.
 |---|---|---|---|---|
 | bytes | A bytes value | bytes | no | `1.15GB` |
 | bytes_null | A bytes value, null as a default | bytes | no | `None` |
-
-
 
 ### Entrypoint: bits
 
@@ -227,9 +204,8 @@ The bits entry point for the extended role.
 | bytes | A bit value | bits | no | `1Mb` |
 | bytes_null | A bit value, null as a default | bits | no | `None` |
 
-
-
 ## Dependencies
+
 None.
 
 ## Example Playbook
@@ -249,6 +225,7 @@ None.
 MIT
 
 ## Author and Project Information
+
 your name @ ansible-docs
 
 Issues: [tracker](https://gitlab.com/kankare/ansible-docs/-/issues)
