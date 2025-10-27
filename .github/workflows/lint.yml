@@ -1,5 +1,5 @@
 ---
-name: Lint
+name: Lint test fixtures
 
 on: # yamllint disable-line rule:truthy
   push: null
@@ -28,7 +28,6 @@ jobs:
           persist-credentials: false
 
       - name: Super-linter
-        uses: super-linter/super-linter@v8.2.1 # x-release-please-version
-        env:
-          # To report GitHub Actions status checks
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: DavidAnson/markdownlint-cli2-action@v20
+        with:
+          globs: 'tests/**/*.md'
