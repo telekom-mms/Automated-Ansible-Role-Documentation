@@ -23,7 +23,7 @@ None.
 
 ## Example Playbook
 
-```
+```yaml
 - hosts: all
   tasks:
     - name: Importing role: no_options

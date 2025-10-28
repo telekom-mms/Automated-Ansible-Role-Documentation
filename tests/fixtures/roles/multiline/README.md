@@ -30,7 +30,7 @@ None.
 
 ## Example Playbook
 
-```
+```yaml
 - hosts: all
   tasks:
     - name: Importing role: multiline

@@ -19,7 +19,7 @@ None.
 
 ## Example Playbook
 
-```
+```yaml
 - hosts: all
   tasks:
     - name: Importing role: missing_arg_spec
