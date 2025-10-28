@@ -2,6 +2,8 @@
 output_template: |
   <!-- BEGIN_ANSIBLE_DOCS -->
 
+  # test
+
   {{ role }} with a configuration file that lies in `~/.ansible-docs.yml` where `~ = role_path`.
 
   <!-- END_ANSIBLE_DOCS -->
