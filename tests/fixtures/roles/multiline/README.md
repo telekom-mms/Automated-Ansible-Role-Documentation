@@ -1,7 +1,7 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
 # Ansible Role: multiline
-Test role with multiline descriptions
 
+Test role with multiline descriptions
 
 ## Requirements
 
@@ -10,7 +10,6 @@ Test role with multiline descriptions
 | Fedora | all |
 
 ## Role Arguments
-
 
 ### Entrypoint: main
 
@@ -25,14 +24,13 @@ that consists of multiple line
 | myapp_int | The integer value. Defaults to 42. | int | no | `42` |
 | myapp_str | The string value. No default value. | str | yes |  |
 
-
-
 ## Dependencies
+
 None.
 
 ## Example Playbook
 
-```
+```yaml
 - hosts: all
   tasks:
     - name: Importing role: multiline
@@ -47,6 +45,7 @@ None.
 MIT
 
 ## Author and Project Information
+
 your name @ ansible-docs
 
 <!-- END_ANSIBLE_DOCS -->
