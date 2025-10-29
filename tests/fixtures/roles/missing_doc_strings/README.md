@@ -37,7 +37,7 @@ None.
 
 ---
 
-```
+```yaml
 - hosts: all
   tasks:
     - name: Importing role: minimum

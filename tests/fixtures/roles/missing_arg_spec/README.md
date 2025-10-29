@@ -1,7 +1,7 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
 # Ansible Role: missing_arg_spec
-Test role without argument_specs
 
+Test role without argument_specs
 
 ## Requirements
 
@@ -10,16 +10,16 @@ Test role without argument_specs
 | Fedora | all |
 
 ## Role Arguments
+
 No arguments are defined for this role.
 
-
-
 ## Dependencies
+
 None.
 
 ## Example Playbook
 
-```
+```yaml
 - hosts: all
   tasks:
     - name: Importing role: missing_arg_spec
@@ -33,6 +33,7 @@ None.
 MIT
 
 ## Author and Project Information
+
 your name @ ansible-docs
 
 <!-- END_ANSIBLE_DOCS -->

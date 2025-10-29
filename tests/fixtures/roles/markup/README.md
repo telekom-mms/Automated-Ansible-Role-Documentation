@@ -1,7 +1,7 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
 # Ansible Role: markup
-Test role with markup in descriptions
 
+Test role with markup in descriptions
 
 ## Requirements
 
@@ -10,7 +10,6 @@ Test role with markup in descriptions
 | Fedora | all |
 
 ## Role Arguments
-
 
 ### Entrypoint: main
 
@@ -29,14 +28,13 @@ This is an example of an [URL](https://github.com/telekom-mms/Automated-Ansible-
 | myapp_int | The integer value. Defaults to `42`. For string, see `myapp_str`. | int | no | `42` |
 | myapp_str | The string value. No default value. For int, see `myapp_int`. | str | yes |  |
 
-
-
 ## Dependencies
+
 None.
 
 ## Example Playbook
 
-```
+```yaml
 - hosts: all
   tasks:
     - name: Importing role: markup
@@ -51,6 +49,7 @@ None.
 MIT
 
 ## Author and Project Information
+
 your name @ ansible-docs
 
 <!-- END_ANSIBLE_DOCS -->

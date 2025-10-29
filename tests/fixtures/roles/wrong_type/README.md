@@ -38,7 +38,7 @@ None.
 
 ---
 
-```
+```yaml
 - hosts: all
   tasks:
     - name: Importing role: wrong_type

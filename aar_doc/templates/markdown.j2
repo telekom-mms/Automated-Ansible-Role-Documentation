@@ -1,10 +1,10 @@
 # Ansible Role: {{ role }}
-
-{%- if "version" in galaxy_collection %}
+{% if "version" in galaxy_collection -%}
 Version: {{ galaxy_collection.version }}
-{% endif %}
+{%- endif %}
 {{ metadata.galaxy_info.description | ansible_doc_markup }}
-{% if ("galaxy_tags" in metadata.galaxy_info) and (metadata.galaxy_info.galaxy_tags | length > 0) %}
+{%- if ("galaxy_tags" in metadata.galaxy_info) and (metadata.galaxy_info.galaxy_tags | length > 0) %}
+
 Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 {%- endif %}
 
@@ -17,51 +17,44 @@ Tags: {{ metadata.galaxy_info.galaxy_tags | join(', ') }}
 {%- endfor %}
 
 ## Role Arguments
-{%- if argument_specs|length == 0 %}
+{% if argument_specs|length == 0 %}
 No arguments are defined for this role.
-
 {% else %}
-{% for entrypoint in argument_specs.keys() %}
-
+{%- for entrypoint in argument_specs.keys() %}
 ### Entrypoint: {{ entrypoint }}
 
 {{ argument_specs[entrypoint].short_description | ansible_doc_markup }}
-
 {% if "description" in argument_specs[entrypoint] %}
-{%- if argument_specs[entrypoint].description is string -%}
+{%- if argument_specs[entrypoint].description is string %}
 {{ argument_specs[entrypoint].description | ansible_doc_markup }}
-{% else %}
-{%- for line in argument_specs[entrypoint].description -%}
+{%- else %}
+{%- for line in argument_specs[entrypoint].description %}
 {{ line | ansible_doc_markup }}
-
 {% endfor -%}
 {% endif -%}
 {% endif -%}
 
 {% if entrypoint_options[entrypoint] %}
-{%- set path, options=entrypoint_options[entrypoint][0] -%}
+{%- set path, options=entrypoint_options[entrypoint][0] %}
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 {%- for name, details in options.items() %}
 | {{ name }} | {{ details.display_description | ansible_doc_markup }} | {{ details.display_type }} | {{ details.display_required }} | {{ details.display_default }} |
 {%- endfor %}
+{%- if entrypoint_options[entrypoint] | length > 1 -%}
+{%- for path, options in entrypoint_options[entrypoint][1:] %}
 
-{% if entrypoint_options[entrypoint] | length > 1 -%}
-{% for path, options in entrypoint_options[entrypoint][1:] -%}
 #### Options for {{ path | join(" > ") }}
 
 |Option|Description|Type|Required|Default|
 |---|---|---|---|---|
 {%- for name, details in options.items() %}
 | {{ name }} | {{ details.display_description | ansible_doc_markup }} | {{ details.display_type }} | {{ details.display_required }} | {{ details.display_default }} |
-{%- endfor %}
-
-{% endfor -%}
-
-{% endif -%}
-
+{%- endfor -%}
+{%- endfor -%}
+{%- endif %}
 {% if entrypoint in entrypoint_choices -%}
-{% for path, choices in entrypoint_choices[entrypoint] -%}
+{%- for path, choices in entrypoint_choices[entrypoint] %}
 #### Choices for {{ path | join(" > ") }}
 
 |Choice|
@@ -69,28 +62,20 @@ No arguments are defined for this role.
 {%- for item in choices %}
 | {{ item }} |
 {%- endfor %}
-
 {% endfor -%}
 {% endif -%}
-{% else -%}
-
+{% else %}
 This entrypoint has no options.
-
 {% endif -%}
-
-{%- if "examples" in argument_specs[entrypoint] -%}
-
+{%- if "examples" in argument_specs[entrypoint] %}
 #### Examples
 
 {{ argument_specs[entrypoint].examples }}
-
 {%- endif -%}
 {% endfor %}
 {%- endif %}
-
 ## Dependencies
-
-{%- if ("dependencies" in metadata) and (metadata.dependencies | length > 0) %}
+{% if ("dependencies" in metadata) and (metadata.dependencies | length > 0) %}
 {%- for dependency in metadata.dependencies %}
 - {{ dependency }}
 {%- endfor %}
@@ -100,7 +85,7 @@ None.
 
 ## Example Playbook
 
-```
+```yaml
 - hosts: all
   tasks:
     - name: Importing role: {{ role }}
@@ -124,8 +109,7 @@ None.
 {{ metadata.galaxy_info.license }}
 
 ## Author and Project Information
-
-{%- if "company" in metadata.galaxy_info %}
+{% if "company" in metadata.galaxy_info %}
 {{ metadata.galaxy_info.author }} @ {{ metadata.galaxy_info.company }}
 {%- else %}
 {{ metadata.galaxy_info.author }}
