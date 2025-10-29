@@ -1,6 +1,6 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
 
-template
+# template
 
 {'galaxy_info': {'role_name': 'template', 'author': 'your name', 'description': 'Test role with a custom template for the output', 'company': 'ansible-docs', 'license': 'MIT', 'min_ansible_version': '1.2', 'platforms': [{'name': 'Fedora', 'versions': ['all']}]}}
 

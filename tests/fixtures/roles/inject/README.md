@@ -1,7 +1,7 @@
 <!-- BEGIN_ANSIBLE_DOCS -->
 # Ansible Role: inject
-Test role with some header and footer text outside of the template
 
+Test role with some header and footer text outside of the template
 
 ## Requirements
 
@@ -10,7 +10,6 @@ Test role with some header and footer text outside of the template
 | Fedora | all |
 
 ## Role Arguments
-
 
 ### Entrypoint: main
 
@@ -21,14 +20,13 @@ The main entry point for the minimum role.
 | myapp_int | The integer value, defaulting to 42. | int | no | `42` |
 | myapp_str | The string value | str | yes |  |
 
-
-
 ## Dependencies
+
 None.
 
 ## Example Playbook
 
-```
+```yaml
 - hosts: all
   tasks:
     - name: Importing role: inject
@@ -43,6 +41,7 @@ None.
 MIT
 
 ## Author and Project Information
+
 your name @ ansible-docs
 
 <!-- END_ANSIBLE_DOCS -->
