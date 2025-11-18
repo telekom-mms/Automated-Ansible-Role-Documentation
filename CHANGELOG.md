@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.4.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.4.0) (2025-11-15)
+## [2.4.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.4.0) (2025-11-18)
 
 [Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/2.3.0...2.4.0)
 
