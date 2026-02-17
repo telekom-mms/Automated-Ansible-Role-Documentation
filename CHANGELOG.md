@@ -1,16 +1,17 @@
 # Changelog
 
-## [2.3.1](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.3.1) (2025-10-29)
+## [2.4.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.4.0) (2026-02-03)
 
-[Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/2.3.0...2.3.1)
+[Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/2.3.0...2.4.0)
 
 **Implemented enhancements:**
 
 - \[Enhancement\] Improve formatting of Markdown template [\#136](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/136)
+- Add linting of rendered markdown and improve the base template [\#183](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/183) ([schurzi](https://github.com/schurzi))
 
 **Merged pull requests:**
 
-- Add linting of rendered markdown and improve the base template [\#183](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/183) ([schurzi](https://github.com/schurzi))
+- chore\(deps\): update actions/checkout action to v6 [\#187](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/187) ([renovate[bot]](https://github.com/apps/renovate))
 - fix\(deps\): update dependency typer to ^0.20.0 [\#182](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/182) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update dependency python to 3.14 [\#179](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/179) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update dependency pylint to v3.3.9 [\#178](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/178) ([renovate[bot]](https://github.com/apps/renovate))
