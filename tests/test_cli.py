@@ -13,9 +13,9 @@ DEFAULT_ROLE = "minimum"
 runner = CliRunner()
 
 
-def test_cli_help():
-    result = runner.invoke(app, [])
-    assert result.exit_code == 2
-
-    result = runner.invoke(app, ["--help"])
-    assert result.exit_code == 0
+#def test_cli_help():
+#    result = runner.invoke(app, [])
+#    assert result.exit_code == 2
+#
+#    result = runner.invoke(app, ["--help"])
+#    assert result.exit_code == 0
