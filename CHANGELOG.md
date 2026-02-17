@@ -11,6 +11,7 @@
 
 **Merged pull requests:**
 
+- Chore/updates [\#193](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/193) ([rndmh3ro](https://github.com/rndmh3ro))
 - chore\(deps\): update wyrihaximus/github-action-get-previous-tag action to v2 [\#191](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/191) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update actions/checkout action to v6 [\#187](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/187) ([renovate[bot]](https://github.com/apps/renovate))
 - fix\(deps\): update dependency typer to ^0.20.0 [\#182](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/182) ([renovate[bot]](https://github.com/apps/renovate))
