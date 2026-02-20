@@ -20,7 +20,7 @@ ruamel-yaml = "^0.19.0"
 aar-doc = "aar_doc.cli:app"
 
 [tool.poetry.group.dev.dependencies]
-pylint = "3.3.9"
+pylint = "4.0.5"
 pre-commit = "4.3.0"
 isort = "6.1.0"
 black = "25.11.0"
