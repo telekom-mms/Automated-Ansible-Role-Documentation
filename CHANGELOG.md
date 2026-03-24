@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.4.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.4.0) (2026-03-12)
+## [2.4.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.4.0) (2026-03-24)
 
 [Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/2.3.0...2.4.0)
 
@@ -11,6 +11,7 @@
 
 **Merged pull requests:**
 
+- chore\(deps\): lock file maintenance [\#195](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/195) ([renovate[bot]](https://github.com/apps/renovate))
 - Chore/updates [\#193](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/193) ([rndmh3ro](https://github.com/rndmh3ro))
 - chore\(deps\): update wyrihaximus/github-action-get-previous-tag action to v2 [\#191](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/191) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update actions/checkout action to v6 [\#187](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/187) ([renovate[bot]](https://github.com/apps/renovate))
