@@ -12,6 +12,7 @@
 **Merged pull requests:**
 
 - chore: update minimum python version [\#205](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/205) ([rndmh3ro](https://github.com/rndmh3ro))
+- Update dependency typer to ^0.24.0 [\#204](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/204) ([renovate[bot]](https://github.com/apps/renovate))
 - Update dependency mypy to v1.20.2 [\#201](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/201) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): lock file maintenance [\#200](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/200) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update hugo19941994/delete-draft-releases action to v3 [\#199](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/199) ([renovate[bot]](https://github.com/apps/renovate))
