@@ -12,6 +12,7 @@
 **Merged pull requests:**
 
 - chore\(deps\): lock file maintenance [\#200](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/200) ([renovate[bot]](https://github.com/apps/renovate))
+- chore\(deps\): update hugo19941994/delete-draft-releases action to v3 [\#199](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/199) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): update dependency pytest-cov to v7.1.0 [\#197](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/197) ([renovate[bot]](https://github.com/apps/renovate))
 - chore\(deps\): lock file maintenance [\#195](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/195) ([renovate[bot]](https://github.com/apps/renovate))
 - Chore/updates [\#193](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/193) ([rndmh3ro](https://github.com/rndmh3ro))
