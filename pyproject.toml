@@ -24,7 +24,7 @@ pylint = "3.3.9"
 pre-commit = "4.3.0"
 isort = "6.1.0"
 black = "25.11.0"
-mypy = "1.19.1"
+mypy = "1.20.2"
 pytest = "8.4.2"
 pytest-cov = "7.1.0"
 
