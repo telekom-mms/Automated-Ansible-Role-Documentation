@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.4.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.4.0) (2026-04-26)
+## [2.4.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.4.0) (2026-04-27)
 
 [Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/2.3.0...2.4.0)
 
@@ -11,6 +11,7 @@
 
 **Merged pull requests:**
 
+- Lock file maintenance [\#206](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/206) ([renovate[bot]](https://github.com/apps/renovate))
 - chore: update minimum python version [\#205](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/205) ([rndmh3ro](https://github.com/rndmh3ro))
 - Update dependency typer to ^0.24.0 [\#204](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/204) ([renovate[bot]](https://github.com/apps/renovate))
 - Update dependency mypy to v1.20.2 [\#201](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/201) ([renovate[bot]](https://github.com/apps/renovate))
