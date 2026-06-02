@@ -1190,14 +1190,14 @@ files = [
 
 [[package]]
 name = "typer"
-version = "0.26.5"
+version = "0.26.6"
 description = "Typer, build great CLIs. Easy to code. Based on Python type hints."
 optional = false
 python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "typer-0.26.5-py3-none-any.whl", hash = "sha256:4bfd901d564e41608920134aa5d4481200f4ba76d98e982d9f9d32dcb7b84da0"},
-    {file = "typer-0.26.5.tar.gz", hash = "sha256:9b9b39e35c3afc9e1e51a06f21155246e457c0911279b09b35d8210ca74b935c"},
+    {file = "typer-0.26.6-py3-none-any.whl", hash = "sha256:49f96d9ee5730cef607bbe155042f40b41fa4c0d0dec04990d580837493805be"},
+    {file = "typer-0.26.6.tar.gz", hash = "sha256:cdbc160fe7e795b835fb6016419494a521a67bfb86b9476a1ccd0e7727d3ae5b"},
 ]
 
 [package.dependencies]
