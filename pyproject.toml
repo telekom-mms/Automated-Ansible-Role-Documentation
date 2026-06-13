@@ -25,7 +25,7 @@ pre-commit = "4.6.0"
 isort = "8.0.1"
 black = "26.5.1"
 mypy = "2.1.0"
-pytest = "9.0.3"
+pytest = "9.1.0"
 pytest-cov = "7.1.0"
 
 [tool.pytest.ini_options]
