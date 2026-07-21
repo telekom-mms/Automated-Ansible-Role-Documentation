@@ -28,6 +28,6 @@ jobs:
           persist-credentials: false
 
       - name: Super-linter
-        uses: DavidAnson/markdownlint-cli2-action@992badcdf24e3b8eb7e87ff9287fe931bcb00c6e # v20
+        uses: DavidAnson/markdownlint-cli2-action@6bf21b07787794f89a243495939cd651942aeabe # v24
         with:
           globs: 'tests/**/*.md'
