@@ -9,8 +9,13 @@
 - \[Enhancement\] Improve formatting of Markdown template [\#136](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/136)
 - Add linting of rendered markdown and improve the base template [\#183](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/183) ([schurzi](https://github.com/schurzi))
 
+**Fixed bugs:**
+
+- \[Bug\] aar-doc defaults generates `dict`  for type of object `list of dict` when `options`  was specified [\#203](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/issues/203)
+
 **Merged pull requests:**
 
+- change priorization when generating defaults to always prefer explicitly set value [\#213](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/213) ([jschacher-dg-i](https://github.com/jschacher-dg-i))
 - Update dependency mypy to v2 [\#208](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/208) ([renovate[bot]](https://github.com/apps/renovate))
 - Lock file maintenance [\#206](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/206) ([renovate[bot]](https://github.com/apps/renovate))
 - chore: update minimum python version [\#205](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/205) ([rndmh3ro](https://github.com/rndmh3ro))
