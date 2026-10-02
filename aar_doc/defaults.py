@@ -134,10 +134,10 @@ def walk_options(options, overwrite_duplicate_defaults, depth=-1) -> RoleDefault
                 spec["description"] = tags.replace()
                 name = tags.defaults_prefix + name
 
-        if spec.get("options"):
-            value = walk_options(spec.get("options"), overwrite_duplicate_defaults, depth).to_commented_map()
-        elif "default" in spec.keys():
+        if "default" in spec.keys():
             value = spec.get("default")
+        elif spec.get("options"):
+            value = walk_options(spec.get("options"), overwrite_duplicate_defaults, depth).to_commented_map()
         else:
             continue
 

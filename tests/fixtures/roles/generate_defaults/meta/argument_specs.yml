@@ -77,6 +77,17 @@ argument_specs:
           - value3: third value
             value4: fourth value
         description: A list-of-dict value
+      generate_defaults_empty_list_of_dict:
+        type: list
+        default: []
+        elements: dict
+        description: A list of dicts with the empty list as the default
+        options:
+          value1:
+            type: str
+            default: first value
+          value2:
+            type: str
       generate_defaults_overwrite:
         type: str
         default: original value

@@ -43,6 +43,8 @@ generate_defaults_list_of_dict:
     value2: second value
   - value3: third value
     value4: fourth value
+# A list of dicts with the empty list as the default
+generate_defaults_empty_list_of_dict: []
 # A string value that was overwritten
 generate_defaults_overwrite: overwritten value
 generate_defaults_no_description: foo
