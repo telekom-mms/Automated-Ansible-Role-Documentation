@@ -21,7 +21,7 @@ aar-doc = "aar_doc.cli:app"
 
 [tool.poetry.group.dev.dependencies]
 pylint = "4.1.3"
-pre-commit = "4.6.2"
+pre-commit = "4.7.0"
 isort = "8.0.1"
 black = "26.10.1"
 mypy = "2.4.0"
