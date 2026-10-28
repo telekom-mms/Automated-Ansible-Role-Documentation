@@ -19,8 +19,8 @@ This is a role description
 
 that consists of multiple line
 
-|Option|Description|Type|Required|Default|
-|---|---|---|---|---|
+| Option | Description | Type | Required | Default |
+| ------ | ----------- | ---- | -------- | ------- |
 | myapp_int | The integer value. Defaults to 42. | int | no | `42` |
 | myapp_str | The string value. No default value. | str | yes |  |
 
