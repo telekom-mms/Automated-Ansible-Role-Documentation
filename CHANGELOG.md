@@ -7,6 +7,7 @@
 **Merged pull requests:**
 
 - Update dependency isort to v9 [\#212](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/212) ([renovate[bot]](https://github.com/apps/renovate))
+- Update actions/setup-python action to v7 [\#211](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/211) ([renovate[bot]](https://github.com/apps/renovate))
 
 ## [2.4.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.4.0) (2026-10-02)
 
