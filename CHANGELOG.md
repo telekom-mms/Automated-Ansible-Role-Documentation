@@ -6,6 +6,7 @@
 
 **Merged pull requests:**
 
+- Update dependency pre-commit to v4.7.0 [\#214](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/214) ([renovate[bot]](https://github.com/apps/renovate))
 - Update dependency isort to v9 [\#212](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/212) ([renovate[bot]](https://github.com/apps/renovate))
 - Update actions/setup-python action to v7 [\#211](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/211) ([renovate[bot]](https://github.com/apps/renovate))
 - Update actions/checkout action to v7 [\#209](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/209) ([renovate[bot]](https://github.com/apps/renovate))
