@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.4.1](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.4.1) (2026-10-28)
+
+[Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/2.4.0...2.4.1)
+
+**Merged pull requests:**
+
+- Update dependency isort to v9 [\#212](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/pull/212) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [2.4.0](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/tree/2.4.0) (2026-10-02)
 
 [Full Changelog](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation/compare/2.3.0...2.4.0)
