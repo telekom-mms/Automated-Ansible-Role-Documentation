@@ -15,8 +15,8 @@ Test role with a multiple_entrypoints amount of metadata
 
 The main entry point for the multiple_entrypoints role.
 
-|Option|Description|Type|Required|Default|
-|---|---|---|---|---|
+| Option | Description | Type | Required | Default |
+| ------ | ----------- | ---- | -------- | ------- |
 | myapp_int | The integer value, defaulting to 42. | int | no | `42` |
 | myapp_str | The string value | str | yes |  |
 
@@ -24,8 +24,8 @@ The main entry point for the multiple_entrypoints role.
 
 The second entry point for the multiple_entrypoints role.
 
-|Option|Description|Type|Required|Default|
-|---|---|---|---|---|
+| Option | Description | Type | Required | Default |
+| ------ | ----------- | ---- | -------- | ------- |
 | myapp_int_second | The integer value, defaulting to 42. | int | no | `42` |
 | myapp_str_second | The string value | str | yes |  |
 
