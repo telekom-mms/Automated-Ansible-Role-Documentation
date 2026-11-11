@@ -36,8 +36,8 @@ No arguments are defined for this role.
 
 {% if entrypoint_options[entrypoint] %}
 {%- set path, options=entrypoint_options[entrypoint][0] %}
-|Option|Description|Type|Required|Default|
-|---|---|---|---|---|
+| Option | Description | Type | Required | Default |
+| ------ | ----------- | ---- | -------- | ------- |
 {%- for name, details in options.items() %}
 | {{ name }} | {{ details.display_description | ansible_doc_markup }} | {{ details.display_type }} | {{ details.display_required }} | {{ details.display_default }} |
 {%- endfor %}
@@ -46,8 +46,8 @@ No arguments are defined for this role.
 
 #### Options for {{ path | join(" > ") }}
 
-|Option|Description|Type|Required|Default|
-|---|---|---|---|---|
+| Option | Description | Type | Required | Default |
+| ------ | ----------- | ---- | -------- | ------- |
 {%- for name, details in options.items() %}
 | {{ name }} | {{ details.display_description | ansible_doc_markup }} | {{ details.display_type }} | {{ details.display_required }} | {{ details.display_default }} |
 {%- endfor -%}
@@ -57,8 +57,8 @@ No arguments are defined for this role.
 {%- for path, choices in entrypoint_choices[entrypoint] %}
 #### Choices for {{ path | join(" > ") }}
 
-|Choice|
-|---|
+| Choice |
+| ------ |
 {%- for item in choices %}
 | {{ item }} |
 {%- endfor %}
