@@ -23,8 +23,8 @@ This is an example of `monospace` text.
 
 This is an example of an [URL](https://github.com/telekom-mms/Automated-Ansible-Role-Documentation).
 
-|Option|Description|Type|Required|Default|
-|---|---|---|---|---|
+| Option | Description | Type | Required | Default |
+| ------ | ----------- | ---- | -------- | ------- |
 | myapp_int | The integer value. Defaults to `42`. For string, see `myapp_str`. | int | no | `42` |
 | myapp_str | The string value. No default value. For int, see `myapp_int`. | str | yes |  |
 
